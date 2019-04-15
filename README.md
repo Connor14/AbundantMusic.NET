@@ -13,8 +13,12 @@ I created **AbundantMusic.NET** because I wanted an easy way to generate MIDI fi
 
 As Per noted in the *Help/Credits > Questions and Answers* tab of the original **Abundant Music** application, **_all songs_** are licensed under **_CC0, "No rights reserved"_**. He included a link to the license which can be found here: https://creativecommons.org/share-your-work/public-domain/cc0
 
-The **Abundant Music** repository contained its own `LICENSE` file including the *MIT* license and *Copyright (c) 2017 Per Nyblom*. The same license can be found in the `abundant-music-composer` directory of this repository. 
+The **Abundant Music** repository contained its own `LICENSE` file including the *MIT* license and *Copyright (c) 2017 Per Nyblom*. The same license can be found in the `AbundantMusic.NET/abundant-music-composer` directory of this repository. 
 
 ### Future Development
 
-Cleaning up the modified JavaScript files is the number one thing on my todo list. It works as is, but the readability needs to be improved. 
+Cleaning up the modified JavaScript files is the number one thing on my todo list. It works as is, but the readability and code quality need to be improved. 
+
+Error checking should also be implemented
+
+I will add a demo project shortly

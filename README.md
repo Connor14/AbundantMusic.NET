@@ -1,2 +1,20 @@
 # AbundantMusic.NET
 A C# wrapper for the Abundant Music MIDI composer
+
+### About
+
+**Abundant Music** was written by **Per Nyblom**. The original source code can be found here: https://github.com/pernyblom/pernyblom.github.io/tree/master/abundant-music
+
+Check out the original **Abundant Music** application here: https://pernyblom.github.io/abundant-music/index.html
+
+I created **AbundantMusic.NET** because I wanted an easy way to generate MIDI files and play them back in C# based applications. I looked through the Abundant Music source code starting with the `exportMidi()` function in `composemain.js`. I copied the relevant files and modified some code to work with **Microsoft ClearScript**. The biggest change I made was removing the Web Workers dependency. This was to make the code compatible with **Microsoft ClearScript**. 
+
+### License Information
+
+As Per noted in the *Help/Credits > Questions and Answers* tab of the original **Abundant Music** application, **_all songs_** are licensed under **_CC0, "No rights reserved"_**. He included a link to the license which can be found here: https://creativecommons.org/share-your-work/public-domain/cc0
+
+The **Abundant Music** repository contained its own `LICENSE` file including the *MIT* license and *Copyright (c) 2017 Per Nyblom*. The same license can be found in the `abundant-music-composer` directory of this repository. 
+
+### Future Development
+
+Cleaning up the modified JavaScript files is the number one thing on my todo list. It works as is, but the readability needs to be improved. 

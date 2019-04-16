@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbundantMusic.NET", "AbundantMusic.NET\AbundantMusic.NET.csproj", "{05BAF21C-9800-4FCA-8C47-271FD279B2F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbundantMusic.NET", "AbundantMusic.NET\AbundantMusic.NET.csproj", "{05BAF21C-9800-4FCA-8C47-271FD279B2F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoPlayer", "DemoPlayer\DemoPlayer.csproj", "{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{05BAF21C-9800-4FCA-8C47-271FD279B2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BAF21C-9800-4FCA-8C47-271FD279B2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BAF21C-9800-4FCA-8C47-271FD279B2F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

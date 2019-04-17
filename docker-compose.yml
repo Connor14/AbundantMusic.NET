@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  demoplayer:
+    image: ${DOCKER_REGISTRY-}demoplayer
+    build:
+      context: .
+      dockerfile: DemoPlayer/Dockerfile

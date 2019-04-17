@@ -10,31 +10,33 @@ namespace DemoPlayer
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter seed: ");
-            string seed = Console.ReadLine();
-
-            // Generate a MIDI using Abundant Music
-            Console.WriteLine("Generating Midi...");
-            byte[] midiFile = MidiComposer.Generate(seed);
-
-            // Play the MIDI using managed-midi
-            // https://github.com/atsushieno/managed-midi
-            var access = MidiAccessManager.Default;
-            var music = MidiMusic.Read(new MemoryStream(midiFile));
-            using (var player = new MidiPlayer(music, access))
+            // Continuously ask for seeds
+            while (true)
             {
-                long totalPlayTime = player.GetTotalPlayTimeMilliseconds();
-                Console.WriteLine("Play time: " + TimeSpan.FromMilliseconds(totalPlayTime).ToString("g"));
+                Console.Write("Enter seed: ");
+                string seed = Console.ReadLine();
 
-                player.Play();
-                while (player.State == PlayerState.Playing)
+                // Generate a MIDI using Abundant Music
+                Console.WriteLine("Generating Midi...");
+                byte[] midiFile = MidiComposer.Generate(seed);
+
+                // Play the MIDI using managed-midi
+                // https://github.com/atsushieno/managed-midi
+                var access = MidiAccessManager.Default;
+                var music = MidiMusic.Read(new MemoryStream(midiFile));
+                using (var player = new MidiPlayer(music, access))
                 {
+                    long totalPlayTime = player.GetTotalPlayTimeMilliseconds();
+                    Console.WriteLine("Play time: " + TimeSpan.FromMilliseconds(totalPlayTime).ToString("g"));
 
+                    player.Play();
+                    while (player.State == PlayerState.Playing)
+                    {
+
+                    }
                 }
             }
 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadLine();
         }
     }
 }

@@ -45,7 +45,7 @@ Stream midiFile = composer.Generate("my seed string");
 ...
 ```
 
-See `DemoProject` for a more detailed example.
+See `DemoPlayer` for a more detailed example.
 
 ## License Information
 

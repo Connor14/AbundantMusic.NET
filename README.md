@@ -11,14 +11,14 @@ I created **AbundantMusic.NET** because I wanted an easy way to generate MIDI fi
 
 ## Tools / Libraries
 
-###### AbundantMusic.NET
+##### AbundantMusic.NET
 
 * .NET Standard 2.0
 * Abundant Music (https://github.com/pernyblom/pernyblom.github.io/tree/master/abundant-music)
 * JavaScriptEngineSwitcher: ChakraCore (https://github.com/Taritsyn/JavaScriptEngineSwitcher)
     * Core
         * JS Engine Switcher: Core
-        * JS Engine Switcher: MS Dependency Injection
+        * (planned, but not currently included) JS Engine Switcher: MS Dependency Injection
     * JS Engines
         * JS Engine Switcher: ChakraCore
             * Windows (x86)
@@ -27,7 +27,7 @@ I created **AbundantMusic.NET** because I wanted an easy way to generate MIDI fi
             * Linux (x64)
             * OS X (x64) 
 
-###### DemoPlayer
+##### DemoPlayer
 
 * .NET Core 2.2
 * managed-midi (https://github.com/atsushieno/managed-midi)
@@ -49,15 +49,19 @@ See `DemoProject` for a more detailed example.
 
 ## License Information
 
-###### Abundant Music
+##### Abundant Music
 
 As Per noted in the *Help/Credits > Questions and Answers* tab of the original Abundant Music application, **_all songs_** are licensed under **_CC0, "No rights reserved"_**. He included a link to the license which can be found here: https://creativecommons.org/share-your-work/public-domain/cc0
 
 The **Abundant Music** repository contained its own `LICENSE` file including the *MIT* license and *Copyright (c) 2017 Per Nyblom*. The same license can be found in the `AbundantMusic.NET/abundant-music-composer` directory of this repository. 
 
-###### JavaScriptEngineSwitcher
+##### JavaScriptEngineSwitcher
 
 **JavaScriptEngineSwitcher** and its associated libraries (listed above) are under the *Apache-2.0* license. The licenses include *Copyright (c) 2013-2019 Andrey Taritsyn - http://www.taritsyn.ru*
+
+##### managed-midi
+
+**Managed-midi** is used in the demo project and is listed under the *MIT* license and includes *Copyright (c) 2010 Atsushi Eno* 
 
 ## Future Development
 

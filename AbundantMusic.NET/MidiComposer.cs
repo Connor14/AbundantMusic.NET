@@ -39,21 +39,21 @@ namespace AbundantMusic.NET
                 engine = JsEngineSwitcher.Current.CreateEngine(ChakraCoreJsEngine.EngineName);
 
                 engine.Execute("function logit(param){ }"); // logit function is referenced from within Abundant Music and could cause crashes once in a while
-                engine.ExecuteFile("./abundant-music-composer/js/composeeditoronlinesource.js");
-                engine.ExecuteFile("./abundant-music-composer/js/fakebytearray.js");
-                engine.ExecuteFile("./abundant-music-composer/js/composeworkersource.js");
-                engine.ExecuteFile("./abundant-music-composer/js/riffwave.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthsource.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthenvelope.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthfilter.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthoscillator.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthvoice.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynthinstrument.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midisynth.js");
-                engine.ExecuteFile("./abundant-music-composer/js/stacktrace.js");
-                engine.ExecuteFile("./abundant-music-composer/js/midi.js");
-                engine.ExecuteFile("./abundant-music-composer/js/generator.js");
-                engine.ExecuteFile("./abundant-music-composer/js/composemain.js");
+                engine.ExecuteResource("abundant_music_composer.js.composeeditoronlinesource.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.fakebytearray.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.composeworkersource.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.riffwave.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthsource.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthenvelope.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthfilter.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthoscillator.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthvoice.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynthinstrument.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midisynth.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.stacktrace.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.midi.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.generator.js", typeof(MidiComposer));
+                engine.ExecuteResource("abundant_music_composer.js.composemain.js", typeof(MidiComposer));
             }
         }
 

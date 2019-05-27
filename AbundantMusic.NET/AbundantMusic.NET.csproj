@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>A C# wrapper for the Abundant Music MIDI composer</Description>
+    <Copyright>2019 Connor Schmidt</Copyright>
+    <RepositoryUrl></RepositoryUrl>
+    <Version>0.1.0</Version>
+    <Authors>Connor14</Authors>
+    <Company />
+    <PackageProjectUrl>https://github.com/Connor14/AbundantMusic.NET</PackageProjectUrl>
+    <PackageTags>abundant, music, midi, composer</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

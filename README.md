@@ -1,6 +1,8 @@
 # AbundantMusic.NET
 A C# wrapper for the Abundant Music MIDI composer
 
+Find it on NuGet: https://www.nuget.org/packages/AbundantMusic.NET/
+
 ## About
 
 **Abundant Music** was written by **Per Nyblom**. The original source code can be found here: https://github.com/pernyblom/pernyblom.github.io/tree/master/abundant-music

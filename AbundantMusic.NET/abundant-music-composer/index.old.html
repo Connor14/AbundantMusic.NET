@@ -3,14 +3,7 @@
 <head>
     <title>Abundant Music</title>
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
-    <!-- Testing to look for global variables -->
-    <script type="text/javascript" src="tester.js"></script>
-    <script type="text/javascript">
-        var originalGlobals = GET_GLOBALS();
-        console.log(originalGlobals);
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script type="text/javascript" src="js/composeeditoronlinesource.js"></script>
 
@@ -33,27 +26,15 @@
 
     <script type="text/javascript" src="js/composemain.js"></script>
 
-    <script type="text/javascript">
-        var newGlobals = GET_GLOBALS();
-        console.log(newGlobals);
-
-        for(var i in originalGlobals){
-            if(originalGlobals[i].key == newGlobals[i].key){
-                newGlobals[i].key = "DUPLICATE";
-            }
-        }
-
-        for(var i in newGlobals){
-            if(newGlobals[i].key != "DUPLICATE"){
-                console.log(newGlobals[i].key, newGlobals[i].value);
-            }
-        }
-    </script>
-
     <meta name="description" content="Procedural music editor" >
 
 </head>
 <body style="overflow: hidden; padding: 0px; margin: 0px;">
-    <p>See console</p>
+    <button onclick="exportMidi()">Export midi</button>
+
+    <a id="resultUrl" class="result-url" download="newMidi.mid" href="" target="_blank">Result Link</a>
+
+    <div id="json" style="overflow: scroll;">
+    </div>
 </body>
 </html>

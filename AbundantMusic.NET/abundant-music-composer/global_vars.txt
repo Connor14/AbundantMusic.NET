@@ -1,0 +1,252 @@
+==============================		==============================
+VoiceLineSemantics		
+[object Object]		
+==============================		
+ChordType		
+Unknown chord type undefined		
+==============================		
+SimpleScaleType		
+Unknown scale type undefined		
+==============================		
+ScaleType		
+Unknown scale type undefined		
+==============================		
+IndexType		
+Unknown index type undefined		
+==============================		
+SnapType		
+Unknown snap type undefined		
+==============================		
+FrequencyUnit		
+Unknown frequency unit undefined		
+==============================		
+CyclesUnit		
+Unknown cycles unit undefined		
+==============================		
+SnapMetrics		
+Unknown snap metrics undefined		
+==============================		
+VerticalRelativeType		
+Unknown type undefined		
+==============================		
+IndexBorderMode		
+undefined		
+==============================		
+HorizontalRelativeType		
+Unknown horiz. relative type undefined		
+==============================		
+OffsetType		
+Unknown offset type undefined		
+==============================		
+LengthAndCountUnit		
+Unknown length and count unit		
+==============================		
+CountUnit		
+Unknown count unit undefined		
+==============================		
+PositionUnit		
+Unknown position unit undefined		
+==============================		
+PhraseHarmonyElementType		
+Unknown phrase harmony element type undefined		
+==============================		
+MidiControllerType		
+Unknown midi controller type undefined		
+==============================		
+MidiDrum		
+unknown midi drum (undefined, ?NaN)		
+==============================		
+MidiProgram		
+Unknown midi program undefined		
+==============================		
+SongStructureType		
+[object Object]		
+==============================		
+SimpleModuleGeneratorPhraseGroupType		
+Unknown phrase group type undefined		
+==============================		
+SongPartType		
+Unknown song part type undefined		
+==============================		
+MelodyOffsetLevel		
+Unknown melody offset level undefined		
+==============================		
+PhraseGroupIndexProperty		
+Unknown phrase group index property		
+==============================		
+SongPartStrength		
+Medium		
+==============================		
+HarmonyLengthMode		
+Unknown length mode undefined		
+==============================		
+MajorMixtureChordType		
+[object Object]		
+==============================		
+MinorMixtureChordType		
+[object Object]		
+==============================		
+DynamicHarmonyModulationTarget		
+Unknown modulation target undefined		
+==============================		
+AppliedChordType		
+Unknown applied chord type undefined		
+==============================		
+PhraseHarmonyElementShorteningMode		
+Unknown phrase harmony element shortening mode undefined		
+==============================		
+SoundFontType		
+Unknown soundfont type undefined		
+==============================		
+QuadraticSplineInterpolation		
+[object Object]		
+==============================		
+SplineInterpolation		
+[object Object]		
+==============================		
+EnumType		
+Unknown enum type undefined		
+==============================		
+EditorIdReferenceType		
+Unknown id reference type undefined		
+==============================		
+moduleConstructTimer		
+[object Object]		
+==============================		
+composeTimer		
+[object Object]		
+==============================		
+harmonyTimer		
+[object Object]		
+==============================		
+voiceLeadingTimer		
+[object Object]		
+==============================		
+voiceLeadingPrepareTimer		
+[object Object]		
+==============================		
+figurationTimer		
+[object Object]		
+==============================		
+perfTimer1		
+[object Object]		
+==============================		
+perfTimer2		
+[object Object]		
+==============================		
+perfTimer3		
+[object Object]		
+==============================		
+ControlChannelDatatype		
+Unknown data type undefined		
+==============================		
+ControlChannelControlWriteMode		
+[object Object]		
+==============================		
+NumericControlChannelMixMode		
+Unknown mix mode undefined		
+==============================		
+BooleanControlChannelMixMode		
+Unknown mix mode undefined		
+==============================		
+PredefinedCurveType		
+Unknown type undefined		
+==============================		
+Mix1DType		
+[object Object]		
+==============================		
+NonClassicalScaleFigurationMode		
+[object Object]		
+==============================		
+RenderElementCutHarmonyMode		
+Unknown cut mode undefined		
+==============================		
+NoteOverlapHarmonyMode		
+Unknown overlap mode undefined		
+==============================		
+SplitStrategy		
+Unknown strategy undefined		
+==============================		
+DottedSplitStrategy		
+Unknown strategy undefined		
+==============================		
+TripletSplitStrategy		
+Unknown strategy undefined		
+==============================		
+NoteRythmElementLengthType		
+Unknown type undefined		
+==============================		
+SectionTempoMode		
+[object Object]		
+==============================		
+MotifZoneFillerLengthMode		
+Unknown length mode undefined		
+==============================		
+FillerNoteLengthMode		
+[object Object]		
+==============================		
+AdaptiveVerticalDomainType		
+Unknown ad. vert. dom. type undefined		
+==============================		
+AdaptiveHorizontalDomainType		
+Unknown ad. horiz. dom. type undefined		
+==============================		
+PercussionMotifMode		
+Unknown percussion motif mode undefined		
+==============================		
+PredefinedPercussionMotifType		
+Unknown predefined type undefined		
+==============================		
+HarmonyStepLengthType		
+Unknown step length type undefined		
+==============================		
+StaticHarmonyMode		
+[object Object]		
+==============================		
+DynamicHarmonyMode		
+[object Object]		
+==============================		
+SuspendVoiceLinePlannerConstraintMode		
+[object Object]		
+==============================		
+InstrumentCapabilityProperty		
+undefined		
+==============================		
+SimpleModuleGeneratorInstrumentSetType		
+[object Object]		
+==============================		
+SimpleModuleGeneratorHarmonyStyleType		
+[object Object]		
+==============================		
+SimpleModuleGeneratorBassType		
+[object Object]		
+==============================		
+SimpleModuleGeneratorConnectType		
+[object Object]		
+==============================		
+PhraseGroupEffectConstraint		
+[object Object]		
+==============================		
+PhraseGroupEffectType		
+toString() for PhraseGroupEffectType not implemented		
+==============================		
+FastBase64		
+[object Object]		
+==============================		
+MidiSynthVoiceMode		
+[object Object]		
+==============================		
+Midi		
+[object Object]		
+==============================		
+asyncOperations		
+==============================		
+asyncOperationCounter		
+0		
+==============================		
+AsyncServerChildTaskType		
+[object Object]		
+==============================		
+WorkerTaskType		
+[object Object]		
+==============================

@@ -25,6 +25,9 @@ namespace AbundantMusic.NET
         }
 
         // Configure only once
+        // Like in a web browser, each midi composer requires it's own JavaScript engine instance.
+        // Due to the way Abundant Music uses some global JS variables, we cannot share the JS Engine.
+        // See "index.html" in the "abundant-music-composer" source directory.
         private void Configure()
         {
             if (engineSwitcher == null)

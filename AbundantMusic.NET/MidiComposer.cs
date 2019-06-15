@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace AbundantMusic.NET
 {
@@ -80,7 +81,12 @@ namespace AbundantMusic.NET
             }
         }
 
-        public MemoryStream Generate(string seed)
+        public async Task<Composition> Generate(string seed)
+        {
+            return await Task<MemoryStream>.Run(() => { return GenerateSynchronous(seed); });
+        }
+
+        private Composition GenerateSynchronous(string seed)
         {
             string safeSeed = Regex.Replace(seed, RegexPattern, RegexReplacement);
             //Console.WriteLine("Accepted seed: " + safeSeed);
@@ -97,7 +103,9 @@ namespace AbundantMusic.NET
                 newFile[i] = byte.Parse(nums[i]);
             }
 
-            return new MemoryStream(newFile);
+            Composition composition = new Composition(seed, safeSeed, new MemoryStream(newFile));
+
+            return composition;
         }
 
     }

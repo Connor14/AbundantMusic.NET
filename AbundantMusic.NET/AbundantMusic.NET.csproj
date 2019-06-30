@@ -5,13 +5,13 @@
     <Description>A C# wrapper for the Abundant Music MIDI composer</Description>
     <Copyright>2019 Connor Schmidt</Copyright>
     <RepositoryUrl></RepositoryUrl>
-    <Version>0.1.5</Version>
+    <Version>0.2.0</Version>
     <Authors>Connor14</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/Connor14/AbundantMusic.NET</PackageProjectUrl>
     <PackageTags>abundant, music, midi, composer</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>Fixed dependency issue</PackageReleaseNotes>
+    <PackageReleaseNotes>Made the Generate method an async Task that returns a Composition object.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

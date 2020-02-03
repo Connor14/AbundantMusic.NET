@@ -3,57 +3,28 @@
 <head>
     <title>Abundant Music</title>
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
-    <!-- Testing to look for global variables -->
-    <script type="text/javascript" src="tester.js"></script>
-    <script type="text/javascript">
-        var originalGlobals = GET_GLOBALS();
-        console.log(originalGlobals);
-    </script>
-
     <script type="text/javascript" src="js/composeeditoronlinesource.js"></script>
-
     <script type="text/javascript" src="js/fakebytearray.js"></script>
-
     <script type="text/javascript" src="js/composeworkersource.js"></script>
-    <script type="text/javascript" src="js/riffwave.js"></script>
-    <script type="text/javascript" src="js/midisynthsource.js"></script>
-    <script type="text/javascript" src="js/midisynthenvelope.js"></script>
-    <script type="text/javascript" src="js/midisynthfilter.js"></script>
-    <script type="text/javascript" src="js/midisynthoscillator.js"></script>
-    <script type="text/javascript" src="js/midisynthvoice.js"></script>
-    <script type="text/javascript" src="js/midisynthinstrument.js"></script>
-    <script type="text/javascript" src="js/midisynth.js"></script>
-    <script type="text/javascript" src="js/stacktrace.js"></script>
-
     <script type="text/javascript" src="js/midi.js"></script>
     <script type="text/javascript" src="js/generator.js"></script>
-  
-
     <script type="text/javascript" src="js/composemain.js"></script>
 
+    <meta name="description" content="Abundant Music">
+
     <script type="text/javascript">
-        var newGlobals = GET_GLOBALS();
-        console.log(newGlobals);
+        function onClick() {
+            console.log("Generating...");
 
-        for(var i in originalGlobals){
-            if(originalGlobals[i].key == newGlobals[i].key){
-                newGlobals[i].key = "DUPLICATE";
-            }
-        }
+            var seed = document.getElementById("inputSeed").value;
+            var stringResult = exportMidi(seed);
 
-        for(var i in newGlobals){
-            if(newGlobals[i].key != "DUPLICATE"){
-                console.log(newGlobals[i].key, newGlobals[i].value);
-            }
+            console.log("Done generating " + seed);
         }
     </script>
-
-    <meta name="description" content="Procedural music editor" >
-
 </head>
-<body style="overflow: hidden; padding: 0px; margin: 0px;">
-    <p>See console</p>
+<body>
+    <input id="inputSeed" type="text" placeholder="Seed" />
+    <button onclick="onClick()">Export midi</button>
 </body>
 </html>

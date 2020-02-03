@@ -89,7 +89,7 @@ function render(data) {
 
 // receive result from asyncoperation.js
 function getFileAsString(data){
-
+    console.log(data);
     var result = data;
     // that.resultRenderData = result.renderData;
     // that.resultRenderDataLength = result.renderDataLength;
@@ -105,22 +105,7 @@ function getFileAsString(data){
     buffer = fakeByteArray.toBuffer();
     //                                addAudioElement = true;
     //                                audioType = "audio/midi";
-    
-    //return new Blob([new Uint8Array(buffer)]);
-    return array2String(new Uint8Array(buffer));
-}
 
-// Returns a comma separated string representation of the Uint8Array 
-// Inspired by on https://stackoverflow.com/questions/3195865/converting-byte-array-to-string-in-javascript
-function array2String(array) {
-    var result = "";
-    for (var i = 0; i < array.length; i++) {
-        if (i === array.length - 1) {
-            result += array[i];
-        } else {
-            result += array[i] + ",";
-        }
-        //result += String.fromCharCode(array[i]);
-    }
-    return result;
+    // create a comma separated list of integers representing the bytes of the file
+    return new Uint8Array(buffer).join(); 
 }

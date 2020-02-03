@@ -5,19 +5,24 @@ using System.Text;
 
 namespace AbundantMusic.NET
 {
-    public class Composition
+    public class Composition : IDisposable
     {
 
-        public string Seed { get; set; }
+        public string InputSeed { get; set; }
         public string AcceptedSeed { get; set; }
 
         public MemoryStream Midi { get; set; }
 
-        public Composition(string seed, string acceptedSeed, MemoryStream midiStream)
+        public Composition(string inputSeed, string acceptedSeed, MemoryStream midiStream)
         {
-            this.Seed = seed;
+            this.InputSeed = inputSeed;
             this.AcceptedSeed = acceptedSeed;
             this.Midi = midiStream;
+        }
+
+        public void Dispose()
+        {
+            Midi.Dispose();
         }
     }
 }

@@ -1,31 +1,34 @@
 ﻿using AbundantMusic.NET;
 using Commons.Music.Midi;
 using System;
-using System.IO;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DemoPlayer
 {
-    // This demo player will ONLY work on Windows (without tweaking)
+    // Because of the midi playback library used in this demo, this demo will only work on Windows
     // Save the file and/or use another midi synthesizer to play the midi on Mac or Linux
     class Program
     {
         static void Main(string[] args)
         {
-            Task.Run(async () =>
+            Stopwatch stopwatch = new Stopwatch();
+
+            while (true)
             {
-                // Continuously ask for seeds
-                while (true)
+                Console.Write("Enter seed: ");
+                string seed = Console.ReadLine();
+
+                Console.WriteLine("Generating Midi...");
+
+                stopwatch.Restart();
+
+                // Generate a MIDI using Abundant Music
+                using (MidiComposer composer = new MidiComposer())
+                using(Composition composition = composer.Generate(seed))
                 {
-                    Console.Write("Enter seed: ");
-                    string seed = Console.ReadLine();
-
-                    // Generate a MIDI using Abundant Music
-                    Console.WriteLine("Generating Midi...");
-                    MidiComposer composer = new MidiComposer();
-                    Composition composition = await composer.Generate(seed);
-
+                    stopwatch.Stop();
                     Console.WriteLine("Accepted Seed: " + composition.AcceptedSeed);
+                    Console.WriteLine("Generated in: " + stopwatch.Elapsed);
 
                     // Play the MIDI using managed-midi
                     // https://github.com/atsushieno/managed-midi
@@ -37,13 +40,14 @@ namespace DemoPlayer
                         Console.WriteLine("Play time: " + TimeSpan.FromMilliseconds(totalPlayTime).ToString("g"));
 
                         player.Play();
+
                         while (player.State == PlayerState.Playing)
                         {
 
                         }
                     }
                 }
-            }).Wait();
+            }
         }
     }
 }

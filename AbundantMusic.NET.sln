@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbundantMusic.NET", "AbundantMusic.NET\AbundantMusic.NET.csproj", "{05BAF21C-9800-4FCA-8C47-271FD279B2F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoPlayer", "DemoPlayer\DemoPlayer.csproj", "{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}"
-EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{60363A1D-07D4-41A3-AB1B-E185267C3678}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E9A9D4B-BECF-4A71-BAA5-AC7751DE8EAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60363A1D-07D4-41A3-AB1B-E185267C3678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60363A1D-07D4-41A3-AB1B-E185267C3678}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60363A1D-07D4-41A3-AB1B-E185267C3678}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60363A1D-07D4-41A3-AB1B-E185267C3678}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

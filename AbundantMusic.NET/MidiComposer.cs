@@ -2,111 +2,97 @@
 using JavaScriptEngineSwitcher.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AbundantMusic.NET
 {
-    public class MidiComposer
+    /// <summary>
+    /// Generates MIDI files using Abundant Music
+    /// </summary>
+    public class MidiComposer : IDisposable
     {
-        // save compiled JS scripts to prevent us from needing to recompile them for every new instance of MidiComposer
-        // first run took something like .33 seconds to initiate MidiComposer
-        // second run took like 0.04 seconds. There is improvement.
-        private static List<IPrecompiledScript> _precompiledScripts = null; 
+        // I save the compiled scripts to prevent the JS Engine from needing to recompile them for every new instance of MidiComposer
+        // For example, the first run took something like .33 seconds to initiate MidiComposer
+        // The Second run took like 0.04 seconds. There is improvement from caching the scripts
+        private static readonly IReadOnlyList<IPrecompiledScript> precompiledScripts;
 
-        private IJsEngineSwitcher engineSwitcher = null;
-        private IJsEngine engine = null;
+        private IJsEngine engine;
 
-        // didn't work quite right
-        //public const string RegexPattern = "[^A-Za-z0-9_ ]*";
-
+        // Allow only certian characters in the JSON
         // https://stackoverflow.com/questions/181356/regex-to-match-alphanumeric-and-spaces
         // https://stackoverflow.com/questions/2998519/net-regex-what-is-the-word-character-w
-        public const string RegexPattern = @"[^\w _.-]"; // todo is this safe?
+        public const string RegexPattern = @"[^\w _.-]"; // todo does this prevent unsafe input? Is it even necessary?
         public const string RegexReplacement = "_";
 
         /// <summary>
-        /// WARNING: In multi-client/multi-user situations, each client MUST have his own instance of MidiComposer due to global JavaScript variables within Abundant Music.
+        /// Initialize the MidiComposer by pre-compiling the Abundant Music JavaScript
+        /// </summary>
+        // Note: I believe this is thread-safe based on the documentation and comments here: 
+        // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors
+        // https://github.com/dotnet/docs/issues/10243
+        static MidiComposer()
+        {
+            Debug.WriteLine("Initializing MidiComposer");
+            // Create a temporary engine to pre-compile the scripts
+            using(var compilationEngine = new ChakraCoreJsEngine())
+            {
+                var scripts = new List<IPrecompiledScript>();
+
+                scripts.Add(compilationEngine.Precompile("function logit(param){ }")); // logit function is referenced from within Abundant Music and is called once in a while
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composeeditoronlinesource.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.fakebytearray.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composeworkersource.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.midi.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.generator.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composemain.js", typeof(MidiComposer)));
+
+                precompiledScripts = scripts;
+            }
+        }
+
+        /// <summary>
+        /// Initialize a new MidiComposer. 
+        /// 
+        /// WARNING: In multi-client/multi-user/multi-thread situations, each thread MUST have his own instance of MidiComposer due to global JavaScript variables within Abundant Music.
         /// </summary>
         public MidiComposer()
         {
-            Configure();
-        }
+            engine = new ChakraCoreJsEngine();
 
-        // Configure only once
-        // Like in a web browser, each midi composer requires it's own JavaScript engine instance.
-        // Due to the way Abundant Music uses some global JS variables, we cannot share the JS Engine.
-        // See "index.html" in the "abundant-music-composer" source directory.
-        private void Configure()
-        {
-            if (engineSwitcher == null)
+            // load the precompiled scripts
+            foreach (IPrecompiledScript script in precompiledScripts)
             {
-                engineSwitcher = JsEngineSwitcher.Current;
-                engineSwitcher.EngineFactories.AddChakraCore();
-                engineSwitcher.DefaultEngineName = "ChakraCoreJsEngine";
-            }
-
-            if (engine == null)
-            {
-                engine = JsEngineSwitcher.Current.CreateEngine(ChakraCoreJsEngine.EngineName);
-
-                if (_precompiledScripts == null)
-                {
-                    _precompiledScripts = new List<IPrecompiledScript>();
-
-                    _precompiledScripts.Add(engine.Precompile("function logit(param){ }")); // logit function is referenced from within Abundant Music and could cause crashes once in a while
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.composeeditoronlinesource.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.fakebytearray.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.composeworkersource.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.riffwave.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthsource.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthenvelope.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthfilter.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthoscillator.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthvoice.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynthinstrument.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midisynth.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.stacktrace.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.midi.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.generator.js", typeof(MidiComposer)));
-                    _precompiledScripts.Add(engine.PrecompileResource("abundant_music_composer.js.composemain.js", typeof(MidiComposer)));
-                }
-
-                // load the precompiled scripts
-                foreach(IPrecompiledScript script in _precompiledScripts)
-                {
-                    engine.Execute(script);
-                }                
+                engine.Execute(script);
             }
         }
 
-        public async Task<Composition> Generate(string seed)
+        public async Task<Composition> GenerateAsync(string seed)
         {
-            return await Task<MemoryStream>.Run(() => { return GenerateSynchronous(seed); });
+            return await Task.Run(() => { return Generate(seed); });
         }
 
-        private Composition GenerateSynchronous(string seed)
+        public Composition Generate(string seed)
         {
-            string safeSeed = Regex.Replace(seed, RegexPattern, RegexReplacement);
-            //Console.WriteLine("Accepted seed: " + safeSeed);
+            string acceptedSeed = Regex.Replace(seed, RegexPattern, RegexReplacement);
 
-            string fileResult = engine.Evaluate<string>(string.Format("exportMidi('{0}');", safeSeed));
-            string[] nums = fileResult.Split(',');
+            string fileResult = engine.Evaluate<string>(string.Format("exportMidi('{0}');", acceptedSeed));
+            string[] unsignedIntegers = fileResult.Split(',');
 
-            // Debugging to ensure consistency between JavaScript engines
-            //Console.WriteLine(nums.Length);
-
-            byte[] newFile = new byte[nums.Length];
+            byte[] newFile = new byte[unsignedIntegers.Length];
             for (int i = 0; i < newFile.Length; i++)
             {
-                newFile[i] = byte.Parse(nums[i]);
+                newFile[i] = byte.Parse(unsignedIntegers[i]);
             }
 
-            Composition composition = new Composition(seed, safeSeed, new MemoryStream(newFile));
-
-            return composition;
+            return new Composition(seed, acceptedSeed, new MemoryStream(newFile));
         }
 
+        public void Dispose()
+        {
+            engine.Dispose();
+        }
     }
 }

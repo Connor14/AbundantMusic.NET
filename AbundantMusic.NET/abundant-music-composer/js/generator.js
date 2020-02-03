@@ -89,7 +89,7 @@ function render(data) {
 
 // receive result from asyncoperation.js
 function getFileAsString(data){
-    console.log(data);
+    //console.log(data);
     var result = data;
     // that.resultRenderData = result.renderData;
     // that.resultRenderDataLength = result.renderDataLength;

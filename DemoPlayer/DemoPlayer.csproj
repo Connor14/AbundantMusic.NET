@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="managed-midi" Version="1.9.0" />
+    <PackageReference Include="managed-midi" Version="1.9.14" />
   </ItemGroup>
 
   <ItemGroup>

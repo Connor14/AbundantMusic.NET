@@ -5,13 +5,13 @@
     <Description>A C# wrapper for the Abundant Music MIDI composer</Description>
     <Copyright>2019 Connor Schmidt</Copyright>
     <RepositoryUrl></RepositoryUrl>
-    <Version>0.2.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Connor14</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/Connor14/AbundantMusic.NET</PackageProjectUrl>
     <PackageTags>abundant, music, midi, composer</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>Made the Generate method an async Task that returns a Composition object.</PackageReleaseNotes>
+    <PackageReleaseNotes>Cleaned up MidiComposer and updated NuGet packages.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,11 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.3.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.linux-x64" Version="3.3.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.osx-x64" Version="3.3.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-arm" Version="3.3.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.3.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x86" Version="3.3.0" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.4.4" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.linux-x64" Version="3.4.4" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.osx-x64" Version="3.4.4" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-arm" Version="3.4.4" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.4.4" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x86" Version="3.4.4" />
   </ItemGroup>
 </Project>

@@ -27,7 +27,7 @@ namespace DemoPlayer
                 using(Composition composition = composer.Generate(seed))
                 {
                     stopwatch.Stop();
-                    Console.WriteLine("Accepted Seed: " + composition.AcceptedSeed);
+                    Console.WriteLine("Seed: " + composition.Seed);
                     Console.WriteLine("Generated in: " + stopwatch.Elapsed);
 
                     // Play the MIDI using managed-midi

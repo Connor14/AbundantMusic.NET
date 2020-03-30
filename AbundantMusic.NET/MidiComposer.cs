@@ -21,12 +21,6 @@ namespace AbundantMusic.NET
 
         private IJsEngine engine;
 
-        // Allow only certian characters in the JSON
-        // https://stackoverflow.com/questions/181356/regex-to-match-alphanumeric-and-spaces
-        // https://stackoverflow.com/questions/2998519/net-regex-what-is-the-word-character-w
-        public const string RegexPattern = @"[^\w _.-]"; // todo does this prevent unsafe input? Is it even necessary?
-        public const string RegexReplacement = "_";
-
         /// <summary>
         /// Initialize the MidiComposer by pre-compiling the Abundant Music JavaScript
         /// </summary>
@@ -76,9 +70,8 @@ namespace AbundantMusic.NET
 
         public Composition Generate(string seed)
         {
-            string acceptedSeed = Regex.Replace(seed, RegexPattern, RegexReplacement);
+            string fileResult = engine.CallFunction<string>("exportMidi", seed);
 
-            string fileResult = engine.Evaluate<string>(string.Format("exportMidi('{0}');", acceptedSeed));
             string[] unsignedIntegers = fileResult.Split(',');
 
             byte[] newFile = new byte[unsignedIntegers.Length];
@@ -87,7 +80,7 @@ namespace AbundantMusic.NET
                 newFile[i] = byte.Parse(unsignedIntegers[i]);
             }
 
-            return new Composition(seed, acceptedSeed, new MemoryStream(newFile));
+            return new Composition(seed, new MemoryStream(newFile));
         }
 
         public void Dispose()

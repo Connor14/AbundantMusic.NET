@@ -8,16 +8,13 @@ namespace AbundantMusic.NET
     public class Composition : IDisposable
     {
 
-        public string InputSeed { get; set; }
-        public string AcceptedSeed { get; set; }
-
+        public string Seed { get; set; }
         public MemoryStream Midi { get; set; }
 
-        public Composition(string inputSeed, string acceptedSeed, MemoryStream midiStream)
+        public Composition(string seed, MemoryStream midiStream)
         {
-            this.InputSeed = inputSeed;
-            this.AcceptedSeed = acceptedSeed;
-            this.Midi = midiStream;
+            Seed = seed;
+            Midi = midiStream;
         }
 
         public void Dispose()

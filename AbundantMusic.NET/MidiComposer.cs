@@ -36,12 +36,7 @@ namespace AbundantMusic.NET
                 var scripts = new List<IPrecompiledScript>();
 
                 scripts.Add(compilationEngine.Precompile("function logit(param){ }")); // logit function is referenced from within Abundant Music and is called once in a while
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composeeditoronlinesource.js", typeof(MidiComposer)));
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.fakebytearray.js", typeof(MidiComposer)));
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composeworkersource.js", typeof(MidiComposer)));
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.midi.js", typeof(MidiComposer)));
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.generator.js", typeof(MidiComposer)));
-                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.composemain.js", typeof(MidiComposer)));
+                scripts.Add(compilationEngine.PrecompileResource("abundant_music_composer.js.abundant-music-consolidated.js", typeof(MidiComposer)));
 
                 precompiledScripts = scripts;
             }

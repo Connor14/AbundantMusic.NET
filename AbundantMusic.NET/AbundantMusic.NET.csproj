@@ -15,23 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="abundant-music-composer\js\composeeditoronlinesource.js" />
-    <None Remove="abundant-music-composer\js\composemain.js" />
-    <None Remove="abundant-music-composer\js\composeworkersource.js" />
-    <None Remove="abundant-music-composer\js\fakebytearray.js" />
-    <None Remove="abundant-music-composer\js\generator.js" />
-    <None Remove="abundant-music-composer\js\midi.js" />
-    <None Remove="abundant-music-composer\LICENSE" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="abundant-music-composer\js\composeeditoronlinesource.js" />
-    <EmbeddedResource Include="abundant-music-composer\js\composemain.js" />
-    <EmbeddedResource Include="abundant-music-composer\js\composeworkersource.js" />
-    <EmbeddedResource Include="abundant-music-composer\js\fakebytearray.js" />
-    <EmbeddedResource Include="abundant-music-composer\js\generator.js" />
-    <EmbeddedResource Include="abundant-music-composer\js\midi.js" />
     <EmbeddedResource Include="abundant-music-composer\LICENSE" />
+    <EmbeddedResource Include="abundant-music-composer\js\abundant-music-consolidated.js" />
   </ItemGroup>
 
   <ItemGroup>

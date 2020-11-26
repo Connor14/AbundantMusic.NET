@@ -23,8 +23,7 @@ namespace DemoPlayer
                 stopwatch.Restart();
 
                 // Generate a MIDI using Abundant Music
-                using (MidiComposer composer = new MidiComposer())
-                using(Composition composition = composer.Generate(seed))
+                using (Composition composition = MidiComposer.Compose(seed))
                 {
                     stopwatch.Stop();
                     Console.WriteLine("Seed: " + composition.Seed);

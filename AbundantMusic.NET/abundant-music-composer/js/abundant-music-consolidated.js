@@ -1,4 +1,1524 @@
-﻿function FakeByteArray() {
+﻿'use strict';
+
+var renderRequestData = {
+    "seed": hashCode("connor"),
+    "strSeed": "connor",
+    "name": "Song",
+    "sectionIndex": -1,
+    "genInfo": {
+        "minorScaleLikelihood": 1,
+        "majorScaleLikelihood": 1,
+        "timeSignature2Likelihood": 1,
+        "timeSignature3Likelihood": 1,
+        "timeSignature4Likelihood": 3,
+        "electronicLikelihood": 1,
+        "electricLikelihood": 1,
+        "acousticLikelihood": 1,
+        "strictBuildSongStructureLikelihoodMultiplier": 1,
+        "buildSongStructureLikelihoodMultiplier": 1,
+        "verseChorusSongStructureLikelihoodMultiplier": 1,
+        "verseChorusBridgeSongStructureLikelihoodMultiplier": 1,
+        "noMelodyPartSongStructureLikelihoodMultiplier": 1,
+        "percussionFillProbabilities": [
+            0.35
+        ],
+        "raiseLeadingInMinorProbabilities": [
+            0.5
+        ],
+        "tonicizeLikelihoodMultipliers": [
+            1
+        ],
+        "modulateLikelihoodMultiplier": 0.25,
+        "simpleMixtureLikelihoods": [
+            1
+        ],
+        "sus2ChordsLikelihoods": [
+            1
+        ],
+        "sus4ChordsLikelihoods": [
+            1
+        ],
+        "neighbourChordsLikelihoods": [
+            1
+        ],
+        "passingChordsLikelihoods": [
+            1
+        ],
+        "melodyMotifRythmCountIncreasePerIndex": 0.4,
+        "melodyMotifRythmCountIncreaseOffsetRange": [
+            0.5,
+            1
+        ],
+        "bassMotifRythmCountIncreasePerIndex": 0.4,
+        "bassMotifRythmCountIncreaseOffsetRange": [
+            0.25,
+            0.75
+        ],
+        "melodyMotifZone1Probabilities": [
+            0.5
+        ],
+        "melodyMotifZone1TripletLikelihoods": [
+            0.5
+        ],
+        "melodyMotifZone1DotFirstLikelihoods": [
+            2
+        ],
+        "melodyMotifZone1DotSecondLikelihoods": [
+            0.5
+        ],
+        "melodyMotifZone1DotNormalDotLikelihoods": [
+            0.5
+        ],
+        "melodyMotifZone1NormalDotDotLikelihoods": [
+            0.5
+        ],
+        "melodyMotifZone1DotDotNormalLikelihoods": [
+            0.5
+        ],
+        "melodyMotifZone1StartPosRanges": [
+            [
+                0,
+                0
+            ]
+        ],
+        "melodyMotifZone1EndPosRanges": [
+            [
+                0.75,
+                0.75
+            ]
+        ],
+        "melodyMotifZone1StartEnds": [],
+        "bassMotifZone1Probabilities": [
+            0.5
+        ],
+        "bassMotifZone1TripletLikelihoods": [
+            0.01
+        ],
+        "bassMotifZone1DotFirstLikelihoods": [
+            2
+        ],
+        "bassMotifZone1DotSecondLikelihoods": [
+            0.5
+        ],
+        "bassMotifZone1DotNormalDotLikelihoods": [
+            0.5
+        ],
+        "bassMotifZone1NormalDotDotLikelihoods": [
+            0.5
+        ],
+        "bassMotifZone1DotDotNormalLikelihoods": [
+            0.5
+        ],
+        "bassMotifZone1StartPosRanges": [
+            [
+                0,
+                0
+            ]
+        ],
+        "bassMotifZone1EndPosRanges": [
+            [
+                0.75,
+                0.75
+            ]
+        ],
+        "bassMotifZone1StartEnds": [],
+        "allInstrumentsDifferentProbability": 0.35,
+        "adaptHarmonyRythmToTempo": true,
+        "adaptHarmonyRythmToTimeSignature": true,
+        "adaptSuspensionToTempo": true,
+        "adaptMotifRythmsToTempo": true,
+        "filterFEffectsProbMultiplier": 1,
+        "filterBWEffectsProbMultiplier": 1,
+        "panEffectsProbMultiplier": 1,
+        "oddHarmonyRythmProbability": 0.01,
+        "melodyShareProbabilities": [
+            0.3
+        ],
+        "endSongTempoChangeProbability": 0.5,
+        "endPhraseGroupTempoChangeProbabilities": [
+            0
+        ],
+        "adaptTempoToRenderAmount": true,
+        "tempoAdaptBias": 3,
+        "tempoAdaptRandomMultiplier": 3,
+        "useNaturalTempoChanges": true,
+        "voiceLineSuspensionProbabilities": [
+            0.5
+        ],
+        "songIntroProbability": 0.7,
+        "songEndProbability": 0.5,
+        "withinPhraseGroupSimilarRandomFraction": 0.35,
+        "withinPhraseGroupSimilarBias": 0.55,
+        "samePhraseGroupIndexSimilarRandomFraction": 0.25,
+        "samePhraseGroupIndexSimilarBias": 0.5,
+        "differentPhraseGroupIndexDifferentRandomFraction": 0.3,
+        "differentPhraseGroupIndexDifferentBias": 0.25,
+        "prefixGlueProbabilityMultiplier": 1,
+        "postfixGlueProbabilityMultiplier": 1,
+        "useMaxHarmonyElementLength": true,
+        "prolongStaticLikelihoods": [
+            2
+        ],
+        "prolongDynamicLikelihoods": [
+            4
+        ],
+        "prolongDominantCadenceLikelihoods": [
+            3
+        ],
+        "prolongTonicCadenceLikelihoods": [
+            1
+        ],
+        "prolongHarmonyPartBiases": [
+            20
+        ],
+        "prolongHarmonyPartRandomFractions": [
+            50
+        ],
+        "tempoRange": [
+            60,
+            140
+        ],
+        "melodyShapeAmpRanges": [
+            [
+                6,
+                12
+            ]
+        ],
+        "melodyShapeBiasRanges": [
+            [
+                68,
+                76
+            ]
+        ],
+        "bassShapeAmpRanges": [
+            [
+                2,
+                4
+            ]
+        ],
+        "bassShapeBiasRanges": [
+            [
+                35,
+                45
+            ]
+        ],
+        "overwriteSongPartStructureRndInfos": false,
+        "songPartStructureRndInfos": [],
+        "phraseGroupTypes": [{
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 20
+        },
+        {
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 11
+        },
+        {
+            "likelihood": 0.125,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 8
+        },
+        {
+            "likelihood": 0.125,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 10
+        },
+        {
+            "likelihood": 0.25,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 19
+        },
+        {
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 15
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 3
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 18
+        },
+        {
+            "likelihood": 0.5,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 22
+        },
+        {
+            "likelihood": 0.5,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 2
+        }
+        ],
+        "modulatePhraseGroupTypes": [{
+            "likelihood": 0.5,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 23
+        },
+        {
+            "likelihood": 0.5,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 20
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 11
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 9
+        },
+        {
+            "likelihood": 0.5,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 12
+        }
+        ],
+        "majorDeceptiveRootRndInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 6
+        },
+        {
+            "likelihood": 4,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 4,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 3
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 2
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 1
+        }
+        ],
+        "minorDeceptiveRootRndInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 6
+        },
+        {
+            "likelihood": 4,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 4,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 3
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 2
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "IntDataSample",
+            "data": 1
+        }
+        ],
+        "introGroupTypes": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 17
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 27
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 0
+        }
+        ],
+        "endGroupTypes": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 17
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 27
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 0
+        }
+        ],
+        "glueGroupTypes": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 17
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 27
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "PhraseGroupTypeDataSample",
+            "data": 0
+        }
+        ],
+        "majorModulationTargetInfos": [{
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 1
+        },
+        {
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 0.2,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 0
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 3
+        }
+        ],
+        "minorModulationTargetInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 1
+        },
+        {
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 0.1,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 0.2,
+            "active": true,
+            "_constructorName": "ModulationTargetDataSample",
+            "data": 3
+        }
+        ],
+        "electronicMelodyInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 62
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 63
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 81
+        }
+        ],
+        "electronicInnerFastInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 2
+        }
+        ],
+        "electronicInnerSlowInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 94
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 93
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 88
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 90
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 95
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 50
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 51
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 89
+        }
+        ],
+        "electronicBassInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 38
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 38
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 39
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 39
+        }
+        ],
+        "electricMelodyInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 30
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 2
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 17
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 18
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 62
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 63
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 29
+        }
+        ],
+        "electricInnerFastInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 30
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 2
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 26
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 28
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 4
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 5
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 29
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 62
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 63
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 54
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 27
+        }
+        ],
+        "electricInnerSlowInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 30
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 29
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 62
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 63
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 54
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 92
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 94
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 93
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 88
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 90
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 95
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 50
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 51
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 89
+        }
+        ],
+        "electricBassInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 2
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 33
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 34
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 38
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 39
+        }
+        ],
+        "acousticMelodyInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 0
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 1
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 24
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 25
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 46
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 42
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 73
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 72
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 45
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 74
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 40
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 68
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 20
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 18
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 41
+        }
+        ],
+        "acousticInnerFastInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 0
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 1
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 24
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 25
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 46
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 42
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 73
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 72
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 45
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 74
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 40
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 68
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 20
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 18
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 57
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 41
+        }
+        ],
+        "acousticInnerSlowInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 48
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 49
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 53
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 52
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 19
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 71
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 7
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 69
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 68
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 79
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 75
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 20
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 18
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 42
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 73
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 72
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 74
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 40
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 41
+        }
+        ],
+        "acousticBassInstrInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 0
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 1
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 35
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 36
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 37
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiProgramDataSample",
+            "data": 32
+        }
+        ],
+        "bassDrumRndInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 43
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 41
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 61
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 64
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 66
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 36
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 35
+        }
+        ],
+        "snareRndInfos": [{
+            "likelihood": 30,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 38
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 39
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 50
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 48
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 47
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 45
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 63
+        },
+        {
+            "likelihood": 30,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 40
+        }
+        ],
+        "crashRndInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 52
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 55
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 49
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 57
+        }
+        ],
+        "rideRndInfos": [{
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 70
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 81
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 80
+        },
+        {
+            "likelihood": 1,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 75
+        },
+        {
+            "likelihood": 2,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 53
+        },
+        {
+            "likelihood": 5,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 37
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 51
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 59
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 44
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 42
+        },
+        {
+            "likelihood": 20,
+            "active": true,
+            "_constructorName": "MidiDrumDataSample",
+            "data": 46
+        }
+        ],
+        "setScaleBaseNote": false,
+        "scaleBaseNote": 60,
+        "overwriteSongPartStructure": false,
+        "songPartStructure": [{
+            "partType": 0,
+            "harmonyRythmCountOverrides": [],
+            "harmonyTotalLengthOverrides": [],
+            "overridePhraseGroupType": false,
+            "phraseGroupType": 19,
+            "overrideMajorModulationTarget": false,
+            "majorModulationTarget": 3,
+            "overrideMinorModulationTarget": false,
+            "minorModulationTarget": 3,
+            "overrideScaleBaseNote": false,
+            "scaleBaseNote": 60,
+            "overrideScaleType": false,
+            "scaleType": 1,
+            "harmonyElementIndices": [],
+            "customMelodyCurveIndices": [],
+            "customBassCurveIndices": [],
+            "extraMelodyRenderElementIndices": [],
+            "extraInner1RenderElementIndices": [],
+            "extraInner2RenderElementIndices": [],
+            "extraBassRenderElementIndices": [],
+            "extraPercussionRenderElementIndices": [],
+            "melodyShapeIndexOverride": [],
+            "bassShapeIndexOverride": [],
+            "harmonyIndexOverride": [],
+            "harmonyRythmIndexOverride": [],
+            "suspendIndexOverride": [],
+            "melodyChannelDistributionIndexOverride": [],
+            "inner1ChannelDistributionIndexOverride": [],
+            "inner2ChannelDistributionIndexOverride": [],
+            "bassChannelDistributionIndexOverride": [],
+            "melodyMotifDistributionIndexOverride": [],
+            "inner1MotifDistributionIndexOverride": [],
+            "inner2MotifDistributionIndexOverride": [],
+            "bassMotifDistributionIndexOverride": [],
+            "percussionMotifDistributionIndexOverride": [],
+            "percussionFillMotifDistributionIndexOverride": [],
+            "harmonyExtraIndexOverride": [],
+            "renderAmountIndexOverride": [],
+            "tempoIndexOverride": [],
+            "sequentialTempoChangeIndexOverride": [],
+            "parallelTempoChangeIndexOverride": [],
+            "sequentialMelodyEffectChangeIndexOverride": [],
+            "sequentialInner1EffectChangeIndexOverride": [],
+            "sequentialInner2EffectChangeIndexOverride": [],
+            "sequentialBassEffectChangeIndexOverride": [],
+            "sequentialPercussionEffectChangeIndexOverride": [],
+            "strength": 0,
+            "prefixProbsOverride": [],
+            "postfixProbsOverride": [],
+            "majorGroupModulationTarget": -1,
+            "minorGroupModulationTarget": -1,
+            "melodyRenderAmountOverride": [],
+            "inner1RenderAmountOverride": [],
+            "inner2RenderAmountOverride": [],
+            "bassRenderAmountOverride": [],
+            "percussionRenderAmountOverride": [],
+            "prefixInfoOverrides": [],
+            "postfixInfoOverrides": [],
+            "_constructorName": "SongPartStructureInfo"
+        }],
+        "songPartTypeOverrideInfos": [],
+        "harmonyRythmMeasureCountOverrides": [],
+        "harmonyRythmNoteCountOverrides": [],
+        "harmonyRythmDensityCurveAmplitudeOverrides": [],
+        "harmonyRythmDensityCurveFrequencyOverrides": [],
+        "melodyMotifRythmNoteCountOverrides": [],
+        "bassMotifRythmNoteCountOverrides": [],
+        "overwriteMelodyInstruments": false,
+        "melodyInstruments": [
+            0,
+            46,
+            25
+        ],
+        "overwriteInner1Instruments": false,
+        "inner1Instruments": [
+            0,
+            46,
+            25
+        ],
+        "overwriteInner2Instruments": false,
+        "inner2Instruments": [
+            0,
+            46,
+            25
+        ],
+        "overwriteBassInstruments": false,
+        "bassInstruments": [
+            0,
+            32,
+            43
+        ],
+        "percussionFillMotifIndicesOverride": [],
+        "addBassDrumsOverride": [],
+        "addSnareDrumsOverride": [],
+        "addCrashDrumsOverride": [],
+        "addRideDrumsOverride": [],
+        "overrideBassDrumNote": false,
+        "bassDrumNote": 36,
+        "overrideSnareDrumNote": false,
+        "snareDrumNote": 38,
+        "overrideCrashDrumNote": false,
+        "crashDrumNote": 49,
+        "overrideRideDrumNotes": false,
+        "rideDrumNotes": [
+            42,
+            46,
+            51
+        ],
+        "harmonyElements": [],
+        "customMelodyCurveInfos": [],
+        "customBassCurveInfos": [],
+        "exportVolume": true,
+        "exportEffects": true,
+        "mergeChannels": false,
+        "exportChordsToNewChannel": false,
+        "melodyVolumeMultipliers": [
+            1
+        ],
+        "inner1VolumeMultipliers": [
+            1
+        ],
+        "inner2VolumeMultipliers": [
+            1
+        ],
+        "bassVolumeMultipliers": [
+            1
+        ],
+        "percussionVolumeMultiplier": 1,
+        "melodyReverbSends": [
+            1
+        ],
+        "melodyChorusSends": [
+            0.3
+        ],
+        "bassReverbSends": [
+            0.1
+        ],
+        "bassChorusSends": [
+            0.1
+        ],
+        "inner1ReverbSends": [
+            0.1
+        ],
+        "inner1ChorusSends": [
+            0.1
+        ],
+        "inner2ReverbSends": [
+            0.1
+        ],
+        "inner2ChorusSends": [
+            0.1
+        ],
+        "percussionReverbSend": 0,
+        "percussionChorusSend": 0
+    }
+};
+
+function FakeByteArray() {
     this.position = 0;
     this.length = 0;
     this.data = [];
@@ -54,7 +1574,6 @@ FakeByteArray.prototype.appendByteArray = function (arr) {
     }
 };
 
-
 FakeByteArray.prototype.writeByte = function (byt) {
     if (typeof (byt) === 'undefined') {
         console.log("bad byte...");
@@ -85,6 +1604,7 @@ FakeByteArray.prototype.writeShort = function (s) {
     this.position += 1;
 };
 
+// DONE
 var MersenneTwister = function (a) {
     if (a == undefined) {
         a = new Date().getTime()
@@ -105,38 +1625,6 @@ MersenneTwister.prototype.init_genrand = function (a) {
         this.mt[this.mti] = (((((a & 4294901760) >>> 16) * 1812433253) << 16) + (a & 65535) * 1812433253) + this.mti;
         this.mt[this.mti] >>>= 0
     }
-};
-MersenneTwister.prototype.init_by_array = function (a, f) {
-    var d, c, b;
-    this.init_genrand(19650218);
-    d = 1;
-    c = 0;
-    b = (this.N > f ? this.N : f);
-    for (; b; b--) {
-        var e = this.mt[d - 1] ^ (this.mt[d - 1] >>> 30);
-        this.mt[d] = (this.mt[d] ^ (((((e & 4294901760) >>> 16) * 1664525) << 16) + ((e & 65535) * 1664525))) + a[c] + c;
-        this.mt[d] >>>= 0;
-        d++;
-        c++;
-        if (d >= this.N) {
-            this.mt[0] = this.mt[this.N - 1];
-            d = 1
-        }
-        if (c >= f) {
-            c = 0
-        }
-    }
-    for (b = this.N - 1; b; b--) {
-        var e = this.mt[d - 1] ^ (this.mt[d - 1] >>> 30);
-        this.mt[d] = (this.mt[d] ^ (((((e & 4294901760) >>> 16) * 1566083941) << 16) + (e & 65535) * 1566083941)) - d;
-        this.mt[d] >>>= 0;
-        d++;
-        if (d >= this.N) {
-            this.mt[0] = this.mt[this.N - 1];
-            d = 1
-        }
-    }
-    this.mt[0] = 2147483648
 };
 MersenneTwister.prototype.genrand_int32 = function () {
     var c;
@@ -168,19 +1656,8 @@ MersenneTwister.prototype.genrand_int32 = function () {
 MersenneTwister.prototype.genrand_int31 = function () {
     return (this.genrand_int32() >>> 1)
 };
-MersenneTwister.prototype.genrand_real1 = function () {
-    return this.genrand_int32() * (1 / 4294967295)
-};
 MersenneTwister.prototype.random = function () {
     return this.genrand_int32() * (1 / 4294967296)
-};
-MersenneTwister.prototype.genrand_real3 = function () {
-    return (this.genrand_int32() + 0.5) * (1 / 4294967296)
-};
-MersenneTwister.prototype.genrand_res53 = function () {
-    var d = this.genrand_int32() >>> 5,
-        c = this.genrand_int32() >>> 6;
-    return (d * 67108864 + c) * (1 / 9007199254740992)
 };
 
 function intervalIntersect(b, a) {
@@ -211,7 +1688,7 @@ function hashCode(c) {
     if (c.length == 0) {
         return b
     }
-    for (i = 0; i < c.length; i++) {
+    for (let i = 0; i < c.length; i++) {
         var a = c.charCodeAt(i);
         b = ((b << 5) - b) + a;
         b = b & b
@@ -530,15 +2007,8 @@ function getValue2LevelsOrDefault(e, b, a, d) {
 function copyValueDeep(g, f, d) {
     if (isArray(g)) {
         var a = [];
-        if (d && d.propertyInfo && d.propertyInfo.dataType == GuiPropertyDataType.ID_REFERENCE_LIST) {
-            var c = d.propertyInfo.uniqueIdInfo;
-            for (var e = 0; e < g.length; e++) {
-                a[e] = getValue2LevelsOrDefault(d.oldToNewIdMap, c.namespace, g[e], g[e])
-            }
-        } else {
-            for (var e = 0; e < g.length; e++) {
-                a[e] = copyValueDeep(g[e], f, d)
-            }
+        for (var e = 0; e < g.length; e++) {
+            a[e] = copyValueDeep(g[e], f, d)
         }
         return a
     } else {
@@ -548,13 +2018,6 @@ function copyValueDeep(g, f, d) {
             if (typeof (g) === "object") {
                 return copyObjectDeep(g, d)
             } else {
-                if (d && d.propertyInfo) {
-                    if (d.propertyInfo.dataType == GuiPropertyDataType.UNIQUE_ID || d.propertyInfo.dataType == GuiPropertyDataType.ID_REFERENCE) {
-                        var c = d.propertyInfo.uniqueIdInfo;
-                        var b = getValue2LevelsOrDefault(d.oldToNewIdMap, c.namespace, g, g);
-                        return b
-                    }
-                }
                 return g
             }
         }
@@ -597,7 +2060,8 @@ function copyObjectDeep(obj, options) {
         copy = {}
     } else {
         if (isValidFunctionName(obj._constructorName)) {
-            copy = eval("new " + obj._constructorName + "()")
+            //copy = eval("new " + obj._constructorName + "()")
+            copy = Object.create(obj);
         } else {
             copy = {}
         }
@@ -610,10 +2074,6 @@ function copyObjectDeep(obj, options) {
             options.propertyInfos = propertyInfos
         } else {
             options.propertyInfos = null
-        }
-        if (!options.oldToNewIdMap) {
-            options.oldToNewIdMap = {};
-            traverseObject(obj, propertyInfoProvider, createOldToNewIdMap, null, options.oldToNewIdMap)
         }
     }
     copyObjectPropertiesDeep(copy, obj, options);
@@ -628,7 +2088,7 @@ function objectToJson(g, a, b) {
         a = []
     }
     if (!b) {
-        b = new Map(true)
+        b = new CustomMap(true)
     }
     var f = b.get(g);
     if (f) {
@@ -701,7 +2161,7 @@ function traverseValue(g, f, a) {
         return
     }
     if (!a) {
-        a = new Map(true)
+        a = new CustomMap(true)
     }
     if (isArray(g)) {
         for (var c = 0; c < g.length; c++) {
@@ -724,8 +2184,6 @@ function traverseValue(g, f, a) {
                         }
                     }
                 }
-            } else {
-                if (typeof (g) === "string") { } else { }
             }
         }
     }
@@ -734,9 +2192,13 @@ function traverseValue(g, f, a) {
 function getExpressionValue(expression, module, extraVars, verbose, object, propName) {
     var result = null;
     var exprIsString = typeof (expression) === "string";
-    if (exprIsString && !expression.match(/[a-z]/i)) {
-        result = eval(expression);
-        return result
+    // expression does not contain a letter (i option is ignore case)
+    // I suppose these could be symbols and numbers, but in a couple of test cases, the value was always 1
+    if (exprIsString && !expression.match(/[a-z]/i)) { 
+        // always seems to return 1
+        //result = eval(expression);
+        result = +expression;
+        return result 
     }
     if (exprIsString && !expression.match(/[^a-z]/i)) {
         var variable = module.getVariable(expression);
@@ -799,19 +2261,17 @@ function getExpressionValue(expression, module, extraVars, verbose, object, prop
         var v = foundVars[varId];
         pub[v.id] = prop(v.id, v.getValue(module))
     }
-    for (var i = 0; i < module.procedures.length; i++) {
-        var v = module.procedures[i];
-        pub[v.id] = prop(v.id, v.getProcedure(module))
-    }
     if (extraVars) {
         for (var varName in extraVars) {
             pub[varName] = prop(varName, extraVars[varName])
         }
     }
     pub.getTheValue = function () {
-        with (prv) {
-            return eval(expression)
-        }
+        return prv[expression];
+        // with / eval are dangerous. 'expression' is just a path to an property on the 'prv' object, so using prv[expression] works fine.
+        //with (prv) {
+        //    return eval(expression)
+        //}
     };
     result = pub.getTheValue();
     return result
@@ -921,7 +2381,8 @@ function validateArrayValue(arrayValue, allowedTypes, defaultAllowedArrayTypes, 
         if (type === "object") {
             result = allowedTypes[arrayValue._constructorName];
             if (result) {
-                var safeValue = eval("new " + arrayValue._constructorName + "()");
+                //var safeValue = eval("new " + arrayValue._constructorName + "()");
+                var safeValue = Object.create(arrayValue);
                 result = validateValueWithSafeValue(arrayValue, safeValue, null, defaultAllowedArrayTypes, correct)
             }
         } else {
@@ -1077,7 +2538,6 @@ var ScaleType = {
             default:
                 return ScaleType.MAJOR_SCALE_STEPS
         }
-        return ScaleType.MAJOR_SCALE_STEPS
     },
     toString: function (a) {
         switch (a) {
@@ -1284,7 +2744,6 @@ var IndexBorderMode = {
                 } else {
                     return d - a - 1
                 }
-                return b % c
         }
         return b
     }
@@ -1945,8 +3404,8 @@ var SplineInterpolation = {
         return ((a * n + d) * n + e) * n + f
     }
 };
-
-function Map(a) {
+// Map was renamed to CustomMap to avoid conflicting with ES6 Map
+function CustomMap(a) {
     this.current = undefined;
     this.size = 0;
     this.isLinked = true;
@@ -1954,8 +3413,8 @@ function Map(a) {
         this.disableLinking()
     }
 }
-Map.from = function (d, a, c) {
-    var b = new Map(c);
+CustomMap.from = function (d, a, c) {
+    var b = new CustomMap(c);
     for (var e in d) {
         if (a || d.hasOwnProperty(e)) {
             b.put(e, d[e])
@@ -1963,13 +3422,13 @@ Map.from = function (d, a, c) {
     }
     return b
 };
-Map.noop = function () {
+CustomMap.noop = function () {
     return this
 };
-Map.illegal = function () {
+CustomMap.illegal = function () {
     throw new Error("can't do this with unlinked maps")
 };
-Map.prototype.disableLinking = function () {
+CustomMap.prototype.disableLinking = function () {
     this.isLinked = false;
     this.link = Map.noop;
     this.unlink = Map.noop;
@@ -1985,11 +3444,12 @@ Map.prototype.disableLinking = function () {
     this.listValues = Map.illegal;
     return this
 };
-Map.prototype.hash = function (a) {
-    return a instanceof Object ? (a.__hash || (a.__hash = "object " + ++arguments.callee.current)) : (typeof a) + " " + String(a)
+CustomMap.prototype.hash = function (a) {
+    // replaced ++arguments.callee.current with ++this.hash.current
+    return a instanceof Object ? (a.__hash || (a.__hash = "object " + ++this.hash.current)) : (typeof a) + " " + String(a)
 };
-Map.prototype.hash.current = 0;
-Map.prototype.link = function (a) {
+CustomMap.prototype.hash.current = 0;
+CustomMap.prototype.link = function (a) {
     if (this.size === 0) {
         a.prev = a;
         a.next = a;
@@ -2001,7 +3461,7 @@ Map.prototype.link = function (a) {
         this.current.prev = a
     }
 };
-Map.prototype.unlink = function (a) {
+CustomMap.prototype.unlink = function (a) {
     if (this.size === 0) {
         this.current = undefined
     } else {
@@ -2012,11 +3472,11 @@ Map.prototype.unlink = function (a) {
         }
     }
 };
-Map.prototype.get = function (a) {
+CustomMap.prototype.get = function (a) {
     var b = this[this.hash(a)];
     return typeof b === "undefined" ? undefined : b.value
 };
-Map.prototype.put = function (a, c) {
+CustomMap.prototype.put = function (a, c) {
     var d = this.hash(a);
     if (this.hasOwnProperty(d)) {
         this[d].value = c
@@ -2031,7 +3491,7 @@ Map.prototype.put = function (a, c) {
     }
     return this
 };
-Map.prototype.remove = function (a) {
+CustomMap.prototype.remove = function (a) {
     var b = this.hash(a);
     if (this.hasOwnProperty(b)) {
         --this.size;
@@ -2040,29 +3500,29 @@ Map.prototype.remove = function (a) {
     }
     return this
 };
-Map.prototype.removeAll = function () {
+CustomMap.prototype.removeAll = function () {
     while (this.size) {
         this.remove(this.key())
     }
     return this
 };
-Map.prototype.contains = function (a) {
+CustomMap.prototype.contains = function (a) {
     return this.hasOwnProperty(this.hash(a))
 };
-Map.prototype.isUndefined = function (a) {
+CustomMap.prototype.isUndefined = function (a) {
     var b = this.hash(a);
     return this.hasOwnProperty(b) ? typeof this[b] === "undefined" : false
 };
-Map.prototype.next = function () {
+CustomMap.prototype.next = function () {
     this.current = this.current.next
 };
-Map.prototype.key = function () {
+CustomMap.prototype.key = function () {
     return this.current.key
 };
-Map.prototype.value = function () {
+CustomMap.prototype.value = function () {
     return this.current.value
 };
-Map.prototype.each = function (c, a) {
+CustomMap.prototype.each = function (c, a) {
     if (typeof a === "undefined") {
         a = this
     }
@@ -2074,8 +3534,8 @@ Map.prototype.each = function (c, a) {
     }
     return this
 };
-Map.prototype.flip = function (e) {
-    var d = new Map(e);
+CustomMap.prototype.flip = function (e) {
+    var d = new CustomMap(e);
     for (var a = this.size; a--; this.next()) {
         var c = this.value(),
             b = d.get(c);
@@ -2087,7 +3547,7 @@ Map.prototype.flip = function (e) {
     }
     return d
 };
-Map.prototype.drop = function (c, a) {
+CustomMap.prototype.drop = function (c, a) {
     if (typeof a === "undefined") {
         a = this
     }
@@ -2101,21 +3561,21 @@ Map.prototype.drop = function (c, a) {
     }
     return this
 };
-Map.prototype.listValues = function () {
+CustomMap.prototype.listValues = function () {
     var b = [];
     for (var a = this.size; a--; this.next()) {
         b.push(this.value())
     }
     return b
 };
-Map.prototype.listKeys = function () {
+CustomMap.prototype.listKeys = function () {
     var b = [];
     for (var a = this.size; a--; this.next()) {
         b.push(this.key())
     }
     return b
 };
-Map.prototype.toString = function () {
+CustomMap.prototype.toString = function () {
     var a = "[object Map";
 
     function b(d, e, c) {
@@ -2128,8 +3588,8 @@ Map.prototype.toString = function () {
     a += "]";
     return a
 };
-Map.reverseIndexTableFrom = function (g, f) {
-    var e = new Map(f);
+CustomMap.reverseIndexTableFrom = function (g, f) {
+    var e = new CustomMap(f);
     for (var b = 0, a = g.length; b < a; ++b) {
         var c = g[b],
             d = e.get(c);
@@ -2141,7 +3601,7 @@ Map.reverseIndexTableFrom = function (g, f) {
     }
     return e
 };
-Map.cross = function (h, g, e, b) {
+CustomMap.cross = function (h, g, e, b) {
     var f, a;
     if (h.isLinked) {
         f = h;
@@ -2162,7 +3622,7 @@ Map.cross = function (h, g, e, b) {
     }
     return b
 };
-Map.uniqueArray = function (d) {
+CustomMap.uniqueArray = function (d) {
     var c = new Map;
     for (var b = 0, a = d.length; b < a; ++b) {
         c.put(d[b])
@@ -2827,26 +4287,6 @@ var voiceLeadingTimer = new PerfTimer("voice leading");
 var voiceLeadingPrepareTimer = new PerfTimer("voice leading prepare");
 var figurationTimer = new PerfTimer("figuration");
 var perfTimer2 = new PerfTimer("timer 2");
-
-function EditorProcedure() {
-    this.id = "";
-    this._constructorName = "EditorProcedure"
-}
-EditorProcedure.prototype.getProcedure = function (a) {
-    return function () { }
-};
-
-function CustomEditorProcedure() {
-    EditorProcedure.call(this);
-    this.procedureText = "";
-    this._constructorName = "CustomEditorProcedure"
-}
-CustomEditorProcedure.prototype = new EditorProcedure();
-CustomEditorProcedure.prototype.getProcedure = function (module) {
-    return function () {
-        eval(this.procedureText)
-    }
-};
 
 function DfsSearchNode(b, a, c) {
     this.state = b;
@@ -4126,12 +5566,6 @@ MaxCurveComputation.prototype.getValueReferencesOk = function (f, b) {
     }
     return a === null ? 0 : a
 };
-
-function CurveGroup() {
-    this.curves = []
-}
-
-function CurveModifier() { }
 
 function FigurationGrid(a) {
     this.beatCellSize = getValueOrDefault(a, "beatCellSize", 1);
@@ -5719,13 +7153,13 @@ MotifRenderElement.prototype.renderBatch = function (b) {
         return
     }
     var m = b.constantHarmony;
-    var d = new Map(true);
+    var d = new CustomMap(true);
     var g = [];
-    var c = new Map(true);
-    var p = new Map(true);
-    var q = new Map(true);
-    var o = new Map(true);
-    var k = new Map(true);
+    var c = new CustomMap(true);
+    var p = new CustomMap(true);
+    var q = new CustomMap(true);
+    var o = new CustomMap(true);
+    var k = new CustomMap(true);
     var f = this.getOrCreateVoiceLine(b, m);
     var h = b.voiceLineHarmonies[f.id];
     if (h) {
@@ -6131,7 +7565,6 @@ function GenMusicModule() {
     this.figurationPlanners = [];
     this._variables = [];
     this._variablesHash = {};
-    this.procedures = [];
     this.voiceLines = [];
     this.idCounters = {};
     this.reusables = {};
@@ -6585,7 +8018,7 @@ SplitZoneCollection.prototype.getSplitBeat = function (c, b, j, k, a, e) {
         return h
     }
     var d = 0;
-    var l = new Map();
+    var l = new CustomMap();
     while (true) {
         var f = this.singleSplit(c, k, h, j, a, e, d, l);
         d++;
@@ -7983,17 +9416,9 @@ function Motif() {
     this.useExternalSeed = false;
     this._constructorName = "Motif"
 }
-Motif.prototype.toString = function (b) {
-    var a = "{";
-    a += "" + $.map(this.motifElements, function (d, c) {
-        return d.toString(b)
-    });
-    a += "}";
-    return a
-};
 Motif.prototype.getConstantMotifElements = function (c, n, b, v) {
     if (!v) {
-        v = new Map(true)
+        v = new CustomMap(true)
     }
     var l = [];
     if (this.inheritedMotif) {
@@ -10933,7 +12358,6 @@ SequenceHarmonyElement.prototype.getBeatLengths = function (c) {
             var s = u[N];
             addAll(P, A(s))
         }
-        if (u.length != P.length) { }
         u = P
     }
     return u
@@ -12216,9 +13640,7 @@ PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
         var bi = false;
         for (var ak = 0; ak < ba.length; ak++) {
             var ao = ba[ak].toRomanString().indexOf("X") >= 0;
-            if (ao) { }
             var a4 = ba[ak].toRomanString().indexOf("sus") >= 0;
-            if (a4) { }
             var M = ba[ak].toRomanString().indexOf("NX") >= 0 || ba[ak].toRomanString().indexOf("NMX") >= 0;
             var a4 = ba[ak].toRomanString().indexOf("sus") >= 0;
             var bk = ba[ak].note.indexOf("D, E") >= 0
@@ -14553,7 +15975,6 @@ DynamicHarmonyGenerator.prototype.isGoalState = function (f) {
         default:
             return false
     }
-    return false
 };
 DynamicHarmonyGenerator.prototype.isInvalidState = function (a) {
     return false
@@ -14946,8 +16367,6 @@ DynamicHarmonyGenerator.prototype.getRootStatesAndLikelihoods = function (ai, av
             this.getChordsStuff(aB, aL, this.simpleMixtureLikelihood * at[T], J[T], this.mixtureSeventhLikelihoods, this.mixtureTriadLikelihoods, this.mixtureSeventhCosts, this.mixtureTriadCosts, av, ah, ag)
         }
     }
-    if (this.passingLikelihood > 0) { }
-    if (this.expansionLikelihood > 0) { }
 };
 DynamicHarmonyGenerator.prototype.getSuccessorIterator = function (d) {
     var e = d.state;
@@ -18052,7 +19471,6 @@ MidiRenderer.prototype.getMidiData = function (y, c, h) {
                 var l = clamp(Math.round(C.value * e.amplitude + e.bias), 0, 127);
                 var a = MidiControllerType.getValue(e.controllerType);
                 if (e && (h.exportEffects && e.controllerType != MidiControllerType.VOLUME || h.exportVolume && e.controllerType == MidiControllerType.VOLUME)) {
-                    if (a == MidiControllerType.VOLUME) { }
                     if (!k[e.channel]) {
                         q = {
                             eventTime: x,
@@ -21552,6 +22970,13 @@ function createPercussionMotifInfos(P, r, C, e, b, s) {
         }
         return ac
     }
+
+    // moved from inside the next for loop
+    function J(ae, j, ad) {
+        var ac = j[0] + ad.random() * (j[1] - j[0]);
+        return ae + "RenderAmountVar > " + ac
+    }
+
     for (var Y = 0; Y < P; Y++) {
         var Z = {};
         var y = copyValueDeep(q);
@@ -21604,10 +23029,6 @@ function createPercussionMotifInfos(P, r, C, e, b, s) {
         var W = 0.8;
         var w = 16;
 
-        function J(ae, j, ad) {
-            var ac = j[0] + ad.random() * (j[1] - j[0]);
-            return ae + "RenderAmountVar > " + ac
-        }
         if (D) {
             var T = {};
             var L = ab;
@@ -22996,37 +24417,39 @@ var PhraseGroupEffectType = {
         var o = null;
         var n = null;
         switch (g) {
-            case PhraseGroupEffectType.RANDOM_ALL_SAME:
-            case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
-            case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
-            case PhraseGroupEffectType.RANDOM_GROUP:
-            case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
-                var e = getRandomCurveInfos({
-                    ampRange: [0.3, 0.5],
-                    biasRange: [1, 1]
-                }, l);
-                var d = getRandomCurveInfos({
-                    ampRange: [0.3, 0.5],
-                    biasRange: [1, 1]
-                }, l);
-                o = sampleData(curveRndInfos, l);
-                switch (g) {
-                    case PhraseGroupEffectType.RANDOM_ALL_SAME:
-                        n = o;
-                        break;
-                    case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
-                        n = sampleData(curveRndInfos, l);
-                        break;
-                    case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
-                        break;
-                    case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
-                        n = o;
-                        o = null;
-                        break;
-                    case PhraseGroupEffectType.RANDOM_GROUP:
-                        break
-                }
-                break;
+            // curveRndInfos is not defined. Perhaps it's either 'e' or 'e', but I'm not sure which.
+            //case PhraseGroupEffectType.RANDOM_ALL_SAME:
+            //case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
+            //case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
+            //case PhraseGroupEffectType.RANDOM_GROUP:
+            //case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
+            //    console.log('here');
+            //    var e = getRandomCurveInfos({
+            //        ampRange: [0.3, 0.5],
+            //        biasRange: [1, 1]
+            //    }, l);
+            //    var d = getRandomCurveInfos({
+            //        ampRange: [0.3, 0.5],
+            //        biasRange: [1, 1]
+            //    }, l);
+            //    o = sampleData(curveRndInfos, l);
+            //    switch (g) {
+            //        case PhraseGroupEffectType.RANDOM_ALL_SAME:
+            //            n = o;
+            //            break;
+            //        case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
+            //            n = sampleData(curveRndInfos, l);
+            //            break;
+            //        case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
+            //            break;
+            //        case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
+            //            n = o;
+            //            o = null;
+            //            break;
+            //        case PhraseGroupEffectType.RANDOM_GROUP:
+            //            break
+            //    }
+            //    break;
             case PhraseGroupEffectType.DEC_SECOND_PHRASE:
                 h = [1 - a, 1];
                 break;
@@ -23251,7 +24674,6 @@ function createEffectChangeInfos(E, y, n) {
         var ao = getValueOrDefault(ad, "prefix", "melody");
         var at = getValueOrDefault(ad, "effect", "FilterF");
         var T = getValueOrDefault(ad, "infos", []);
-        if (X.length == 0 && ao == "percussion") { }
         var L = 0;
         var W = 1;
         var aj = 1;
@@ -25109,7 +26531,6 @@ function createPhraseGroupInfo(b7, cY, cx) {
                 aw = 0.5;
                 aQ = [0.3, 0.5]
             }
-            if (a2) { }
             a2[bO] = bO == 0 && bR && aO.random() < aw ? 1 : 0;
             ct[bO] = bO == aX.length - 1 && a0 && aO.random() < c ? 1 : 0;
             a2[bO] *= cY.prefixGlueProbabilityMultiplier;
@@ -25717,7 +27138,6 @@ function checkConstraints(y, d, n, p, z, l, r, b, B) {
                     break
                 }
             }
-            if (s) { }
         }
     }
     return A
@@ -27475,98 +28895,6 @@ function createTestModule(seed, inputGenInfo, resultObj) {
         structure.references.push(sectionRef)
     }
     module.addStructure(structure);
-    if (!(typeof (WebAudioRenderer) === "undefined")) {
-        var waRenderer = new WebAudioRenderer();
-        waRenderer.id = "webAudioRenderer";
-        waRenderer.structure = module.getStructures()[0].id;
-        var waEnv1 = new WebAudioADSREnvelope();
-        waEnv1.id = "env1";
-        var waEnv2 = new WebAudioADSREnvelope();
-        waEnv2.id = "env2";
-        waEnv2.attack = 0.01;
-        waEnv2.release = 0.2;
-        waEnv2.sustain = 0;
-        waRenderer.envelopes = [waEnv1, waEnv2];
-        var bufferCurve1 = new PredefinedCurve();
-        bufferCurve1.id = "bufferCurve1";
-        bufferCurve1.type = PredefinedCurveType.SQUARE;
-        module.curves.push(bufferCurve1);
-        var quadNoiseCurve1 = new PredefinedCurve();
-        quadNoiseCurve1.id = "bufferCurve2";
-        quadNoiseCurve1.type = PredefinedCurveType.QUADRATIC_NOISE;
-        quadNoiseCurve1.frequency = 40;
-        module.curves.push(quadNoiseCurve1);
-        var quadNoiseCurve2 = new PredefinedCurve();
-        quadNoiseCurve2.id = "bufferCurve3";
-        quadNoiseCurve2.type = PredefinedCurveType.QUADRATIC_NOISE;
-        quadNoiseCurve2.frequency = 220;
-        module.curves.push(quadNoiseCurve2);
-        var waBuffer1 = new WebAudioCurveBufferSource();
-        waBuffer1.id = "buffer1";
-        waBuffer1.curve = bufferCurve1.id;
-        var waBuffer2 = new WebAudioCurveBufferSource();
-        waBuffer2.id = "buffer2";
-        waBuffer2.curve = quadNoiseCurve1.id;
-        waBuffer2.adaptToFrequency = false;
-        var waBuffer3 = new WebAudioCurveBufferSource();
-        waBuffer3.id = "buffer3";
-        waBuffer3.curve = quadNoiseCurve2.id;
-        waBuffer3.adaptToFrequency = false;
-        waRenderer.sources = [waBuffer1, waBuffer2, waBuffer3];
-        var zoneCounter = 1;
-
-        function createWebAudioZone(bufferId, noteInterval, ampEnvId) {
-            var result = new WebAudioSourceZone();
-            result.noteInterval = noteInterval ? noteInterval : [0, 127];
-            result.id = "waSourceZone" + zoneCounter;
-            result.amplitudeEnvelope = ampEnvId ? ampEnvId : "";
-            zoneCounter++;
-            result.source = bufferId;
-            return result
-        }
-        var waSourceZone1 = createWebAudioZone(waBuffer1.id);
-        var waSourceZone2 = createWebAudioZone(waBuffer1.id);
-        var waSourceZone3 = createWebAudioZone(waBuffer1.id);
-        var waSourceZone4 = createWebAudioZone(waBuffer2.id, [36, 36], waEnv2.id);
-        var waSourceZone5 = createWebAudioZone(waBuffer3.id, [38, 38], waEnv2.id);
-        var waSourceZone6 = createWebAudioZone(waBuffer3.id, [42, 42], waEnv2.id);
-        var waInstr1 = new WebAudioInstrument();
-        waInstr1.id = "waInstrument1";
-        waInstr1.zones = [waSourceZone1];
-        var waInstr2 = new WebAudioInstrument();
-        waInstr2.id = "waInstrument2";
-        waInstr2.zones = [waSourceZone2];
-        var waInstr3 = new WebAudioInstrument();
-        waInstr3.id = "waInstrument3";
-        waInstr3.zones = [waSourceZone3];
-        var waInstr4 = new WebAudioInstrument();
-        waInstr4.id = "percussionInstrument";
-        waInstr4.zones = [waSourceZone4, waSourceZone5, waSourceZone6];
-        waRenderer.instruments = [waInstr1, waInstr2, waInstr3, waInstr4];
-        var waChannelInfo1 = new WebAudioRenderChannelInfo();
-        waChannelInfo1.instrument = waInstr1.id;
-        waChannelInfo1.renderChannel = "melodyRenderChannel1";
-        var waChannelInfo2 = new WebAudioRenderChannelInfo();
-        waChannelInfo2.instrument = waInstr2.id;
-        waChannelInfo2.renderChannel = "inner1RenderChannel1";
-        var waChannelInfo5 = new WebAudioRenderChannelInfo();
-        waChannelInfo5.instrument = waInstr2.id;
-        waChannelInfo5.renderChannel = "inner2RenderChannel1";
-        var waChannelInfo3 = new WebAudioRenderChannelInfo();
-        waChannelInfo3.instrument = waInstr3.id;
-        waChannelInfo3.renderChannel = "bassRenderChannel1";
-        var waChannelInfo4 = new WebAudioRenderChannelInfo();
-        waChannelInfo4.instrument = waInstr4.id;
-        waChannelInfo4.renderChannel = percussionRenderChannel1.id;
-        waRenderer.channelInfos = [waChannelInfo1, waChannelInfo2, waChannelInfo3, waChannelInfo4, waChannelInfo5];
-        module.addRenderer(waRenderer)
-    }
-    if (!(typeof (JsonAudioRenderer) === "undefined")) {
-        var jsonRenderer = new JsonRenderer();
-        jsonRenderer.id = "jsonRenderer";
-        jsonRenderer.structure = module.getStructures()[0].id;
-        module.addRenderer(jsonRenderer)
-    }
     if (!(typeof (MidiRenderer) === "undefined")) {
         var midiRenderer = new MidiRenderer();
         midiRenderer.id = "midiRenderer";
@@ -28282,27 +29610,6 @@ var Midi = (function () {
 
 })();
 
-// stuff from worker.js
-function returnMidiData(message) {
-    var data = message;
-
-    var result = render(data);
-    //$("#json").html(JSON.stringify(result));
-
-    if (result) {
-        var midiRenderer = result.module.getSynthRenderer("midiRenderer");
-        var midiData = midiRenderer.getMidiData(result.origRenderData, result.module, data.content.genInfo);
-        result.midiData = midiData;
-
-        //                            console.log("Result midi data " + JSON.stringify(result.midiData));
-
-        delete result.origRenderData; // No use to us now after midi has been rendered
-        delete result.module; // No use to us now after midi has been rendered
-
-        return result;
-    }
-}
-
 function inputOk(genInfo, correct) {
     var valid = true;
     try {
@@ -28321,11 +29628,10 @@ function inputOk(genInfo, correct) {
     return valid;
 }
 
-function render(data) {
-    var content = data.content;
-    var seed = content.seed;
+function render(jsonRenderRequestData) {
+    var content = jsonRenderRequestData;
 
-    var sectionIndex = content.sectionIndex;
+    var seed = content.seed;
 
     var rnd = new MersenneTwister(seed);
     var genInfo = content.genInfo;
@@ -28370,1569 +29676,39 @@ function render(data) {
     return null;
 }
 
-// receive result from asyncoperation.js
-function getFileAsString(data) {
-    //console.log(data);
-    var result = data;
+function generateMidiData(jsonRenderRequestData) {
+    var result = render(jsonRenderRequestData);
+
+    if (result) {
+        var midiRenderer = result.module.getSynthRenderer("midiRenderer");
+        var midiData = midiRenderer.getMidiData(result.origRenderData, result.module, jsonRenderRequestData.genInfo);
+        result.midiData = midiData;
+
+        delete result.origRenderData; // No use to us now after midi has been rendered
+        delete result.module; // No use to us now after midi has been rendered
+
+        return result;
+    }
+}
+
+function exportMidi(seed) {
+    //console.log("starting midi export...");
+    //var renderRequestData = {seed: seed, strSeed: songSettings.seed, name: songSettings.name, sectionIndex: -1, genInfo: genInfo};
+
+    renderRequestData["seed"] = hashCode(seed);
+    renderRequestData["strSeed"] = seed; // strSeed is not used anywhere.
+    console.log(renderRequestData["strSeed"]);
+    var midiResult = generateMidiData(renderRequestData);
+
     // that.resultRenderData = result.renderData;
     // that.resultRenderDataLength = result.renderDataLength;
     // that.resultChannelMaps = result.channelMaps;
     // that.resultSongStructureInfo = result.songStructureInfo;
     // that.resultSectionTimes = result.sectionTimes;
 
-    var buffer = null;
-    var extension = ".mid";
-
     var fakeByteArray = new FakeByteArray();
-    Midi.encodeMidi(result.midiData, fakeByteArray);
-    buffer = fakeByteArray.toBuffer();
-    //                                addAudioElement = true;
-    //                                audioType = "audio/midi";
+    Midi.encodeMidi(midiResult.midiData, fakeByteArray);
+    var buffer = fakeByteArray.toBuffer();
 
-    // create a comma separated list of integers representing the bytes of the file
-    return new Uint8Array(buffer).join();
+    return new Uint8Array(buffer);
 }
-
-// need
-function exportMidi(seed) {
-    //console.log("starting midi export...");
-    //var renderRequestData = {seed: seed, strSeed: songSettings.seed, name: songSettings.name, sectionIndex: -1, genInfo: genInfo};
-
-    renderRequestData["seed"] = hashCode(seed);
-    renderRequestData["strSeed"] = seed;
-
-    var params = {
-        content: renderRequestData,
-        caption: "Exporting midi...",
-        doneCaption: "Done!",
-        resultDivId: "midi-export-result-div",
-    };
-
-    var midiData = returnMidiData(params);
-    //console.log(midiData);
-
-    var fileString = getFileAsString(midiData);
-    //console.log(blob);
-    //var resultUrl = window.URL.createObjectURL(blob);
-    //$("#resultUrl").attr("href", resultUrl);
-
-    return fileString;
-}
-
-var renderRequestData = {
-    "seed": hashCode("connor"),
-    "strSeed": "connor",
-    "name": "Song",
-    "sectionIndex": -1,
-    "genInfo": {
-        "minorScaleLikelihood": 1,
-        "majorScaleLikelihood": 1,
-        "timeSignature2Likelihood": 1,
-        "timeSignature3Likelihood": 1,
-        "timeSignature4Likelihood": 3,
-        "electronicLikelihood": 1,
-        "electricLikelihood": 1,
-        "acousticLikelihood": 1,
-        "strictBuildSongStructureLikelihoodMultiplier": 1,
-        "buildSongStructureLikelihoodMultiplier": 1,
-        "verseChorusSongStructureLikelihoodMultiplier": 1,
-        "verseChorusBridgeSongStructureLikelihoodMultiplier": 1,
-        "noMelodyPartSongStructureLikelihoodMultiplier": 1,
-        "percussionFillProbabilities": [
-            0.35
-        ],
-        "raiseLeadingInMinorProbabilities": [
-            0.5
-        ],
-        "tonicizeLikelihoodMultipliers": [
-            1
-        ],
-        "modulateLikelihoodMultiplier": 0.25,
-        "simpleMixtureLikelihoods": [
-            1
-        ],
-        "sus2ChordsLikelihoods": [
-            1
-        ],
-        "sus4ChordsLikelihoods": [
-            1
-        ],
-        "neighbourChordsLikelihoods": [
-            1
-        ],
-        "passingChordsLikelihoods": [
-            1
-        ],
-        "melodyMotifRythmCountIncreasePerIndex": 0.4,
-        "melodyMotifRythmCountIncreaseOffsetRange": [
-            0.5,
-            1
-        ],
-        "bassMotifRythmCountIncreasePerIndex": 0.4,
-        "bassMotifRythmCountIncreaseOffsetRange": [
-            0.25,
-            0.75
-        ],
-        "melodyMotifZone1Probabilities": [
-            0.5
-        ],
-        "melodyMotifZone1TripletLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotFirstLikelihoods": [
-            2
-        ],
-        "melodyMotifZone1DotSecondLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotNormalDotLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1NormalDotDotLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotDotNormalLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1StartPosRanges": [
-            [
-                0,
-                0
-            ]
-        ],
-        "melodyMotifZone1EndPosRanges": [
-            [
-                0.75,
-                0.75
-            ]
-        ],
-        "melodyMotifZone1StartEnds": [],
-        "bassMotifZone1Probabilities": [
-            0.5
-        ],
-        "bassMotifZone1TripletLikelihoods": [
-            0.01
-        ],
-        "bassMotifZone1DotFirstLikelihoods": [
-            2
-        ],
-        "bassMotifZone1DotSecondLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1DotNormalDotLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1NormalDotDotLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1DotDotNormalLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1StartPosRanges": [
-            [
-                0,
-                0
-            ]
-        ],
-        "bassMotifZone1EndPosRanges": [
-            [
-                0.75,
-                0.75
-            ]
-        ],
-        "bassMotifZone1StartEnds": [],
-        "allInstrumentsDifferentProbability": 0.35,
-        "adaptHarmonyRythmToTempo": true,
-        "adaptHarmonyRythmToTimeSignature": true,
-        "adaptSuspensionToTempo": true,
-        "adaptMotifRythmsToTempo": true,
-        "filterFEffectsProbMultiplier": 1,
-        "filterBWEffectsProbMultiplier": 1,
-        "panEffectsProbMultiplier": 1,
-        "oddHarmonyRythmProbability": 0.01,
-        "melodyShareProbabilities": [
-            0.3
-        ],
-        "endSongTempoChangeProbability": 0.5,
-        "endPhraseGroupTempoChangeProbabilities": [
-            0
-        ],
-        "adaptTempoToRenderAmount": true,
-        "tempoAdaptBias": 3,
-        "tempoAdaptRandomMultiplier": 3,
-        "useNaturalTempoChanges": true,
-        "voiceLineSuspensionProbabilities": [
-            0.5
-        ],
-        "songIntroProbability": 0.7,
-        "songEndProbability": 0.5,
-        "withinPhraseGroupSimilarRandomFraction": 0.35,
-        "withinPhraseGroupSimilarBias": 0.55,
-        "samePhraseGroupIndexSimilarRandomFraction": 0.25,
-        "samePhraseGroupIndexSimilarBias": 0.5,
-        "differentPhraseGroupIndexDifferentRandomFraction": 0.3,
-        "differentPhraseGroupIndexDifferentBias": 0.25,
-        "prefixGlueProbabilityMultiplier": 1,
-        "postfixGlueProbabilityMultiplier": 1,
-        "useMaxHarmonyElementLength": true,
-        "prolongStaticLikelihoods": [
-            2
-        ],
-        "prolongDynamicLikelihoods": [
-            4
-        ],
-        "prolongDominantCadenceLikelihoods": [
-            3
-        ],
-        "prolongTonicCadenceLikelihoods": [
-            1
-        ],
-        "prolongHarmonyPartBiases": [
-            20
-        ],
-        "prolongHarmonyPartRandomFractions": [
-            50
-        ],
-        "tempoRange": [
-            60,
-            140
-        ],
-        "melodyShapeAmpRanges": [
-            [
-                6,
-                12
-            ]
-        ],
-        "melodyShapeBiasRanges": [
-            [
-                68,
-                76
-            ]
-        ],
-        "bassShapeAmpRanges": [
-            [
-                2,
-                4
-            ]
-        ],
-        "bassShapeBiasRanges": [
-            [
-                35,
-                45
-            ]
-        ],
-        "overwriteSongPartStructureRndInfos": false,
-        "songPartStructureRndInfos": [],
-        "phraseGroupTypes": [{
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 11
-        },
-        {
-            "likelihood": 0.125,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 8
-        },
-        {
-            "likelihood": 0.125,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 10
-        },
-        {
-            "likelihood": 0.25,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 19
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 15
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 22
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 2
-        }
-        ],
-        "modulatePhraseGroupTypes": [{
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 23
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 11
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 9
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 12
-        }
-        ],
-        "majorDeceptiveRootRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 6
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 1
-        }
-        ],
-        "minorDeceptiveRootRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 6
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 1
-        }
-        ],
-        "introGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "endGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "glueGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "majorModulationTargetInfos": [{
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 0.2,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 3
-        }
-        ],
-        "minorModulationTargetInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 0.2,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 3
-        }
-        ],
-        "electronicMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 81
-        }
-        ],
-        "electronicInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        }
-        ],
-        "electronicInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 94
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 93
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 88
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 90
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 95
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 89
-        }
-        ],
-        "electronicBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        }
-        ],
-        "electricMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        }
-        ],
-        "electricInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 26
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 28
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 54
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 27
-        }
-        ],
-        "electricInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 54
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 92
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 94
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 93
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 88
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 90
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 95
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 89
-        }
-        ],
-        "electricBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 33
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 34
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        }
-        ],
-        "acousticMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 24
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 25
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 46
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 24
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 25
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 46
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 57
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 48
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 49
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 53
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 52
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 19
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 71
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 7
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 69
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 79
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 75
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 35
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 36
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 37
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 32
-        }
-        ],
-        "bassDrumRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 43
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 41
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 61
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 64
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 66
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 36
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 35
-        }
-        ],
-        "snareRndInfos": [{
-            "likelihood": 30,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 39
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 48
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 47
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 30,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 40
-        }
-        ],
-        "crashRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 52
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 55
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 49
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 57
-        }
-        ],
-        "rideRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 70
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 81
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 80
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 75
-        },
-        {
-            "likelihood": 2,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 53
-        },
-        {
-            "likelihood": 5,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 37
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 59
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 44
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 46
-        }
-        ],
-        "setScaleBaseNote": false,
-        "scaleBaseNote": 60,
-        "overwriteSongPartStructure": false,
-        "songPartStructure": [{
-            "partType": 0,
-            "harmonyRythmCountOverrides": [],
-            "harmonyTotalLengthOverrides": [],
-            "overridePhraseGroupType": false,
-            "phraseGroupType": 19,
-            "overrideMajorModulationTarget": false,
-            "majorModulationTarget": 3,
-            "overrideMinorModulationTarget": false,
-            "minorModulationTarget": 3,
-            "overrideScaleBaseNote": false,
-            "scaleBaseNote": 60,
-            "overrideScaleType": false,
-            "scaleType": 1,
-            "harmonyElementIndices": [],
-            "customMelodyCurveIndices": [],
-            "customBassCurveIndices": [],
-            "extraMelodyRenderElementIndices": [],
-            "extraInner1RenderElementIndices": [],
-            "extraInner2RenderElementIndices": [],
-            "extraBassRenderElementIndices": [],
-            "extraPercussionRenderElementIndices": [],
-            "melodyShapeIndexOverride": [],
-            "bassShapeIndexOverride": [],
-            "harmonyIndexOverride": [],
-            "harmonyRythmIndexOverride": [],
-            "suspendIndexOverride": [],
-            "melodyChannelDistributionIndexOverride": [],
-            "inner1ChannelDistributionIndexOverride": [],
-            "inner2ChannelDistributionIndexOverride": [],
-            "bassChannelDistributionIndexOverride": [],
-            "melodyMotifDistributionIndexOverride": [],
-            "inner1MotifDistributionIndexOverride": [],
-            "inner2MotifDistributionIndexOverride": [],
-            "bassMotifDistributionIndexOverride": [],
-            "percussionMotifDistributionIndexOverride": [],
-            "percussionFillMotifDistributionIndexOverride": [],
-            "harmonyExtraIndexOverride": [],
-            "renderAmountIndexOverride": [],
-            "tempoIndexOverride": [],
-            "sequentialTempoChangeIndexOverride": [],
-            "parallelTempoChangeIndexOverride": [],
-            "sequentialMelodyEffectChangeIndexOverride": [],
-            "sequentialInner1EffectChangeIndexOverride": [],
-            "sequentialInner2EffectChangeIndexOverride": [],
-            "sequentialBassEffectChangeIndexOverride": [],
-            "sequentialPercussionEffectChangeIndexOverride": [],
-            "strength": 0,
-            "prefixProbsOverride": [],
-            "postfixProbsOverride": [],
-            "majorGroupModulationTarget": -1,
-            "minorGroupModulationTarget": -1,
-            "melodyRenderAmountOverride": [],
-            "inner1RenderAmountOverride": [],
-            "inner2RenderAmountOverride": [],
-            "bassRenderAmountOverride": [],
-            "percussionRenderAmountOverride": [],
-            "prefixInfoOverrides": [],
-            "postfixInfoOverrides": [],
-            "_constructorName": "SongPartStructureInfo"
-        }],
-        "songPartTypeOverrideInfos": [],
-        "harmonyRythmMeasureCountOverrides": [],
-        "harmonyRythmNoteCountOverrides": [],
-        "harmonyRythmDensityCurveAmplitudeOverrides": [],
-        "harmonyRythmDensityCurveFrequencyOverrides": [],
-        "melodyMotifRythmNoteCountOverrides": [],
-        "bassMotifRythmNoteCountOverrides": [],
-        "overwriteMelodyInstruments": false,
-        "melodyInstruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteInner1Instruments": false,
-        "inner1Instruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteInner2Instruments": false,
-        "inner2Instruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteBassInstruments": false,
-        "bassInstruments": [
-            0,
-            32,
-            43
-        ],
-        "percussionFillMotifIndicesOverride": [],
-        "addBassDrumsOverride": [],
-        "addSnareDrumsOverride": [],
-        "addCrashDrumsOverride": [],
-        "addRideDrumsOverride": [],
-        "overrideBassDrumNote": false,
-        "bassDrumNote": 36,
-        "overrideSnareDrumNote": false,
-        "snareDrumNote": 38,
-        "overrideCrashDrumNote": false,
-        "crashDrumNote": 49,
-        "overrideRideDrumNotes": false,
-        "rideDrumNotes": [
-            42,
-            46,
-            51
-        ],
-        "harmonyElements": [],
-        "customMelodyCurveInfos": [],
-        "customBassCurveInfos": [],
-        "exportVolume": true,
-        "exportEffects": true,
-        "mergeChannels": false,
-        "exportChordsToNewChannel": false,
-        "melodyVolumeMultipliers": [
-            1
-        ],
-        "inner1VolumeMultipliers": [
-            1
-        ],
-        "inner2VolumeMultipliers": [
-            1
-        ],
-        "bassVolumeMultipliers": [
-            1
-        ],
-        "percussionVolumeMultiplier": 1,
-        "melodyReverbSends": [
-            1
-        ],
-        "melodyChorusSends": [
-            0.3
-        ],
-        "bassReverbSends": [
-            0.1
-        ],
-        "bassChorusSends": [
-            0.1
-        ],
-        "inner1ReverbSends": [
-            0.1
-        ],
-        "inner1ChorusSends": [
-            0.1
-        ],
-        "inner2ReverbSends": [
-            0.1
-        ],
-        "inner2ChorusSends": [
-            0.1
-        ],
-        "percussionReverbSend": 0,
-        "percussionChorusSend": 0
-    }
-};

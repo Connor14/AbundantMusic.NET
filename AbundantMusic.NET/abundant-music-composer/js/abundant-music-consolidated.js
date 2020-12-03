@@ -7126,59 +7126,40 @@ function parseSeed(seedString) {
     return seed;
 }
 
-// Properly parses seeds and sets them on the object Sets the seed values
-// function setSeeds(result, settings) {
-//     for (var prop in settings) {
-//         // using indexOf prevents the _constructorName property (potentially among other defaults) from being copied
-//         if (prop.indexOf("Seed") >= 0) {
-//             var seedStr = settings[prop];
-//             if (seedStr) {
-//                 var seed = parseSeed(seedStr);
+// Properly parses seeds and sets them back on the object
+function adjustSeedValues(inputGenInfo) {
+    for (var prop in inputGenInfo) {
+        // using indexOf ensures that only "seed" properties are ajusted
+        if (prop.indexOf("Seed") >= 0) {
+            var seedStr = inputGenInfo[prop];
+            if (seedStr) {
+                var seed = parseSeed(seedStr); // Parse the seed
 
-//                 if (!isNaN(seed)) {
-//                     result[prop] = seed;
-//                 }
-//             }
-//         }
-//     }
-// }
+                if (!isNaN(seed)) {
+                    inputGenInfo[prop] = seed; // Replace the value
+                }
+            }
+        }
+    }
+}
 
-// function setProperties(result, settings) {
-//     for (var prop in settings) {
-//         let value = settings[prop];
-//         if (!isFunction(value)) {
-//             result[prop] = value;
-//         }
-//     }
-// }
-
-// Create a new object to use as genInfo
-// function createGenInfo() {
-//     var result = new GenInfo(); // Start with the plain gen info object
-
-//     setSeeds(result, new SongStructureSeedSettings());
-//     setSeeds(result, new SongContentSeedSettings());
-//     setSeeds(result, new SongIndicesSeedSettings());
-
-//     setProperties(result, new SongParameters());
-//     setProperties(result, new SongDomains());
-//     setProperties(result, new SongDetails());
-
-//     setProperties(result, new MidiExportSettings())
-
-//     return result;
-// }
-
-function exportMidi(seedString) {
+function exportMidi(seedString) {    
     //console.log("starting midi export...");
     let seed = parseSeed(seedString); // Parse the user provided seed
+
+    // Copy the overrides object
+    // genInfo_overrides_default is located in geninfo.overrides.js
+    let inputGenInfo = copyObjectDeep(genInfo_overrides_default); 
+
+    // Make sure any seed values are properly parsed the same way they are in Abundant Music web
+    adjustSeedValues(inputGenInfo);
 
     var renderRequestData = {
         seed: seed, 
         strSeed: seedString, // strSeed is not used anywhere.
         name: 'Song',
         sectionIndex: -1, 
-        genInfo: genInfo_overrides_default // located in geninfo.overrides.js
+        genInfo: inputGenInfo
     };
 
     var midiResult = generateMidiData(renderRequestData);

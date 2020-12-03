@@ -1,1522 +1,4 @@
-﻿'use strict';
-
-var renderRequestData = {
-    "seed": hashCode("connor"),
-    "strSeed": "connor",
-    "name": "Song",
-    "sectionIndex": -1,
-    "genInfo": {
-        "minorScaleLikelihood": 1,
-        "majorScaleLikelihood": 1,
-        "timeSignature2Likelihood": 1,
-        "timeSignature3Likelihood": 1,
-        "timeSignature4Likelihood": 3,
-        "electronicLikelihood": 1,
-        "electricLikelihood": 1,
-        "acousticLikelihood": 1,
-        "strictBuildSongStructureLikelihoodMultiplier": 1,
-        "buildSongStructureLikelihoodMultiplier": 1,
-        "verseChorusSongStructureLikelihoodMultiplier": 1,
-        "verseChorusBridgeSongStructureLikelihoodMultiplier": 1,
-        "noMelodyPartSongStructureLikelihoodMultiplier": 1,
-        "percussionFillProbabilities": [
-            0.35
-        ],
-        "raiseLeadingInMinorProbabilities": [
-            0.5
-        ],
-        "tonicizeLikelihoodMultipliers": [
-            1
-        ],
-        "modulateLikelihoodMultiplier": 0.25,
-        "simpleMixtureLikelihoods": [
-            1
-        ],
-        "sus2ChordsLikelihoods": [
-            1
-        ],
-        "sus4ChordsLikelihoods": [
-            1
-        ],
-        "neighbourChordsLikelihoods": [
-            1
-        ],
-        "passingChordsLikelihoods": [
-            1
-        ],
-        "melodyMotifRythmCountIncreasePerIndex": 0.4,
-        "melodyMotifRythmCountIncreaseOffsetRange": [
-            0.5,
-            1
-        ],
-        "bassMotifRythmCountIncreasePerIndex": 0.4,
-        "bassMotifRythmCountIncreaseOffsetRange": [
-            0.25,
-            0.75
-        ],
-        "melodyMotifZone1Probabilities": [
-            0.5
-        ],
-        "melodyMotifZone1TripletLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotFirstLikelihoods": [
-            2
-        ],
-        "melodyMotifZone1DotSecondLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotNormalDotLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1NormalDotDotLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1DotDotNormalLikelihoods": [
-            0.5
-        ],
-        "melodyMotifZone1StartPosRanges": [
-            [
-                0,
-                0
-            ]
-        ],
-        "melodyMotifZone1EndPosRanges": [
-            [
-                0.75,
-                0.75
-            ]
-        ],
-        "melodyMotifZone1StartEnds": [],
-        "bassMotifZone1Probabilities": [
-            0.5
-        ],
-        "bassMotifZone1TripletLikelihoods": [
-            0.01
-        ],
-        "bassMotifZone1DotFirstLikelihoods": [
-            2
-        ],
-        "bassMotifZone1DotSecondLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1DotNormalDotLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1NormalDotDotLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1DotDotNormalLikelihoods": [
-            0.5
-        ],
-        "bassMotifZone1StartPosRanges": [
-            [
-                0,
-                0
-            ]
-        ],
-        "bassMotifZone1EndPosRanges": [
-            [
-                0.75,
-                0.75
-            ]
-        ],
-        "bassMotifZone1StartEnds": [],
-        "allInstrumentsDifferentProbability": 0.35,
-        "adaptHarmonyRythmToTempo": true,
-        "adaptHarmonyRythmToTimeSignature": true,
-        "adaptSuspensionToTempo": true,
-        "adaptMotifRythmsToTempo": true,
-        "filterFEffectsProbMultiplier": 1,
-        "filterBWEffectsProbMultiplier": 1,
-        "panEffectsProbMultiplier": 1,
-        "oddHarmonyRythmProbability": 0.01,
-        "melodyShareProbabilities": [
-            0.3
-        ],
-        "endSongTempoChangeProbability": 0.5,
-        "endPhraseGroupTempoChangeProbabilities": [
-            0
-        ],
-        "adaptTempoToRenderAmount": true,
-        "tempoAdaptBias": 3,
-        "tempoAdaptRandomMultiplier": 3,
-        "useNaturalTempoChanges": true,
-        "voiceLineSuspensionProbabilities": [
-            0.5
-        ],
-        "songIntroProbability": 0.7,
-        "songEndProbability": 0.5,
-        "withinPhraseGroupSimilarRandomFraction": 0.35,
-        "withinPhraseGroupSimilarBias": 0.55,
-        "samePhraseGroupIndexSimilarRandomFraction": 0.25,
-        "samePhraseGroupIndexSimilarBias": 0.5,
-        "differentPhraseGroupIndexDifferentRandomFraction": 0.3,
-        "differentPhraseGroupIndexDifferentBias": 0.25,
-        "prefixGlueProbabilityMultiplier": 1,
-        "postfixGlueProbabilityMultiplier": 1,
-        "useMaxHarmonyElementLength": true,
-        "prolongStaticLikelihoods": [
-            2
-        ],
-        "prolongDynamicLikelihoods": [
-            4
-        ],
-        "prolongDominantCadenceLikelihoods": [
-            3
-        ],
-        "prolongTonicCadenceLikelihoods": [
-            1
-        ],
-        "prolongHarmonyPartBiases": [
-            20
-        ],
-        "prolongHarmonyPartRandomFractions": [
-            50
-        ],
-        "tempoRange": [
-            60,
-            140
-        ],
-        "melodyShapeAmpRanges": [
-            [
-                6,
-                12
-            ]
-        ],
-        "melodyShapeBiasRanges": [
-            [
-                68,
-                76
-            ]
-        ],
-        "bassShapeAmpRanges": [
-            [
-                2,
-                4
-            ]
-        ],
-        "bassShapeBiasRanges": [
-            [
-                35,
-                45
-            ]
-        ],
-        "overwriteSongPartStructureRndInfos": false,
-        "songPartStructureRndInfos": [],
-        "phraseGroupTypes": [{
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 11
-        },
-        {
-            "likelihood": 0.125,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 8
-        },
-        {
-            "likelihood": 0.125,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 10
-        },
-        {
-            "likelihood": 0.25,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 19
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 15
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 22
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 2
-        }
-        ],
-        "modulatePhraseGroupTypes": [{
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 23
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 11
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 9
-        },
-        {
-            "likelihood": 0.5,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 12
-        }
-        ],
-        "majorDeceptiveRootRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 6
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 1
-        }
-        ],
-        "minorDeceptiveRootRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 6
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 4,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 3
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "IntDataSample",
-            "data": 1
-        }
-        ],
-        "introGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "endGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "glueGroupTypes": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 27
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "PhraseGroupTypeDataSample",
-            "data": 0
-        }
-        ],
-        "majorModulationTargetInfos": [{
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 0.2,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 3
-        }
-        ],
-        "minorModulationTargetInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 0.1,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 0.2,
-            "active": true,
-            "_constructorName": "ModulationTargetDataSample",
-            "data": 3
-        }
-        ],
-        "electronicMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 81
-        }
-        ],
-        "electronicInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        }
-        ],
-        "electronicInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 94
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 93
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 88
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 90
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 95
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 89
-        }
-        ],
-        "electronicBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        }
-        ],
-        "electricMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 17
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        }
-        ],
-        "electricInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 26
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 28
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 4
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 5
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 54
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 27
-        }
-        ],
-        "electricInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 30
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 29
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 62
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 54
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 92
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 94
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 93
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 88
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 90
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 95
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 89
-        }
-        ],
-        "electricBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 2
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 33
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 34
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 39
-        }
-        ],
-        "acousticMelodyInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 24
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 25
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 46
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticInnerFastInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 24
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 25
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 46
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 57
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticInnerSlowInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 48
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 49
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 53
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 52
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 19
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 71
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 7
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 69
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 68
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 79
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 75
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 20
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 18
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 73
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 72
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 74
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 40
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 41
-        }
-        ],
-        "acousticBassInstrInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 0
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 1
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 35
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 36
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 37
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiProgramDataSample",
-            "data": 32
-        }
-        ],
-        "bassDrumRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 43
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 41
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 61
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 64
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 66
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 36
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 35
-        }
-        ],
-        "snareRndInfos": [{
-            "likelihood": 30,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 38
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 39
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 50
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 48
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 47
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 45
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 63
-        },
-        {
-            "likelihood": 30,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 40
-        }
-        ],
-        "crashRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 52
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 55
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 49
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 57
-        }
-        ],
-        "rideRndInfos": [{
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 70
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 81
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 80
-        },
-        {
-            "likelihood": 1,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 75
-        },
-        {
-            "likelihood": 2,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 53
-        },
-        {
-            "likelihood": 5,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 37
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 51
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 59
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 44
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 42
-        },
-        {
-            "likelihood": 20,
-            "active": true,
-            "_constructorName": "MidiDrumDataSample",
-            "data": 46
-        }
-        ],
-        "setScaleBaseNote": false,
-        "scaleBaseNote": 60,
-        "overwriteSongPartStructure": false,
-        "songPartStructure": [{
-            "partType": 0,
-            "harmonyRythmCountOverrides": [],
-            "harmonyTotalLengthOverrides": [],
-            "overridePhraseGroupType": false,
-            "phraseGroupType": 19,
-            "overrideMajorModulationTarget": false,
-            "majorModulationTarget": 3,
-            "overrideMinorModulationTarget": false,
-            "minorModulationTarget": 3,
-            "overrideScaleBaseNote": false,
-            "scaleBaseNote": 60,
-            "overrideScaleType": false,
-            "scaleType": 1,
-            "harmonyElementIndices": [],
-            "customMelodyCurveIndices": [],
-            "customBassCurveIndices": [],
-            "extraMelodyRenderElementIndices": [],
-            "extraInner1RenderElementIndices": [],
-            "extraInner2RenderElementIndices": [],
-            "extraBassRenderElementIndices": [],
-            "extraPercussionRenderElementIndices": [],
-            "melodyShapeIndexOverride": [],
-            "bassShapeIndexOverride": [],
-            "harmonyIndexOverride": [],
-            "harmonyRythmIndexOverride": [],
-            "suspendIndexOverride": [],
-            "melodyChannelDistributionIndexOverride": [],
-            "inner1ChannelDistributionIndexOverride": [],
-            "inner2ChannelDistributionIndexOverride": [],
-            "bassChannelDistributionIndexOverride": [],
-            "melodyMotifDistributionIndexOverride": [],
-            "inner1MotifDistributionIndexOverride": [],
-            "inner2MotifDistributionIndexOverride": [],
-            "bassMotifDistributionIndexOverride": [],
-            "percussionMotifDistributionIndexOverride": [],
-            "percussionFillMotifDistributionIndexOverride": [],
-            "harmonyExtraIndexOverride": [],
-            "renderAmountIndexOverride": [],
-            "tempoIndexOverride": [],
-            "sequentialTempoChangeIndexOverride": [],
-            "parallelTempoChangeIndexOverride": [],
-            "sequentialMelodyEffectChangeIndexOverride": [],
-            "sequentialInner1EffectChangeIndexOverride": [],
-            "sequentialInner2EffectChangeIndexOverride": [],
-            "sequentialBassEffectChangeIndexOverride": [],
-            "sequentialPercussionEffectChangeIndexOverride": [],
-            "strength": 0,
-            "prefixProbsOverride": [],
-            "postfixProbsOverride": [],
-            "majorGroupModulationTarget": -1,
-            "minorGroupModulationTarget": -1,
-            "melodyRenderAmountOverride": [],
-            "inner1RenderAmountOverride": [],
-            "inner2RenderAmountOverride": [],
-            "bassRenderAmountOverride": [],
-            "percussionRenderAmountOverride": [],
-            "prefixInfoOverrides": [],
-            "postfixInfoOverrides": [],
-            "_constructorName": "SongPartStructureInfo"
-        }],
-        "songPartTypeOverrideInfos": [],
-        "harmonyRythmMeasureCountOverrides": [],
-        "harmonyRythmNoteCountOverrides": [],
-        "harmonyRythmDensityCurveAmplitudeOverrides": [],
-        "harmonyRythmDensityCurveFrequencyOverrides": [],
-        "melodyMotifRythmNoteCountOverrides": [],
-        "bassMotifRythmNoteCountOverrides": [],
-        "overwriteMelodyInstruments": false,
-        "melodyInstruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteInner1Instruments": false,
-        "inner1Instruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteInner2Instruments": false,
-        "inner2Instruments": [
-            0,
-            46,
-            25
-        ],
-        "overwriteBassInstruments": false,
-        "bassInstruments": [
-            0,
-            32,
-            43
-        ],
-        "percussionFillMotifIndicesOverride": [],
-        "addBassDrumsOverride": [],
-        "addSnareDrumsOverride": [],
-        "addCrashDrumsOverride": [],
-        "addRideDrumsOverride": [],
-        "overrideBassDrumNote": false,
-        "bassDrumNote": 36,
-        "overrideSnareDrumNote": false,
-        "snareDrumNote": 38,
-        "overrideCrashDrumNote": false,
-        "crashDrumNote": 49,
-        "overrideRideDrumNotes": false,
-        "rideDrumNotes": [
-            42,
-            46,
-            51
-        ],
-        "harmonyElements": [],
-        "customMelodyCurveInfos": [],
-        "customBassCurveInfos": [],
-        "exportVolume": true,
-        "exportEffects": true,
-        "mergeChannels": false,
-        "exportChordsToNewChannel": false,
-        "melodyVolumeMultipliers": [
-            1
-        ],
-        "inner1VolumeMultipliers": [
-            1
-        ],
-        "inner2VolumeMultipliers": [
-            1
-        ],
-        "bassVolumeMultipliers": [
-            1
-        ],
-        "percussionVolumeMultiplier": 1,
-        "melodyReverbSends": [
-            1
-        ],
-        "melodyChorusSends": [
-            0.3
-        ],
-        "bassReverbSends": [
-            0.1
-        ],
-        "bassChorusSends": [
-            0.1
-        ],
-        "inner1ReverbSends": [
-            0.1
-        ],
-        "inner1ChorusSends": [
-            0.1
-        ],
-        "inner2ReverbSends": [
-            0.1
-        ],
-        "inner2ChorusSends": [
-            0.1
-        ],
-        "percussionReverbSend": 0,
-        "percussionChorusSend": 0
-    }
-};
+'use strict';
 
 function FakeByteArray() {
     this.position = 0;
@@ -1994,16 +476,6 @@ function toPitchClassString(b) {
     return "?"
 }
 
-function getValue2LevelsOrDefault(e, b, a, d) {
-    if (e && e[b]) {
-        var c = e[b][a];
-        if (!(typeof (c) === "undefined")) {
-            return c
-        }
-    }
-    return d
-}
-
 function copyValueDeep(g, f, d) {
     if (isArray(g)) {
         var a = [];
@@ -2339,19 +811,6 @@ function snapMidiTicks(d, a) {
     return d - b / a
 }
 
-function addPossibleValuesFunction(a, c, b) {
-    a.possibleValues = null;
-    a.getPossibleValues = function () {
-        if (!a.possibleValues) {
-            a.possibleValues = [];
-            for (var d = c; d <= b; d++) {
-                a.possibleValues.push(d)
-            }
-        }
-        return a.possibleValues
-    }
-}
-
 function stringEndsWith(b, a) {
     return b.length == a.length ? b == a : b.indexOf(a, b.length - a.length) !== -1
 }
@@ -2465,44 +924,14 @@ var ChordType = {
     SUS2_SEVENTH: 4,
     SUS4_SEVENTH: 5,
     NINTH: 6,
-    CUSTOM: 7,
-    toString: function (a) {
-        switch (a) {
-            case ChordType.CUSTOM:
-                return "Custom";
-            case ChordType.SEVENTH:
-                return "Seventh";
-            case ChordType.SUS2:
-                return "Sus2";
-            case ChordType.SUS2_SEVENTH:
-                return "Sus2 Seventh";
-            case ChordType.SUS4:
-                return "Sus4";
-            case ChordType.SUS4_SEVENTH:
-                return "Sus4 Seventh";
-            case ChordType.TRIAD:
-                return "Triad";
-            case ChordType.NINTH:
-                return "Ninth"
-        }
-        return "Unknown chord type " + a
-    }
+    CUSTOM: 7
 };
-addPossibleValuesFunction(ChordType, ChordType.TRIAD, ChordType.CUSTOM);
+
 var SimpleScaleType = {
     MAJOR: 1,
-    NATURAL_MINOR: 2,
-    toString: function (a) {
-        switch (a) {
-            case SimpleScaleType.MAJOR:
-                return "Major";
-            case SimpleScaleType.NATURAL_MINOR:
-                return "Minor"
-        }
-        return "Unknown scale type " + a
-    }
+    NATURAL_MINOR: 2
 };
-addPossibleValuesFunction(SimpleScaleType, SimpleScaleType.MAJOR, SimpleScaleType.NATURAL_MINOR);
+
 var ScaleType = {
     CUSTOM: 0,
     MAJOR: 1,
@@ -2561,58 +990,25 @@ var ScaleType = {
         return "Unknown scale type " + a
     }
 };
-addPossibleValuesFunction(ScaleType, ScaleType.CUSTOM, ScaleType.WHOLE_NOTE);
+
 var IndexType = {
     MIDI_NOTE: 0,
     SCALE: 1,
     CHORD_BASS: 2,
-    CHORD_ROOT: 3,
-    toString: function (a) {
-        switch (a) {
-            case IndexType.MIDI_NOTE:
-                return "Midi note";
-            case IndexType.SCALE:
-                return "Scale";
-            case IndexType.CHORD_BASS:
-                return "Chord bass";
-            case IndexType.CHORD_ROOT:
-                return "Chord root"
-        }
-        return "Unknown index type " + a
-    }
+    CHORD_ROOT: 3
 };
-addPossibleValuesFunction(IndexType, IndexType.MIDI_NOTE, IndexType.CHORD_ROOT);
+
 var SnapType = {
     NONE: 0,
     SCALE: 1,
-    CHORD: 2,
-    toString: function (a) {
-        switch (a) {
-            case SnapType.NONE:
-                return "None";
-            case SnapType.CHORD:
-                return "Chord";
-            case SnapType.SCALE:
-                return "Scale"
-        }
-        return "Unknown snap type " + a
-    }
+    CHORD: 2
 };
-addPossibleValuesFunction(SnapType, SnapType.NONE, SnapType.CHORD);
+
 var FrequencyUnit = {
     HERTZ: 0,
-    MIDI_NOTE: 1,
-    toString: function (a) {
-        switch (a) {
-            case FrequencyUnit.HERTZ:
-                return "Hertz";
-            case FrequencyUnit.MIDI_NOTE:
-                return "Midi note"
-        }
-        return "Unknown frequency unit " + a
-    }
+    MIDI_NOTE: 1
 };
-addPossibleValuesFunction(FrequencyUnit, FrequencyUnit.HERTZ, FrequencyUnit.MIDI_NOTE);
+
 var CyclesUnit = {
     CYCLES_PER_PERIOD: 0,
     CYCLES_PER_BEAT: 1,
@@ -2634,38 +1030,13 @@ var CyclesUnit = {
             }
         }
         return g
-    },
-    toString: function (a) {
-        switch (a) {
-            case CyclesUnit.CYCLES_PER_PERIOD:
-                return "Cycles per period";
-            case CyclesUnit.CYCLES_PER_BEAT:
-                return "Cycles per beat";
-            case CyclesUnit.CYCLES_PER_MEASURE:
-                return "Cycles per measure";
-            case CyclesUnit.CYCLES_PER_HARMONY:
-                return "Cycles per harmony"
-        }
-        return "Unknown cycles unit " + a
     }
 };
-addPossibleValuesFunction(CyclesUnit, CyclesUnit.CYCLES_PER_PERIOD, CyclesUnit.CYCLES_PER_HARMONY);
 
 var SnapMetrics = {
     FLOOR: 0,
     CEIL: 1,
     ROUND: 2,
-    toString: function (a) {
-        switch (a) {
-            case SnapMetrics.CEIL:
-                return "Ceil";
-            case SnapMetrics.FLOOR:
-                return "Floor";
-            case SnapMetrics.ROUND:
-                return "Round"
-        }
-        return "Unknown snap metrics " + a
-    },
     snap: function (b, a) {
         switch (a) {
             case SnapMetrics.CEIL:
@@ -2678,7 +1049,7 @@ var SnapMetrics = {
         return Math.round(b)
     }
 };
-addPossibleValuesFunction(SnapMetrics, SnapMetrics.FLOOR, SnapMetrics.ROUND);
+
 var VerticalRelativeType = {
     MIDI_ZERO: 0,
     SCALE_BASE: 1,
@@ -2686,45 +1057,16 @@ var VerticalRelativeType = {
     CHORD_ROOT: 3,
     VOICE_LINE: 4,
     NOTE: 5,
-    toString: function (a) {
-        switch (a) {
-            case VerticalRelativeType.MIDI_ZERO:
-                return "Midi zero";
-            case VerticalRelativeType.SCALE_BASE:
-                return "Scale base";
-            case VerticalRelativeType.CHORD_BASS:
-                return "Chord bass";
-            case VerticalRelativeType.CHORD_ROOT:
-                return "Chord root";
-            case VerticalRelativeType.VOICE_LINE:
-                return "Voice line";
-            case VerticalRelativeType.NOTE:
-                return "Note"
-        }
-        return "Unknown type " + a
-    },
     sample: function (a) {
         return Math.min(4, Math.max(0, Math.floor(a.random() * 5)))
     }
 };
-addPossibleValuesFunction(VerticalRelativeType, VerticalRelativeType.MIDI_ZERO, VerticalRelativeType.NOTE);
+
 var IndexBorderMode = {
     END: 0,
     RESTART: 1,
     MIRROR: 2,
     CLAMP: 3,
-    toString: function (a) {
-        switch (a) {
-            case IndexBorderMode.END:
-                return "End";
-            case IndexBorderMode.RESTART:
-                return "Restart";
-            case IndexBorderMode.MIRROR:
-                return "Mirror";
-            case IndexBorderMode.CLAMP:
-                return "Clamp"
-        }
-    },
     getIndex: function (e, c, b) {
         if (b < c) {
             return b
@@ -2748,73 +1090,30 @@ var IndexBorderMode = {
         return b
     }
 };
-addPossibleValuesFunction(IndexBorderMode, IndexBorderMode.END, IndexBorderMode.CLAMP);
+
 var HorizontalRelativeType = {
     PREVIOUS_NOTE: 0,
     NEXT_NOTE: 1,
     PREVIOUS_VOICE_LINE_ELEMENT: 2,
-    NEXT_VOICE_LINE_ELEMENT: 3,
-    toString: function (a) {
-        switch (a) {
-            case HorizontalRelativeType.NEXT_NOTE:
-                return "Next note";
-            case HorizontalRelativeType.NEXT_VOICE_LINE_ELEMENT:
-                return "Next voice line element";
-            case HorizontalRelativeType.PREVIOUS_NOTE:
-                return "Previous note";
-            case HorizontalRelativeType.PREVIOUS_VOICE_LINE_ELEMENT:
-                return "Previous voice line element"
-        }
-        return "Unknown horiz. relative type " + a
-    }
+    NEXT_VOICE_LINE_ELEMENT: 3
 };
-addPossibleValuesFunction(HorizontalRelativeType, HorizontalRelativeType.PREVIOUS_NOTE, VerticalRelativeType.NEXT_VOICE_LINE_ELEMENT);
+
 var OffsetType = {
     CHORD: 0,
     SCALE: 1,
     HALF_STEP: 2,
     OCTAVE: 3,
     CHORD_TRIAD_ONLY: 4,
-    CHORD_SEVENTH_ONLY: 5,
-    toString: function (a) {
-        switch (a) {
-            case OffsetType.CHORD:
-                return "Chord";
-            case OffsetType.SCALE:
-                return "Scale";
-            case OffsetType.HALF_STEP:
-                return "Half step";
-            case OffsetType.OCTAVE:
-                return "Octave";
-            case OffsetType.CHORD_TRIAD_ONLY:
-                return "Chord triad only";
-            case OffsetType.CHORD_SEVENTH_ONLY:
-                return "Chord seventh only"
-        }
-        return "Unknown offset type " + a
-    }
+    CHORD_SEVENTH_ONLY: 5
 };
-addPossibleValuesFunction(OffsetType, OffsetType.CHORD, OffsetType.CHORD_SEVENTH_ONLY);
+
 var LengthAndCountUnit = {
     LENGTH_PERCENT: 0,
     COUNT_PERCENT: 1,
     LENGTH: 2,
-    COUNT: 3,
-    toString: function (a) {
-        switch (a) {
-            case LengthAndCountUnit.LENGTH:
-                return "Length";
-            case LengthAndCountUnit.COUNT:
-                return "Count";
-            case LengthAndCountUnit.LENGTH_PERCENT:
-                return "Length percent";
-            case LengthAndCountUnit.COUNT_PERCENT:
-                return "Count percent"
-        }
-        return "Unknown length and count unit"
-    }
+    COUNT: 3
 };
-addPossibleValuesFunction(LengthAndCountUnit, LengthAndCountUnit.LENGTH_PERCENT, LengthAndCountUnit.COUNT);
+
 var CountUnit = {
     PLAIN: 0,
     HARMONY_ELEMENT_MEASURES: 1,
@@ -2828,35 +1127,6 @@ var CountUnit = {
     PLAIN_PLUS_HARMONY_BEATS: 9,
     PLAIN_PLUS_HARMONY_ELEMENT_COUNT: 10,
     PHRASE_ELEMENT_COUNT: 11,
-    toString: function (a) {
-        switch (a) {
-            case CountUnit.PLAIN:
-                return "Plain";
-            case CountUnit.HARMONY_BEATS:
-                return "Harmony beats";
-            case CountUnit.HARMONY_ELEMENT_BEATS:
-                return "Harmony element beats";
-            case CountUnit.HARMONY_ELEMENT_COUNT:
-                return "Harmony element count";
-            case CountUnit.HARMONY_ELEMENT_MEASURES:
-                return "Harmony element measures";
-            case CountUnit.HARMONY_MEASURES:
-                return "Harmony measures";
-            case CountUnit.PHRASE_ELEMENT_COUNT:
-                return "Phrase element count";
-            case CountUnit.PLAIN_PLUS_HARMONY_BEATS:
-                return "Plain + Harmony beats";
-            case CountUnit.PLAIN_PLUS_HARMONY_ELEMENT_BEATS:
-                return "Plain + Harmony element beats";
-            case CountUnit.PLAIN_PLUS_HARMONY_ELEMENT_COUNT:
-                return "Plain + Harmony element count";
-            case CountUnit.PLAIN_PLUS_HARMONY_ELEMENT_MEASURES:
-                return "Plain + Harmony element measures";
-            case CountUnit.PLAIN_PLUS_HARMONY_MEASURES:
-                return "Plain + Harmony measures"
-        }
-        return "Unknown count unit " + a
-    },
     getCount: function (g, h, f, b) {
         switch (h) {
             case CountUnit.PLAIN:
@@ -2920,7 +1190,7 @@ var CountUnit = {
         return g
     }
 };
-addPossibleValuesFunction(CountUnit, CountUnit.PLAIN, CountUnit.PLAIN_PLUS_HARMONY_ELEMENT_COUNT);
+
 var PositionUnit = {
     MEASURES: 0,
     BEATS: 1,
@@ -2942,56 +1212,8 @@ var PositionUnit = {
     BEATS_PLUS_HARMONY: 17,
     BEATS_PLUS_HARMONY_ELEMENT: 18,
     HARMONY_ELEMENTS: 19,
-    PHRASE: 20,
-    toString: function (a) {
-        switch (a) {
-            case PositionUnit.BEATS:
-                return "Beats";
-            case PositionUnit.BEATS_PLUS_MEASURE:
-                return "Beats plus one measure";
-            case PositionUnit.BEATS_PLUS_HARMONY:
-                return "Beats plus harmony length";
-            case PositionUnit.BEATS_PLUS_HARMONY_ELEMENT:
-                return "Beats plus harmony element length";
-            case PositionUnit.BEAT_EIGHTHS:
-                return "Beat eighths";
-            case PositionUnit.BEAT_FIFTHS:
-                return "Beat fifths";
-            case PositionUnit.BEAT_FOURTHS:
-                return "Beat fourths";
-            case PositionUnit.BEAT_NINTHS:
-                return "Beat ninths";
-            case PositionUnit.BEAT_SEVENTHS:
-                return "Beat sevenths";
-            case PositionUnit.BEAT_SIXTHS:
-                return "Beat sixths";
-            case PositionUnit.BEAT_THIRDS:
-                return "Beat thirds";
-            case PositionUnit.EIGHTH_NOTES:
-                return "Eighth notes";
-            case PositionUnit.HALF_NOTES:
-                return "Half notes";
-            case PositionUnit.MEASURES:
-                return "Measures";
-            case PositionUnit.QUARTER_NOTES:
-                return "Quarter notes";
-            case PositionUnit.SIXTEENTH_NOTES:
-                return "Sixteenth notes";
-            case PositionUnit.WHOLE_NOTES:
-                return "Whole notes";
-            case PositionUnit.HARMONY_INDEX:
-                return "Harmony index";
-            case PositionUnit.HARMONY:
-                return "Harmony";
-            case PositionUnit.HARMONY_ELEMENTS:
-                return "Harmony elements";
-            case PositionUnit.PHRASE:
-                return "Phrase"
-        }
-        return "Unknown position unit " + a
-    }
+    PHRASE: 20
 };
-addPossibleValuesFunction(PositionUnit, PositionUnit.MEASURES, PositionUnit.PHRASE);
 
 function positionUnitToBeats2(a, h, b, e) {
     var k = e.getHarmonyIndexAt(b);
@@ -3154,66 +1376,8 @@ var PhraseHarmonyElementType = {
     COMPLETE_LENGTHEN_FINAL_TONIC: 22,
     COMPLETE_LENGTHEN_DOMINANT: 23,
     INCOMPLETE_NO_DOMINANT: 24,
-    CHROMATIC_OSCILLATION: 25,
-    toString: function (a) {
-        switch (a) {
-            case PhraseHarmonyElementType.CHROMATIC_OSCILLATION:
-                return "Chromatic oscillation";
-            case PhraseHarmonyElementType.INCOMPLETE_NO_DOMINANT:
-                return "Incomplete no dominant";
-            case PhraseHarmonyElementType.COMPLETE_TONICIZE:
-                return "Complete tonicize";
-            case PhraseHarmonyElementType.COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Complete lengthen final tonic";
-            case PhraseHarmonyElementType.COMPLETE_LENGTHEN_DOMINANT:
-                return "Complete lengthen cadence dominant";
-            case PhraseHarmonyElementType.COMPLETE_TONICIZE_IMPERFECT:
-                return "Complete tonicize imperfect";
-            case PhraseHarmonyElementType.CHROMATIC_TRANSITION_MODULATE:
-                return "Chromatic transition modulate";
-            case PhraseHarmonyElementType.CHROMATIC_TRANSITION_TONICIZE:
-                return "Chromatic transition tonicize";
-            case PhraseHarmonyElementType.CHROMATIC_TRANSITION_INCOMPLETE:
-                return "Chromatic transition incomplete";
-            case PhraseHarmonyElementType.CHROMATIC_TRANSITION_COMPLETE:
-                return "Chromatic transition complete";
-            case PhraseHarmonyElementType.ANTECEDENT_CONSEQUENT:
-                return "Antecedent consequent";
-            case PhraseHarmonyElementType.COMPLETE:
-                return "Complete";
-            case PhraseHarmonyElementType.COMPLETE_IMPERFECT:
-                return "Complete imperfect";
-            case PhraseHarmonyElementType.INCOMPLETE:
-                return "Incomplete";
-            case PhraseHarmonyElementType.INCOMPLETE_INITIAL:
-                return "Incomplete initial";
-            case PhraseHarmonyElementType.DECEPTIVE:
-                return "Deceptive";
-            case PhraseHarmonyElementType.PROLONGED_TONIC:
-                return "Prolonged tonic";
-            case PhraseHarmonyElementType.PROLONGED_TONIC_COMPLETE:
-                return "Prolonged tonic complete";
-            case PhraseHarmonyElementType.PROLONGED_TONIC_COMPLETE_IMPERFECT:
-                return "Prolonged tonic imperfect";
-            case PhraseHarmonyElementType.PROLONGED_TONIC_INCOMPLETE:
-                return "Prolonged tonic incomplete";
-            case PhraseHarmonyElementType.COMPLETE_MODULATE:
-                return "Complete modulate";
-            case PhraseHarmonyElementType.COMPLETE_MODULATE_IMPERFECT:
-                return "Complete modulate imperfect";
-            case PhraseHarmonyElementType.CONSEQUENT:
-                return "Consequent";
-            case PhraseHarmonyElementType.PROLONGED_DOMINANT:
-                return "Prolonged dominant";
-            case PhraseHarmonyElementType.PROLONGED_DOMINANT_CADENCE:
-                return "Prolonged dominant cadence";
-            case PhraseHarmonyElementType.COMPLETE_PLAGIAL:
-                return "Complete plagial"
-        }
-        return "Unknown phrase harmony element type " + a
-    }
+    CHROMATIC_OSCILLATION: 25
 };
-addPossibleValuesFunction(PhraseHarmonyElementType, PhraseHarmonyElementType.COMPLETE, PhraseHarmonyElementType.CHROMATIC_OSCILLATION);
 
 function BaseInterpolator(b, a) {
     this.n = b.length;
@@ -3575,19 +1739,6 @@ CustomMap.prototype.listKeys = function () {
     }
     return b
 };
-CustomMap.prototype.toString = function () {
-    var a = "[object Map";
-
-    function b(d, e, c) {
-        a += " { " + this.hash(d) + " : " + e + " }" + (c ? "," : "") + "\n"
-    }
-    if (this.isLinked && this.size) {
-        a += "\n";
-        this.each(b)
-    }
-    a += "]";
-    return a
-};
 CustomMap.reverseIndexTableFrom = function (g, f) {
     var e = new CustomMap(f);
     for (var b = 0, a = g.length; b < a; ++b) {
@@ -3647,11 +1798,6 @@ LatticeNoise.prototype.whiteNoise1 = function (a) {
     var b = Math.floor(a);
     return this.latticeValue1(b)
 };
-LatticeNoise.prototype.whiteNoise2 = function (b, d) {
-    var c = Math.floor(b);
-    var a = Math.floor(d);
-    return this.latticeValue2(c, a)
-};
 LatticeNoise.prototype.lerpNoise1 = function (a) {
     var b = Math.floor(a);
     var c = a - b;
@@ -3678,14 +1824,8 @@ LatticeNoise.prototype.quadraticNoise1 = function (a) {
 LatticeNoise.prototype.latticeValue1 = function (a) {
     return this.valueTab[this.index1(a)]
 };
-LatticeNoise.prototype.latticeValue2 = function (b, a) {
-    return this.valueTab[this.index2(b, a)]
-};
 LatticeNoise.prototype.index1 = function (a) {
     return hash(a) & this.TAB_MASK
-};
-LatticeNoise.prototype.index2 = function (b, a) {
-    return hash(a + hash(b)) & this.TAB_MASK
 };
 var ClassicalNoise = function (b) {
     if (b == undefined) {
@@ -3720,48 +1860,6 @@ ClassicalNoise.prototype.dot = function (b, a, d, c) {
 ClassicalNoise.prototype.mix = function (d, c, e) {
     return (1 - e) * d + e * c
 };
-ClassicalNoise.prototype.fade = function (a) {
-    return a * a * a * (a * (a * 6 - 15) + 10)
-};
-ClassicalNoise.prototype.noise = function (t, s, q) {
-    var h = Math.floor(t);
-    var f = Math.floor(s);
-    var e = Math.floor(q);
-    t = t - h;
-    s = s - f;
-    q = q - e;
-    h = h & 255;
-    f = f & 255;
-    e = e & 255;
-    var c = this.perm[h + this.perm[f + this.perm[e]]] % 12;
-    var a = this.perm[h + this.perm[f + this.perm[e + 1]]] % 12;
-    var p = this.perm[h + this.perm[f + 1 + this.perm[e]]] % 12;
-    var n = this.perm[h + this.perm[f + 1 + this.perm[e + 1]]] % 12;
-    var G = this.perm[h + 1 + this.perm[f + this.perm[e]]] % 12;
-    var F = this.perm[h + 1 + this.perm[f + this.perm[e + 1]]] % 12;
-    var M = this.perm[h + 1 + this.perm[f + 1 + this.perm[e]]] % 12;
-    var L = this.perm[h + 1 + this.perm[f + 1 + this.perm[e + 1]]] % 12;
-    var l = this.dot(this.grad3[c], t, s, q);
-    var I = this.dot(this.grad3[G], t - 1, s, q);
-    var E = this.dot(this.grad3[p], t, s - 1, q);
-    var j = this.dot(this.grad3[M], t - 1, s - 1, q);
-    var k = this.dot(this.grad3[a], t, s, q - 1);
-    var H = this.dot(this.grad3[F], t - 1, s, q - 1);
-    var D = this.dot(this.grad3[n], t, s - 1, q - 1);
-    var g = this.dot(this.grad3[L], t - 1, s - 1, q - 1);
-    var C = this.fade(t);
-    var B = this.fade(s);
-    var A = this.fade(q);
-    var d = this.mix(l, I, C);
-    var b = this.mix(k, H, C);
-    var r = this.mix(E, j, C);
-    var o = this.mix(D, g, C);
-    var K = this.mix(d, r, B);
-    var J = this.mix(b, o, B);
-    var m = this.mix(K, J, A);
-    return m
-};
-
 function EditorFunctionOrVariable() {
     this.id = "";
     this._constructorName = "EditorFunctionOrVariable"
@@ -3778,38 +1876,9 @@ var EnumType = {
     HORIZONTAL_RELATIVE_TYPE: 8,
     OFFSET_TYPE: 9,
     COUNT_UNIT: 10,
-    PREDEFINED_CURVE_TYPE: 11,
-    toString: function (a) {
-        switch (a) {
-            case EnumType.CHORD_TYPE:
-                return "ChordType";
-            case EnumType.COUNT_UNIT:
-                return "CountUnit";
-            case EnumType.HORIZONTAL_RELATIVE_TYPE:
-                return "HorizontalRelativeType";
-            case EnumType.INDEX_BORDER_MODE:
-                return "IndexBorderMode";
-            case EnumType.INDEX_TYPE:
-                return "IndexType";
-            case EnumType.OFFSET_TYPE:
-                return "OffsetType";
-            case EnumType.POSITION_UNIT:
-                return "PositionUnit";
-            case EnumType.SCALE_TYPE:
-                return "ScaleType";
-            case EnumType.SNAP_METRICS:
-                return "SnapMetrics";
-            case EnumType.SNAP_TYPE:
-                return "SnapType";
-            case EnumType.VERTICAL_RELATIVE_TYPE:
-                return "VerticalRelativeType";
-            case EnumType.PREDEFINED_CURVE_TYPE:
-                return "PredefinedCurveType"
-        }
-        return "Unknown enum type " + a
-    }
+    PREDEFINED_CURVE_TYPE: 11
 };
-addPossibleValuesFunction(EnumType, EnumType.POSITION_UNIT, EnumType.PREDEFINED_CURVE_TYPE);
+
 
 function SimpleEnumEditorVariable() {
     EditorFunctionOrVariable.call(this);
@@ -3916,34 +1985,9 @@ var EditorIdReferenceType = {
     CURVE: 6,
     RENDER_CHANNEL: 7,
     CONTROL_CHANNEL: 8,
-    NAMED_NOTE: 9,
-    toString: function (a) {
-        switch (a) {
-            case EditorIdReferenceType.CONTROL_CHANNEL:
-                return "Control channel";
-            case EditorIdReferenceType.CURVE:
-                return "Curve";
-            case EditorIdReferenceType.HARMONY:
-                return "Harmony";
-            case EditorIdReferenceType.MOTIF:
-                return "Motif";
-            case EditorIdReferenceType.NAMED_NOTE:
-                return "Named note";
-            case EditorIdReferenceType.PERCUSSION_MOTIF:
-                return "Percussion motif";
-            case EditorIdReferenceType.RENDER_CHANNEL:
-                return "Render channel";
-            case EditorIdReferenceType.RYTHM:
-                return "Rythm";
-            case EditorIdReferenceType.SECTION:
-                return "Section";
-            case EditorIdReferenceType.STRUCTURE:
-                return "Structure"
-        }
-        return "Unknown id reference type " + a
-    }
+    NAMED_NOTE: 9
 };
-addPossibleValuesFunction(EditorIdReferenceType, EditorIdReferenceType.HARMONY, EditorIdReferenceType.NAMED_NOTE);
+
 
 function IdReferenceEditorVariable() {
     StringEditorVariable.call(this);
@@ -4218,75 +2262,8 @@ var SoundFontType = {
     STANDARD_LIGHT: 0,
     STANDARD_HEAVY: 1,
     SNES_STYLE: 2,
-    GXSCC_STYLE: 3,
-    getSamplesPrefix: function (a) {
-        switch (a) {
-            case SoundFontType.STANDARD_LIGHT:
-                return "standard_light";
-            case SoundFontType.STANDARD_HEAVY:
-                return "standard_heavy";
-            case SoundFontType.SNES_STYLE:
-                return "snes_style";
-            case SoundFontType.GXSCC_STYLE:
-                return "gxscc_style"
-        }
-        return "Unknown soundfont type " + a
-    },
-    toString: function (a) {
-        switch (a) {
-            case SoundFontType.STANDARD_LIGHT:
-                return "Standard (light)";
-            case SoundFontType.STANDARD_HEAVY:
-                return "Standard (heavy)";
-            case SoundFontType.SNES_STYLE:
-                return "SNES Style";
-            case SoundFontType.GXSCC_STYLE:
-                return "GXSCC Style"
-        }
-        return "Unknown soundfont type " + a
-    },
-    toShortString: function (a) {
-        switch (a) {
-            case SoundFontType.STANDARD_LIGHT:
-                return "Light";
-            case SoundFontType.STANDARD_HEAVY:
-                return "Heavy";
-            case SoundFontType.SNES_STYLE:
-                return "SNES";
-            case SoundFontType.GXSCC_STYLE:
-                return "GXSCC"
-        }
-        return "Unknown soundfont type " + a
-    }
+    GXSCC_STYLE: 3
 };
-addPossibleValuesFunction(SoundFontType, SoundFontType.STANDARD_LIGHT, SoundFontType.GXSCC_STYLE);
-
-function PerfTimer(a) {
-    this.name = a;
-    this.lastStartTime = 0;
-    this.totalTime = 0;
-    this.intervals = 0
-}
-PerfTimer.prototype.report = function () {
-    console.log("PerfTimer " + this.name + " total time: " + this.totalTime + " time per interval: " + (this.totalTime / this.intervals) + " intervals: " + this.intervals)
-};
-PerfTimer.prototype.start = function () {
-    this.lastStartTime = Date.now()
-};
-PerfTimer.prototype.pause = function () {
-    var a = Date.now();
-    var b = a - this.lastStartTime;
-    this.intervals++;
-    this.totalTime += b;
-    this.lastStartTime = a
-};
-var moduleConstructTimer = new PerfTimer("module construct");
-var composeTimer = new PerfTimer("compose");
-var harmonyTimer = new PerfTimer("harmony");
-var voiceLeadingTimer = new PerfTimer("voice leading");
-var voiceLeadingPrepareTimer = new PerfTimer("voice leading prepare");
-var figurationTimer = new PerfTimer("figuration");
-var perfTimer2 = new PerfTimer("timer 2");
 
 function DfsSearchNode(b, a, c) {
     this.state = b;
@@ -4295,9 +2272,6 @@ function DfsSearchNode(b, a, c) {
     this.depth = c;
     this.totalCost = 0
 }
-DfsSearchNode.prototype.toString = function () {
-    return "DFSSN {state: " + this.state + "depth: " + this.depth + "totalCost: " + this.totalCost + "}"
-};
 
 function RandomDfsStateIterator(d, c, a, b) {
     this.elements = d;
@@ -4400,9 +2374,6 @@ function DfsSolver(a) {
     this.mlSolutions = 0;
     this._constructorName = "DfsSolver"
 }
-DfsSolver.prototype.getGoalLikelihood = function (a) {
-    return 1
-};
 DfsSolver.prototype.extractStateResultData = function (a) {
     console.log("DfsSolver need to implement extractStateResultData()")
 };
@@ -4554,31 +2525,6 @@ DfsSolver.prototype.searchML = function () {
     console.log("Failed to find a solution in DfsSolver " + this.failReason + "<br />");
     return null
 };
-DfsSolver.prototype.extractPartialSolutionFromNode = function (c) {
-    var b = c;
-    var a = [];
-    do {
-        a.unshift(b.state.harmony);
-        b = b.previous
-    } while (b);
-    return a
-};
-DfsSolver.prototype.extractPartialSolutionStatesFromNode = function (c) {
-    var b = c;
-    var a = [];
-    do {
-        a.unshift(b.state);
-        b = b.previous
-    } while (b);
-    return a
-};
-DfsSolver.prototype.extractSolutionFromStates = function (b) {
-    var a = [];
-    for (var c = 0; c < b.length; c++) {
-        a.push(this.extractStateResultData(b[c]))
-    }
-    return a
-};
 DfsSolver.prototype.extractSolutionFromMLGoalNode = function (b) {
     var a = [];
     var c = b;
@@ -4606,20 +2552,9 @@ DfsSolver.prototype.extractStatesFromMLGoalNode = function (b) {
 var ControlChannelDatatype = {
     DOUBLE: 0,
     INTEGER: 1,
-    BOOLEAN: 2,
-    toString: function (a) {
-        switch (a) {
-            case ControlChannelDatatype.DOUBLE:
-                return "Double";
-            case ControlChannelDatatype.BOOLEAN:
-                return "Boolean";
-            case ControlChannelDatatype.INTEGER:
-                return "Integer"
-        }
-        return "Unknown data type " + a
-    }
+    BOOLEAN: 2
 };
-addPossibleValuesFunction(ControlChannelDatatype, ControlChannelDatatype.DOUBLE, ControlChannelDatatype.BOOLEAN);
+
 
 function SlotData(c, a, b) {
     this.values = [];
@@ -4729,28 +2664,9 @@ var NumericControlChannelMixMode = {
                 return c
         }
         return a + c
-    },
-    toString: function (a) {
-        switch (a) {
-            case NumericControlChannelMixMode.ADD:
-                return "Add";
-            case NumericControlChannelMixMode.MAX:
-                return "Max";
-            case NumericControlChannelMixMode.MEAN:
-                return "Mean";
-            case NumericControlChannelMixMode.MIN:
-                return "Min";
-            case NumericControlChannelMixMode.MULT:
-                return "Mult";
-            case NumericControlChannelMixMode.OVERWRITE_FIRST:
-                return "Overwrite first";
-            case NumericControlChannelMixMode.OVERWRITE_LAST:
-                return "Overwrite last"
-        }
-        return "Unknown mix mode " + a
     }
 };
-addPossibleValuesFunction(NumericControlChannelMixMode, NumericControlChannelMixMode.ADD, NumericControlChannelMixMode.OVERWRITE_LAST);
+
 
 function DoubleControlChannel() {
     ControlChannel.call(this);
@@ -4839,28 +2755,9 @@ var BooleanControlChannelMixMode = {
                 return c
         }
         return a || c
-    },
-    toString: function (a) {
-        switch (a) {
-            case BooleanControlChannelMixMode.OR:
-                return "Or";
-            case BooleanControlChannelMixMode.AND:
-                return "And";
-            case BooleanControlChannelMixMode.NOR:
-                return "Nor";
-            case BooleanControlChannelMixMode.NAND:
-                return "Nand";
-            case BooleanControlChannelMixMode.XOR:
-                return "Xor";
-            case BooleanControlChannelMixMode.OVERWRITE_FIRST:
-                return "Overwrite first";
-            case BooleanControlChannelMixMode.OVERWRITE_LAST:
-                return "Overwrite last"
-        }
-        return "Unknown mix mode " + a
     }
 };
-addPossibleValuesFunction(BooleanControlChannelMixMode, BooleanControlChannelMixMode.OR, BooleanControlChannelMixMode.OVERWRITE_LAST);
+
 
 function BooleanControlChannel() {
     ControlChannel.call(this);
@@ -4961,44 +2858,9 @@ var PredefinedCurveType = {
     LINEAR_NOISE: 11,
     QUADRATIC_NOISE: 12,
     CUBIC_NOISE: 13,
-    PERLIN_NOISE: 14,
-    toString: function (a) {
-        switch (a) {
-            case PredefinedCurveType.CONSTANT:
-                return "Constant";
-            case PredefinedCurveType.CONSTANT_NOISE:
-                return "Constant noise";
-            case PredefinedCurveType.COSINE:
-                return "Cosine";
-            case PredefinedCurveType.EXP:
-                return "Exponential";
-            case PredefinedCurveType.LINEAR:
-                return "Linear";
-            case PredefinedCurveType.LINEAR_NOISE:
-                return "Linear noise";
-            case PredefinedCurveType.QUADRATIC:
-                return "Quadratic";
-            case PredefinedCurveType.QUADRATIC_NOISE:
-                return "Quadratic noise";
-            case PredefinedCurveType.SAW:
-                return "Saw";
-            case PredefinedCurveType.SINE:
-                return "Sine";
-            case PredefinedCurveType.SQUARE:
-                return "Square";
-            case PredefinedCurveType.TRIANGLE:
-                return "Triangle";
-            case PredefinedCurveType.WHITE_NOISE:
-                return "White noise";
-            case PredefinedCurveType.CUBIC_NOISE:
-                return "Cubic noise";
-            case PredefinedCurveType.PERLIN_NOISE:
-                return "Perlin noise"
-        }
-        return "Unknown type " + a
-    }
+    PERLIN_NOISE: 14
 };
-addPossibleValuesFunction(PredefinedCurveType, PredefinedCurveType.LINEAR, PredefinedCurveType.PERLIN_NOISE);
+
 
 function PredefinedCurve() {
     Curve.call(this);
@@ -5028,10 +2890,6 @@ PredefinedCurve.prototype.setBias = function (b) {
 };
 PredefinedCurve.prototype.setFrequency = function (b) {
     this.frequency = b;
-    return this
-};
-PredefinedCurve.prototype.setPhase = function (b) {
-    this.phase = b;
     return this
 };
 PredefinedCurve.prototype.setType = function (b) {
@@ -5203,10 +3061,6 @@ function ComputationCurve() {
     this._constructorName = "ComputationCurve"
 }
 ComputationCurve.prototype = new Curve();
-ComputationCurve.prototype.setComputation = function (a) {
-    this.computation = a;
-    return this
-};
 ComputationCurve.prototype.getValue = function (b, a) {
     return this.computation.getValue(b, a)
 };
@@ -5393,12 +3247,6 @@ SnapCurveComputation.prototype.getValue = function (b, a) {
     return this.postMultiplier * SnapMetrics.snap(c * this.preMultiplier, this.snapMetrics)
 };
 
-function CurveGroup() {
-    this.curves = []
-}
-
-function CurveModifier() { }
-
 function MultiInputCurveComputation() {
     CurveComputation.call(this);
     this.inputCurves = [];
@@ -5406,10 +3254,6 @@ function MultiInputCurveComputation() {
     this._constructorName = "MultiInputCurveComputation"
 }
 MultiInputCurveComputation.prototype = new CurveComputation();
-MultiInputCurveComputation.prototype.setInputCurves = function (a) {
-    this.inputCurves = a;
-    return this
-};
 MultiInputCurveComputation.prototype.updateReferences = function (c, f, a) {
     for (var b = 0; b < a.length; b++) {
         var e = f[b];
@@ -5567,31 +3411,10 @@ MaxCurveComputation.prototype.getValueReferencesOk = function (f, b) {
     return a === null ? 0 : a
 };
 
-function FigurationGrid(a) {
-    this.beatCellSize = getValueOrDefault(a, "beatCellSize", 1);
-    this.noteCellSize = getValueOrDefault(a, "noteCellSize", 5);
-    this.infos = [];
-    this.nextIndices = [];
-    this.previousIndices = []
-}
-FigurationGrid.prototype.storeInfo = function (a) {
-    this.infos.push(a)
-};
-FigurationGrid.prototype.getBeatCellIndex = function (a) {
-    return Math.floor(a / this.beatCellSize)
-};
-FigurationGrid.prototype.getNoteCellIndex = function (a) {
-    return Math.floor(a / this.noteCellSize)
-};
-FigurationGrid.prototype.getOverlapIndices = function (b, a) { };
-
 function FiguratorState() {
     this.absoluteNote = 60;
     this.stepCost = 0
 }
-FiguratorState.prototype.toString = function () {
-    return "FS{absNote:" + this.absoluteNote + ", stepCost:" + this.stepCost + "}"
-};
 
 function Figurator(a) {
     DfsSolver.call(this, a);
@@ -5692,19 +3515,6 @@ Figurator.prototype.getVerticalOffsets = function (k, f) {
             break
     }
     return c
-};
-Figurator.prototype.intersectDomainAndLikelihoodArrs = function (f, d) {
-    var h = f[0];
-    var c = d[0];
-    var b = null;
-    for (var e = 1; e < f.length; e++) {
-        var g = f[e];
-        var a = d[e];
-        b = this.intersectDomainAndLikelihoods(h, c, g, a);
-        h = b[0];
-        c = b[1]
-    }
-    return b
 };
 Figurator.prototype.intersectDomainAndLikelihoods = function (g, f, e, c) {
     var a = {};
@@ -6018,15 +3828,6 @@ Figurator.prototype.getSuccessorDomain = function (b, e, d) {
     var a = c.absoluteNote;
     return this.getDomain(b + 1, a, null, d, e)
 };
-Figurator.prototype.intersectDomains = function (c, b) {
-    var a = {};
-    for (var e in c) {
-        if (b[e]) {
-            a[e] = true
-        }
-    }
-    return a
-};
 Figurator.prototype.createStatesFromDomain = function (e, g, f, a) {
     for (var h in e) {
         var c = new FiguratorState();
@@ -6065,11 +3866,13 @@ Figurator.prototype.getStartStateIterator = function () {
 Figurator.prototype.getSuccessorIterator = function (a) {
     return this.getSuccessorDomainIteratorForElement(a.depth, a)
 };
+// TODO REMOVE
 Figurator.prototype.prepareBeforeSearch = function () {
-    figurationTimer.start()
+
 };
+// TODO REMOVE
 Figurator.prototype.searchDone = function () {
-    figurationTimer.pause()
+
 };
 
 function RenderLine() {
@@ -6137,40 +3940,16 @@ PrimitiveRenderLine.prototype.addRenderElement = function (a) {
 var RenderElementCutHarmonyMode = {
     STOP: 0,
     CONTINUE_ADAPT: 1,
-    CONTINUE_SAME: 2,
-    toString: function (a) {
-        switch (a) {
-            case RenderElementCutHarmonyMode.STOP:
-                return "Stop";
-            case RenderElementCutHarmonyMode.CONTINUE_ADAPT:
-                return "Continue adapt";
-            case RenderElementCutHarmonyMode.CONTINUE_SAME:
-                return "Continue same"
-        }
-        return "Unknown cut mode " + a
-    }
+    CONTINUE_SAME: 2
 };
-addPossibleValuesFunction(RenderElementCutHarmonyMode, RenderElementCutHarmonyMode.STOP, RenderElementCutHarmonyMode.CONTINUE_SAME);
+
 var NoteOverlapHarmonyMode = {
     SPLIT_REMOVE: 0,
     CONTINUE: 1,
     SPLIT_SNAP: 2,
-    CONTINUE_OR_SPLIT_SNAP: 3,
-    toString: function (a) {
-        switch (a) {
-            case NoteOverlapHarmonyMode.CONTINUE:
-                return "Continue";
-            case NoteOverlapHarmonyMode.SPLIT_REMOVE:
-                return "Split Remove";
-            case NoteOverlapHarmonyMode.SPLIT_SNAP:
-                return "Split Snap";
-            case NoteOverlapHarmonyMode.CONTINUE_OR_SPLIT_SNAP:
-                return "Continue or split snap"
-        }
-        return "Unknown overlap mode " + a
-    }
+    CONTINUE_OR_SPLIT_SNAP: 3
 };
-addPossibleValuesFunction(NoteOverlapHarmonyMode, NoteOverlapHarmonyMode.SPLIT_REMOVE, NoteOverlapHarmonyMode.CONTINUE_OR_SPLIT_SNAP);
+
 
 function RenderElement() {
     this.id = "";
@@ -7556,7 +5335,6 @@ function GenMusicModule() {
     this.rythms = [];
     this.rythmGroups = [];
     this.curves = [];
-    this.curveGroups = [];
     this.parameters = [];
     this.renderChannels = [];
     this.namedNotes = [];
@@ -7570,52 +5348,6 @@ function GenMusicModule() {
     this.reusables = {};
     this._constructorName = "GenMusicModule"
 }
-GenMusicModule.prototype.getUniqueId = function (f, d) {
-    var a = this.idCounters[f];
-    for (var b = 0; b < 100; b++) {
-        if (a) {
-            a++
-        } else {
-            a = 1;
-            this.idCounters[f] = a
-        }
-        var g = f + "" + a;
-        var e = false;
-        for (var c = 0; c < d.length; c++) {
-            if (g == d[c].id) {
-                e = true;
-                break
-            }
-        }
-        if (!e) {
-            return g
-        }
-    }
-    console.log("failed to find unique id with prefix " + f + " and arr " + d + "<br />")
-};
-GenMusicModule.prototype.deleteRythm = function (a) {
-    arrayDelete(this.rythms, a);
-    return this
-};
-GenMusicModule.prototype.setRythms = function (a) {
-    this.rythms = a;
-    return this
-};
-GenMusicModule.prototype.getRythms = function () {
-    return this.rythms
-};
-GenMusicModule.prototype.getMotifs = function () {
-    return this.motifs
-};
-GenMusicModule.prototype.getCurves = function () {
-    return this.curves
-};
-GenMusicModule.prototype.getHarmonies = function () {
-    return this.harmony
-};
-GenMusicModule.prototype.getSections = function () {
-    return this.sections
-};
 GenMusicModule.prototype.getStructures = function () {
     return this.structures
 };
@@ -7639,28 +5371,12 @@ GenMusicModule.prototype.addMotif = function (a) {
     this.motifs.push(a);
     return this
 };
-GenMusicModule.prototype.addMotifGroup = function (a) {
-    this.motifGroups.push(a);
-    return this
-};
 GenMusicModule.prototype.addRythm = function (a) {
     this.rythms.push(a);
     return this
 };
-GenMusicModule.prototype.addRythmGroup = function (a) {
-    this.rythmGroups.push(a);
-    return this
-};
 GenMusicModule.prototype.addCurve = function (a) {
     this.curves.push(a);
-    return this
-};
-GenMusicModule.prototype.addCurveGroup = function (a) {
-    this.curveGroups.push(a);
-    return this
-};
-GenMusicModule.prototype.addParameter = function (a) {
-    this.parameters.push(a);
     return this
 };
 GenMusicModule.prototype.addRenderChannel = function (a) {
@@ -7680,31 +5396,16 @@ GenMusicModule.prototype.addVariable = function (a) {
     this._variablesHash[a.id] = a;
     return this
 };
-GenMusicModule.prototype.getVariables = function () {
-    return this._variables
-};
 GenMusicModule.prototype.getRythm = function (a) {
     return getObjectWithId(a, this.rythms)
 };
 GenMusicModule.prototype.getVariable = function (a) {
     return this._variablesHash[a]
 };
-GenMusicModule.prototype.getRythmGroup = function (a) {
-    return getObjectWithId(a, this.rythmGroups)
-};
 GenMusicModule.prototype.getCurve = function (a) {
     return getObjectWithId(a, this.curves)
 };
-GenMusicModule.prototype.getCurveGroup = function (a) {
-    return getObjectWithId(a, this.curveGroups)
-};
-GenMusicModule.prototype.getParameter = function (a) {
-    return getObjectWithId(a, this.parameters)
-};
 GenMusicModule.prototype.getSynthRenderer = function (a) {
-    return getObjectWithId(a, this.renderers)
-};
-GenMusicModule.prototype.getRenderer = function (a) {
     return getObjectWithId(a, this.renderers)
 };
 GenMusicModule.prototype.getStructure = function (a) {
@@ -7724,9 +5425,6 @@ GenMusicModule.prototype.getNamedNote = function (a) {
 };
 GenMusicModule.prototype.getPercussionMotif = function (a) {
     return getObjectWithId(a, this.percussionMotifs)
-};
-GenMusicModule.prototype.getMotifGroup = function (a) {
-    return getObjectWithId(a, this.motifGroups)
 };
 GenMusicModule.prototype.getControlChannel = function (a) {
     return getObjectWithId(a, this.controlChannels)
@@ -7751,8 +5449,6 @@ GenMusicModule.prototype.renderBatch = function (c) {
     }
     return a
 };
-GenMusicModule.prototype.toJSON = function () { };
-
 var SplitStrategy = {
     NEVER: 0,
     HALVE: 1,
@@ -7761,64 +5457,20 @@ var SplitStrategy = {
     TRIPLET: 4,
     DOT_NORMAL_DOT: 5,
     NORMAL_DOT_DOT: 6,
-    DOT_DOT_NORMAL: 7,
-    toString: function (a) {
-        switch (a) {
-            case SplitStrategy.DOT_DOT_NORMAL:
-                return "Dot dot normal";
-            case SplitStrategy.DOT_FIRST:
-                return "Dot first";
-            case SplitStrategy.DOT_NORMAL_DOT:
-                return "Dot normal dot";
-            case SplitStrategy.DOT_SECOND:
-                return "Dot second";
-            case SplitStrategy.HALVE:
-                return "Halve";
-            case SplitStrategy.NEVER:
-                return "Never";
-            case SplitStrategy.NORMAL_DOT_DOT:
-                return "Normal dot dot";
-            case SplitStrategy.TRIPLET:
-                return "Triplet"
-        }
-        return "Unknown strategy " + a
-    }
+    DOT_DOT_NORMAL: 7
 };
-addPossibleValuesFunction(SplitStrategy, SplitStrategy.NEVER, SplitStrategy.DOT_DOT_NORMAL);
+
 var DottedSplitStrategy = {
     NEVER: 0,
     LONGEST_FIRST: 1,
     LONGEST_LAST: 2,
-    TWO_DOTTED: 3,
-    toString: function (a) {
-        switch (a) {
-            case DottedSplitStrategy.LONGEST_FIRST:
-                return "Longest first";
-            case DottedSplitStrategy.LONGEST_LAST:
-                return "Longest last";
-            case DottedSplitStrategy.NEVER:
-                return "Never";
-            case DottedSplitStrategy.TWO_DOTTED:
-                return "Two dotted"
-        }
-        return "Unknown strategy " + a
-    }
+    TWO_DOTTED: 3
 };
-addPossibleValuesFunction(DottedSplitStrategy, DottedSplitStrategy.NEVER, DottedSplitStrategy.TWO_DOTTED);
+
 var TripletSplitStrategy = {
     NEVER: 0,
-    HALVE: 1,
-    toString: function (a) {
-        switch (a) {
-            case TripletSplitStrategy.HALVE:
-                return "Halve";
-            case TripletSplitStrategy.NEVER:
-                return "Never"
-        }
-        return "Unknown strategy " + a
-    }
+    HALVE: 1
 };
-addPossibleValuesFunction(TripletSplitStrategy, TripletSplitStrategy.NEVER, TripletSplitStrategy.HALVE);
 
 function SplitZone() {
     this.id = "";
@@ -7857,24 +5509,8 @@ SplitZone.prototype.applicable = function (e, f, d, a, c, g) {
     }
     return j
 };
-SplitZone.prototype.setNoteLengthInterval = function (a) {
-    this.noteLengthInterval = a;
-    return this
-};
-SplitZone.prototype.setNoteLengthIntervalUnit = function (a) {
-    this.noteLengthIntervalUnit = a;
-    return this
-};
 SplitZone.prototype.setSplitStrategy = function (a) {
     this.splitStrategy = a;
-    return this
-};
-SplitZone.prototype.setDottedSplitStrategy = function (a) {
-    this.dottedSplitStrategy = a;
-    return this
-};
-SplitZone.prototype.setTripletSplitStrategy = function (a) {
-    this.tripletSplitStrategy = a;
     return this
 };
 SplitZone.prototype.setPositionInterval = function (a) {
@@ -8129,9 +5765,6 @@ Rythm.prototype.addRythmElement = function (a) {
     this.rythmElements.push(a);
     return this
 };
-Rythm.prototype.getRythmElements = function () {
-    return this.rythmElements
-};
 Rythm.prototype.getNoteRythmElements = function (e, c, b) {
     var a = [];
     for (var d = 0; d < this.rythmElements.length; d++) {
@@ -8175,28 +5808,7 @@ RythmElement.prototype.getLengthUnit = function () {
 var NoteRythmElementLengthType = {
     NORMAL: 0,
     DOT: 1,
-    TRIPLET: 2,
-    toString: function (a) {
-        switch (a) {
-            case NoteRythmElementLengthType.NORMAL:
-                return "Normal";
-            case NoteRythmElementLengthType.DOT:
-                return "Dotted";
-            case NoteRythmElementLengthType.TRIPLET:
-                return "Triplet"
-        }
-        return "Unknown type " + a
-    },
-    possibleValues: null,
-    getPossibleValues: function () {
-        if (!NoteRythmElementLengthType.possibleValues) {
-            NoteRythmElementLengthType.possibleValues = [];
-            for (var a = NoteRythmElementLengthType.NORMAL; a <= NoteRythmElementLengthType.TRIPLET; a++) {
-                NoteRythmElementLengthType.possibleValues.push(a)
-            }
-        }
-        return NoteRythmElementLengthType.possibleValues
-    }
+    TRIPLET: 2
 };
 
 function NoteRythmElement() {
@@ -8209,9 +5821,6 @@ NoteRythmElement.prototype = new RythmElement();
 NoteRythmElement.prototype.setLengthType = function (a) {
     this.lengthType = a;
     return this
-};
-NoteRythmElement.prototype.toString = function () {
-    return "NRE{length: " + this.length + " lengthUnit: " + this.lengthUnit + " strength: " + this.strength + " rest: " + this.rest + " lengthType: " + this.lengthType + "}"
 };
 
 function SequenceRythmElement() {
@@ -8498,10 +6107,6 @@ Section.prototype.addControlLine = function (a) {
     this.controlLines.push(a);
     return this
 };
-Section.prototype.addModifier = function (a) {
-    this.modifiers.push(a);
-    return this
-};
 Section.prototype.getVoiceLine = function (a) {
     return getObjectWithId(a, this.voiceLines)
 };
@@ -8611,12 +6216,10 @@ Section.prototype.renderBatch = function (e) {
             var y = b.sectionModifiers[u];
             y.beforeControlRender(e)
         }
-        perfTimer2.start();
         for (var w = 0; w < e.controlLines.length; w++) {
             var l = e.controlLines[w];
             l.renderBatch(e)
         }
-        perfTimer2.pause();
         for (var u = 0; u < b.sectionModifiers.length; u++) {
             var y = b.sectionModifiers[u];
             y.afterControlRender(e)
@@ -8806,10 +6409,6 @@ SetVariableValueSectionModifier.prototype.setVariable = function (a) {
     this.variable = a;
     return this
 };
-SetVariableValueSectionModifier.prototype.setValueExpression = function (a) {
-    this.valueExpression = a;
-    return this
-};
 SetVariableValueSectionModifier.prototype.modifySection = function (d, c) {
     try {
         this.hasBeenSet = false;
@@ -8922,20 +6521,9 @@ AbstractZone.prototype.intersectsRange = function (d, c, b) {
 var MotifZoneFillerLengthMode = {
     ABSOLUTE: 0,
     RELATIVE_MULT: 1,
-    RELATIVE_ADD: 2,
-    toString: function (a) {
-        switch (a) {
-            case MotifZoneFillerLengthMode.ABSOLUTE:
-                return "Absolute";
-            case MotifZoneFillerLengthMode.RELATIVE_ADD:
-                return "Relative add";
-            case MotifZoneFillerLengthMode.RELATIVE_MULT:
-                return "Relative mult"
-        }
-        return "Unknown length mode " + a
-    }
+    RELATIVE_ADD: 2
 };
-addPossibleValuesFunction(MotifZoneFillerLengthMode, MotifZoneFillerLengthMode.ABSOLUTE, MotifZoneFillerLengthMode.RELATIVE_ADD);
+
 
 function MotifZone() {
     AbstractZone.call(this);
@@ -9526,10 +7114,6 @@ Motif.prototype.getConstantMotifElements = function (c, n, b, v) {
     }
     return l
 };
-Motif.prototype.addMotifElement = function (a) {
-    this.motifElements.push(a);
-    return this
-};
 
 function MotifElement() {
     this.id = "";
@@ -9540,18 +7124,6 @@ function MotifElement() {
 }
 MotifElement.prototype.getConstantMotifElements = function (d, c, b, a) {
     return [this]
-};
-MotifElement.prototype.toString = function (d) {
-    var c = getValueOrDefault(d, "showLength", false);
-    var b = getValueOrDefault(d, "showLength", false);
-    var a = "";
-    if (c) {
-        a += "len:" + this.length + " "
-    }
-    if (b) {
-        a += "lu:" + this.lengthUnit + " "
-    }
-    return a
 };
 MotifElement.prototype.setLength = function (a) {
     this.length = a;
@@ -9695,19 +7267,6 @@ ConstantMotifElement.prototype.addFiller = function (a) {
     this.fillers.push(a);
     return this
 };
-ConstantMotifElement.prototype.toString = function (c) {
-    var a = MotifElement.prototype.toString.call(this, c);
-    var d = [];
-    var b = getValueOrDefault(c, "showVelocity", false);
-    var e = getValueOrDefault(c, "showRest", true);
-    if (this.rest && e) {
-        d.push("R")
-    }
-    if (b) {
-        d.push("vel:" + this.strength)
-    }
-    return a + " " + d
-};
 ConstantMotifElement.prototype.set = function (b) {
     MotifElement.prototype.set.call(this, b);
     b.rest = this.rest;
@@ -9715,10 +7274,6 @@ ConstantMotifElement.prototype.set = function (b) {
     for (var a = 0; a < this.fillers.length; a++) {
         b.fillers.push(this.fillers[a].copy())
     }
-};
-ConstantMotifElement.prototype.setRest = function (a) {
-    this.rest = a;
-    return this
 };
 ConstantMotifElement.prototype.getBeatLength = function (a, b) {
     return positionUnitToBeats(this.length, this.lengthUnit, a, b)
@@ -9734,29 +7289,6 @@ function VerticalRelativeMotifElement() {
     this._constructorName = "VerticalRelativeMotifElement"
 }
 VerticalRelativeMotifElement.prototype = new ConstantMotifElement();
-VerticalRelativeMotifElement.prototype.toString = function (h) {
-    var j = ConstantMotifElement.prototype.toString.call(this, h);
-    var e = [];
-    var b = getValueOrDefault(h, "showIndex", true);
-    var g = getValueOrDefault(h, "showRelativeType", false);
-    var f = getValueOrDefault(h, "showOffsetType", false);
-    var d = getValueOrDefault(h, "showBeforeOffsetSnapType", false);
-    var c = getValueOrDefault(h, "showAfterOffsetSnapType", false);
-    var a = getValueOrDefault(h, "showAfterOffsetSnapType", true);
-    if (b) {
-        e.push("ind:" + this.index)
-    }
-    if (g) {
-        e.push("rt:" + VerticalRelativeType.toString(this.relativeType))
-    }
-    if (f) {
-        e.push("ot:" + OffsetType.toString(this.offsetType))
-    }
-    if (a) {
-        e.push("len:" + this.length)
-    }
-    return j + " " + e
-};
 VerticalRelativeMotifElement.prototype.setIndex = function (a) {
     this.index = a;
     return this
@@ -9846,34 +7378,14 @@ HorizontalRelativeMotifElement.prototype.copy = function () {
 var AdaptiveVerticalDomainType = {
     ENUMERABLE: 0,
     RANGE: 1,
-    CURVE: 2,
-    toString: function (a) {
-        switch (a) {
-            case AdaptiveVerticalDomainType.ENUMERABLE:
-                return "Enumerable";
-            case AdaptiveVerticalDomainType.RANGE:
-                return "Range";
-            case AdaptiveVerticalDomainType.CURVE:
-                return "Curve"
-        }
-        return "Unknown ad. vert. dom. type " + a
-    }
+    CURVE: 2
 };
-addPossibleValuesFunction(AdaptiveVerticalDomainType, AdaptiveVerticalDomainType.ENUMERABLE, AdaptiveVerticalDomainType.CURVE);
+
 var AdaptiveHorizontalDomainType = {
     ENUMERABLE: 0,
-    RANGE: 1,
-    toString: function (a) {
-        switch (a) {
-            case AdaptiveHorizontalDomainType.ENUMERABLE:
-                return "Enumerable";
-            case AdaptiveHorizontalDomainType.RANGE:
-                return "Range"
-        }
-        return "Unknown ad. horiz. dom. type " + a
-    }
+    RANGE: 1
 };
-addPossibleValuesFunction(AdaptiveHorizontalDomainType, AdaptiveHorizontalDomainType.ENUMERABLE, AdaptiveHorizontalDomainType.RANGE);
+
 
 function AdaptiveMotifElement() {
     ClusterableMotifElement.call(this);
@@ -9903,71 +7415,12 @@ function AdaptiveMotifElement() {
     this._constructorName = "AdaptiveMotifElement"
 }
 AdaptiveMotifElement.prototype = new ClusterableMotifElement();
-AdaptiveMotifElement.prototype.setVerticalDomainType = function (b) {
-    this.verticalDomainType = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setVerticalRelativeType = function (b) {
-    this.verticalRelativeType = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setVerticalDomainOffsetType = function (b) {
-    this.verticalDomainOffsetType = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setVerticalDomainOffsetRange = function (b) {
-    this.verticalDomainOffsetRange = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setVerticalDomainOffsetElements = function (b) {
-    this.verticalDomainOffsetElements = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setVerticalDomainOffsetCurve = function (b) {
-    this.verticalDomainOffsetCurve = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalDomainTypes = function (b) {
-    this.horizontalDomainTypes = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalRelativeTypes = function (b) {
-    this.horizontalRelativeTypes = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalDomainOffsetTypes = function (b) {
-    this.horizontalDomainOffsetTypes = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalDomainOffsetRanges = function (b) {
-    this.horizontalDomainOffsetRanges = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalDomainOffsetElements = function (b) {
-    this.horizontalDomainOffsetElements = b;
-    return this
-};
-AdaptiveMotifElement.prototype.setHorizontalDomainOffsetLikelihoods = function (b) {
-    this.horizontalDomainOffsetLikelihoods = b;
-    return this
-};
 var PercussionMotifMode = {
     RYTHM_AND_ZONES: 0,
     RYTHM_AND_RENDER_PATTERN: 1,
-    ELEMENTS: 2,
-    toString: function (a) {
-        switch (a) {
-            case PercussionMotifMode.ELEMENTS:
-                return "Elements";
-            case PercussionMotifMode.RYTHM_AND_RENDER_PATTERN:
-                return "Rythm and render pattern";
-            case PercussionMotifMode.RYTHM_AND_ZONES:
-                return "Rythm and zones"
-        }
-        return "Unknown percussion motif mode " + a
-    }
+    ELEMENTS: 2
 };
-addPossibleValuesFunction(PercussionMotifMode, PercussionMotifMode.RYTHM_AND_ZONES, PercussionMotifMode.ELEMENTS);
+
 
 function AbstractPercussionMotif() {
     this.id = "";
@@ -10099,76 +7552,9 @@ var PredefinedPercussionMotifType = {
     FILL_EIGHTS_5: 27,
     FILL_EIGHTS_6: 28,
     FILL_EIGHTS_7: 29,
-    FILL_EIGHTS_8: 30,
-    toString: function (a) {
-        switch (a) {
-            case PredefinedPercussionMotifType.FILL_EIGHTS_1:
-                return "Fill eights 1 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_2:
-                return "Fill eights 2 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_3:
-                return "Fill eights 3 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_4:
-                return "Fill eights 4 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_5:
-                return "Fill eights 5 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_6:
-                return "Fill eights 6 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_7:
-                return "Fill eights 7 (one measure)";
-            case PredefinedPercussionMotifType.FILL_EIGHTS_8:
-                return "Fill eights 8 (one measure)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_TRIPLET_1:
-                return "Fill quarter triplet 1 (one measure)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_TRIPLET_2:
-                return "Fill quarter triplet 2 (one measure)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_TRIPLET_3:
-                return "Fill quarter triplet 3 (one measure)";
-            case PredefinedPercussionMotifType.FILL_DOTTED_QUARTER_1:
-                return "Fill dotted quarter 1 (one measure)";
-            case PredefinedPercussionMotifType.FILL_DOTTED_QUARTER_2:
-                return "Fill dotted quarter 2 (one measure)";
-            case PredefinedPercussionMotifType.FILL_DOTTED_QUARTER_3:
-                return "Fill dotted quarter 3 (two measures)";
-            case PredefinedPercussionMotifType.FILL_DOTTED_QUARTER_4:
-                return "Fill dotted quarter 4 (two measures)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_1:
-                return "Fill quarter 1 (one measures)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_2:
-                return "Fill quarter 2 (one measures)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_3:
-                return "Fill quarter 3 (two measures)";
-            case PredefinedPercussionMotifType.FILL_QUARTER_4:
-                return "Fill quarter 4 (one measures)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_1:
-                return "Rock standard 1 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_2:
-                return "Rock standard 2 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_3:
-                return "Rock standard 3 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_4:
-                return "Rock standard 4 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_5:
-                return "Rock standard 5 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_6:
-                return "Rock standard 6 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_7:
-                return "Rock standard 7 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_8:
-                return "Rock standard 8 (one measure)";
-            case PredefinedPercussionMotifType.ROCK_STANDARD_9:
-                return "Rock standard 9 (one measure)";
-            case PredefinedPercussionMotifType.MARCH_STANDARD_1:
-                return "March standard 1 (one measure)";
-            case PredefinedPercussionMotifType.MARCH_STANDARD_2:
-                return "March standard 2 (one measure)";
-            case PredefinedPercussionMotifType.MARCH_STANDARD_3:
-                return "March standard 3 (one measure)"
-        }
-        return "Unknown predefined type " + a
-    }
+    FILL_EIGHTS_8: 30
 };
-addPossibleValuesFunction(PredefinedPercussionMotifType, PredefinedPercussionMotifType.FILL_DOTTED_QUARTER_1, PredefinedPercussionMotifType.FILL_EIGHTS_8);
+
 
 function PredefinedPercussionMotifElement() {
     PercussionMotifElement.call(this);
@@ -10794,20 +8180,9 @@ ConstantHarmonyElement.prototype = new HarmonyElement();
 var HarmonyLengthMode = {
     COUNT_AND_LENGTH_PATTERN: 0,
     COUNT_AND_RYTHM: 1,
-    RYTHM_ONLY: 2,
-    toString: function (a) {
-        switch (a) {
-            case HarmonyLengthMode.COUNT_AND_LENGTH_PATTERN:
-                return "Count and length pattern";
-            case HarmonyLengthMode.COUNT_AND_RYTHM:
-                return "Count and rythm";
-            case HarmonyLengthMode.RYTHM_ONLY:
-                return "Rythm only"
-        }
-        return "Unknown length mode " + a
-    }
+    RYTHM_ONLY: 2
 };
-addPossibleValuesFunction(HarmonyLengthMode, HarmonyLengthMode.COUNT_AND_LENGTH_PATTERN, HarmonyLengthMode.RYTHM_ONLY);
+
 
 function SequenceHarmonyElement() {
     HarmonyElement.call(this);
@@ -11025,17 +8400,6 @@ HarmonyElement.prototype.setLength = function (a) {
 HarmonyElement.prototype.getConstantHarmonyElements = function (b, a) {
     return [this]
 };
-HarmonyElement.prototype.applyModifers = function (b, a) { };
-HarmonyReferenceHarmonyElement.prototype.getConstantHarmonyElements = function (d, b) {
-    var c = getValueOrExpressionValue(this, "harmony", d);
-    var a = d.getHarmony(c);
-    if (a) {
-        return applyHarmonyModifiers(a.getConstantHarmonyElements(d), this.modifiers, d)
-    } else {
-        console.log("Could not find harmony " + c + "<br />")
-    }
-    return []
-};
 SwitchHarmonyElement.prototype.getConstantHarmonyElements = function (f, c) {
     var a = [];
     var d = getValueOrExpressionValue(this, "index", f);
@@ -11057,15 +8421,6 @@ ConstantHarmonyElement.prototype.getConstantHarmonyElements = function (b, a) {
 };
 ConstantHarmonyElement.prototype.getBeatLength = function () {
     return positionUnitToBeats(this.length, this.lengthUnit, this.tsNumerator, this.tsDenominator)
-};
-ConstantHarmonyElement.prototype.toString = function () {
-    var b = this.getScale();
-    var a = "HarmonyElement {";
-    a += " scale: " + b;
-    a += " chordRoot: " + this.chordRoot;
-    a += " inversions: " + this.chordInversions;
-    a += "}";
-    return a
 };
 ConstantHarmonyElement.prototype.sameScale = function (d) {
     if (d.baseNote == this.baseNote) {
@@ -11197,14 +8552,6 @@ ConstantHarmonyElement.prototype.toRomanString = function () {
 ConstantHarmonyElement.prototype.copy = function () {
     return copyObjectDeep(this)
 };
-ConstantHarmonyElement.prototype.getDerivedChord = function (d, b, c) {
-    var a = this.copy();
-    var e = this.getAbsoluteNoteFromScaleIndex(d);
-    a.baseNote = e;
-    a.chordRoot = c;
-    a.scaleType = b;
-    return a
-};
 ConstantHarmonyElement.prototype.setTimeSignature = function (b, a) {
     this.tsNumerator = b;
     this.tsDenominator = a;
@@ -11261,15 +8608,6 @@ ConstantHarmonyElement.prototype.alterScaleCopy = function (c) {
     }
     return p
 };
-ConstantHarmonyElement.prototype.addAlteration = function (a, b) {
-    this.alterations.push(a);
-    this.alterations.push(b);
-    return this
-};
-ConstantHarmonyElement.prototype.clearAlterations = function () {
-    this.alterations = [];
-    return this
-};
 ConstantHarmonyElement.prototype.getScale = function () {
     var a = ScaleType.MAJOR_SCALE_STEPS;
     switch (this.scaleType) {
@@ -11281,11 +8619,6 @@ ConstantHarmonyElement.prototype.getScale = function () {
             break
     }
     return this.alterScaleCopy(a)
-};
-ConstantHarmonyElement.prototype.getHarmonyElements = function () {
-    var a = [];
-    a.push(this);
-    return a
 };
 ConstantHarmonyElement.prototype.hasSeventh = function () {
     return this.isSeventh() || this.isNinth()
@@ -11369,12 +8702,6 @@ ConstantHarmonyElement.prototype.isTriad = function () {
 ConstantHarmonyElement.prototype.is64Triad = function () {
     return this.chordType == ChordType.TRIAD && this.chordInversions == 2
 };
-ConstantHarmonyElement.prototype.is63Triad = function () {
-    return this.chordType == ChordType.TRIAD && this.chordInversions == 1
-};
-ConstantHarmonyElement.prototype.is53Triad = function () {
-    return this.chordType == ChordType.TRIAD && this.chordInversions == 0
-};
 ConstantHarmonyElement.prototype.setChordRoot = function (a) {
     this.chordRoot = a;
     return this
@@ -11393,9 +8720,6 @@ ConstantHarmonyElement.prototype.getScaleType = function () {
 ConstantHarmonyElement.prototype.setChordInversions = function (a) {
     this.chordInversions = a;
     return this
-};
-ConstantHarmonyElement.prototype.getChordInversions = function () {
-    return this.chordInversions
 };
 ConstantHarmonyElement.prototype.getChordScaleIndices = function () {
     var a = this.chordRoot;
@@ -11418,44 +8742,6 @@ ConstantHarmonyElement.prototype.getChordScaleIndices = function () {
             return [a, a + 3, a + 4, a + 6]
     }
     return this.chord
-};
-ConstantHarmonyElement.prototype.getThirdScaleIndex = function () {
-    switch (this.chordType) {
-        case ChordType.SEVENTH:
-        case ChordType.TRIAD:
-        case ChordType.NINTH:
-            return this.chordRoot + 2;
-        case ChordType.SUS2:
-        case ChordType.SUS2_SEVENTH:
-            return this.chordRoot + 1;
-        case ChordType.SUS4:
-        case ChordType.SUS4_SEVENTH:
-            return this.chordRoot + 3
-    }
-    return this.chordRoot + 2
-};
-ConstantHarmonyElement.prototype.getFifthScaleIndex = function () {
-    switch (this.chordType) {
-        case ChordType.SEVENTH:
-        case ChordType.TRIAD:
-        case ChordType.SUS2:
-        case ChordType.SUS2_SEVENTH:
-        case ChordType.SUS4:
-        case ChordType.SUS4_SEVENTH:
-        case ChordType.NINTH:
-            return this.chordRoot + 4
-    }
-    return this.chordRoot + 4
-};
-ConstantHarmonyElement.prototype.getSeventhScaleIndex = function () {
-    switch (this.chordType) {
-        case ChordType.SUS2_SEVENTH:
-        case ChordType.SUS4_SEVENTH:
-        case ChordType.SEVENTH:
-        case ChordType.NINTH:
-            return this.chordRoot + 6
-    }
-    return this.chordRoot + 7
 };
 ConstantHarmonyElement.prototype.getBassScaleIndex = function () {
     switch (this.chordType) {
@@ -11598,14 +8884,6 @@ ConstantHarmonyElement.prototype.getPitchClassesFromAbsoluteNotes = function (b)
     var a = [];
     for (var c = 0; c < b.length; c++) {
         a[c] = b[c] % 12
-    }
-    return a
-};
-ConstantHarmonyElement.prototype.getPitchClassesSetFromAbsoluteNotes = function (b) {
-    var a = {};
-    for (var d = 0; d < b.length; d++) {
-        var c = b[d] % 12;
-        a[c] = true
     }
     return a
 };
@@ -12482,16 +9760,9 @@ DynamicSequenceHarmonyElement.prototype.getConstantHarmonyElements = function (d
     return a
 };
 var PhraseHarmonyElementShorteningMode = {
-    BEATS: 0,
-    toString: function (a) {
-        switch (a) {
-            case PhraseHarmonyElementShorteningMode.BEATS:
-                return "Beats"
-        }
-        return "Unknown phrase harmony element shortening mode " + a
-    }
+    BEATS: 0
 };
-addPossibleValuesFunction(PhraseHarmonyElementShorteningMode, PhraseHarmonyElementShorteningMode.BEATS, PhraseHarmonyElementShorteningMode.BEATS);
+
 
 function PhraseHarmonyElement() {
     PlannedHarmonyElement.call(this);
@@ -12794,17 +10065,7 @@ PhraseHarmonyElement.prototype.getLengthInfos = function (d, b) {
     }
     return p
 };
-PhraseHarmonyElement.prototype.countSevenths = function (b) {
-    var a = 0;
-    for (var c = 0; c < b.length; c++) {
-        if (b[c].chordType == ChordType.SEVENTH) {
-            a++
-        }
-    }
-    return a
-};
 PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
-    harmonyTimer.start();
     var aD = getValueOrExpressionValue(this, "seed", bv);
     var N = getValueOrExpressionValue(this, "scaleBaseNote", bv);
     var aX = this.getBeatLengths(bv);
@@ -13699,7 +10960,6 @@ PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
             ba[ba.length - 1].voiceLineConstraints.push(h[ak])
         }
     }
-    harmonyTimer.pause();
     return ba
 };
 
@@ -13728,9 +10988,6 @@ VoiceLine.prototype.getCount = function () {
 VoiceLine.prototype.addVoiceLineElement = function (a) {
     this.lineElements.push(a);
     return this
-};
-VoiceLine.prototype.toString = function () {
-    return this.lineElements.toString()
 };
 VoiceLine.prototype.getSingleStepVoiceLineElements = function (b, e) {
     var a = [];
@@ -13977,39 +11234,9 @@ function ConstantVoiceLine() {
     this._constructorName = "ConstantVoiceLine"
 }
 ConstantVoiceLine.prototype = new VoiceLine();
-ConstantVoiceLine.prototype.toString = function (c) {
-    var a = "[";
-    for (var d = 0; d < this.lineElements.length; d++) {
-        var h = this.lineElements[d];
-        a += h.index;
-        var f = [];
-        if (c && c.showAbsoluteNote && c.harmony) {
-            var g = c.harmony.get(d);
-            var b = g.getAbsoluteNoteConstantVoiceLineElement(h);
-            f.push("abs: " + b)
-        }
-        if (f.length > 0) {
-            a += " (" + f + ")"
-        }
-        if (d < this.lineElements.length - 1) {
-            a += ", "
-        }
-    }
-    a += "]";
-    return a
-};
 var HarmonyStepLengthType = {
     HARMONY_STEPS: 0,
     HARMONY_LENGTH_PLUS_STEPS: 1,
-    toString: function (a) {
-        switch (a) {
-            case HarmonyStepLengthType.HARMONY_STEPS:
-                return "Harmony steps";
-            case HarmonyStepLengthType.HARMONY_LENGTH_PLUS_STEPS:
-                return "Harmony steps plus harmony length"
-        }
-        return "Unknown step length type " + a
-    },
     getStepLength: function (a, b, c) {
         switch (b) {
             case HarmonyStepLengthType.HARMONY_STEPS:
@@ -14020,7 +11247,7 @@ var HarmonyStepLengthType = {
         return c
     }
 };
-addPossibleValuesFunction(HarmonyStepLengthType, HarmonyStepLengthType.HARMONY_STEPS, HarmonyStepLengthType.HARMONY_LENGTH_PLUS_STEPS);
+
 
 function VoiceLineElement() {
     this.id = "";
@@ -14082,10 +11309,6 @@ ConstantVoiceLineElement.prototype.setIndex = function (a) {
     this.index = a;
     return this
 };
-ConstantVoiceLineElement.prototype.setOctaves = function (a) {
-    this.octaves = a;
-    return this
-};
 ConstantVoiceLineElement.prototype.setIndexType = function (a) {
     this.indexType = a;
     return this
@@ -14129,7 +11352,6 @@ function Structure() {
     this._constructorName = "Structure"
 }
 Structure.prototype.renderBatch = function (e, a) {
-    composeTimer.start();
     for (var b = 0; b < this.references.length; b++) {
         var d = this.references[b];
         if (d.active) {
@@ -14143,17 +11365,7 @@ Structure.prototype.renderBatch = function (e, a) {
             a(c)
         }
     }
-    composeTimer.pause()
 };
-Structure.prototype.renderSection = function (c, a) {
-    var b = this.references[a];
-    if (b) {
-        b.renderBatch(c)
-    } else {
-        console.log(this._constructorName + ": Could not find section with index " + a)
-    }
-};
-
 function RenderState(a, b) {
     this.module = a;
     this.data = b;
@@ -14231,36 +11443,6 @@ RenderData.prototype.addEvents = function (a) {
 RenderData.prototype.getEvents = function () {
     return this.events
 };
-RenderData.prototype.getNonOverlappingDatas = function () {
-    var a = [];
-    return a
-};
-RenderData.prototype.getTimeLimits = function () {
-    var a = this.events.length == 0 ? 0 : 99999999;
-    var b = this.events.length == 0 ? 0 : -99999999;
-    for (var d = 0; d < this.events.length; d++) {
-        var f = this.events[d];
-        var c = f.getTime();
-        a = Math.min(a, c);
-        b = Math.max(b, c)
-    }
-    return [a, b]
-};
-RenderData.prototype.splitOnTime = function (f) {
-    var c = new RenderData();
-    var g = new RenderData();
-    for (var b = 0; b < this.events.length; b++) {
-        var d = this.events[b];
-        if (d.getTime() >= f) {
-            g.events.push(d)
-        } else {
-            c.events.push(d)
-        }
-    }
-    var a = [c, g];
-    return a
-};
-
 function RenderEvent(a) {
     this.time = a
 }
@@ -14311,9 +11493,6 @@ NoteOnEvent.prototype.netJSONTransformProperty = function (a, b, c, d) {
         return RenderEvent.prototype.netJSONTransformProperty.call(this, a, b, c, d)
     }
 };
-NoteOnEvent.prototype.toString = function () {
-    return "noteOn(" + this.note + ", " + this.time + ", " + this.onVelocity + ", " + this.renderChannel.id + ")"
-};
 
 function NoteOffEvent(c, d, b, a) {
     RenderEvent.call(this, d);
@@ -14337,9 +11516,6 @@ NoteOffEvent.prototype.netJSONTransformProperty = function (a, b, c, d) {
     } else {
         return RenderEvent.prototype.netJSONTransformProperty.call(this, a, b, c, d)
     }
-};
-NoteOffEvent.prototype.toString = function () {
-    return "noteOff(" + this.note + ", " + this.time + ", " + this.offVelocity + ", " + this.renderChannel.id + ")"
 };
 
 function SetControlEvent(b, c, a) {
@@ -14376,9 +11552,6 @@ SetTempoEvent.prototype.netJSONPropertiesMap = {
     bpm: "b"
 };
 SetTempoEvent.prototype.netJSONType = "t";
-SetTempoEvent.prototype.toString = function () {
-    return "setTempo(" + this.bpm + ", " + this.time + ")"
-};
 
 function HarmonyGenerator(a) {
     DfsSolver.call(this, a);
@@ -14431,9 +11604,6 @@ HarmonyGenerator.prototype.calculateSeventhToTriadCosts = function (d, k, h, g) 
             }
         }
     }
-};
-HarmonyGenerator.prototype.getCostFromLikelihood = function (a) {
-    return a > 0 ? -Math.log(a) : 99999999999
 };
 HarmonyGenerator.prototype.calculateSusCosts = function (c, m, k, g, j, e) {
     var a = c.state;
@@ -14720,11 +11890,6 @@ HarmonyGenerator.prototype.getBassPassingChords = function (f, b, c, m, a) {
     var l = this.filterChords(f, g, m, a);
     return l
 };
-HarmonyGenerator.prototype.getThirdFromBassPassingChords = function (b, c, a) { };
-HarmonyGenerator.prototype.getFifthFromBassPassingChords = function (b, c, a) { };
-HarmonyGenerator.prototype.getSeventhFromBassPassingChords = function (b, c, a) { };
-HarmonyGenerator.prototype.prepareBeforeSearch = function () { };
-HarmonyGenerator.prototype.searchDone = function () { };
 var StaticHarmonyMode = {
     BASE: 0,
     AUXILIARY: 1,
@@ -14742,9 +11907,6 @@ function StaticHarmonyState() {
     this.auxiliaryRoot = 0;
     this.stepCost = 0
 }
-StaticHarmonyState.prototype.toString = function () {
-    return "SHS {harmony: " + this.harmony + "mode: " + this.mode + "stepCost: " + this.stepCost + (this.targetHarmony ? "targetHarmony: " + this.targetHarmony : "") + "}"
-};
 
 function StaticHarmonyGenerator(a) {
     HarmonyGenerator.call(this, a);
@@ -15338,28 +12500,9 @@ var DynamicHarmonyModulationTarget = {
                 return a ? b : c
         }
         return a ? c : b
-    },
-    toString: function (a) {
-        switch (a) {
-            case DynamicHarmonyModulationTarget.DOMINANT:
-                return "Dominant";
-            case DynamicHarmonyModulationTarget.MEDIANT:
-                return "Mediant";
-            case DynamicHarmonyModulationTarget.SUBDOMINANT:
-                return "Subdominant";
-            case DynamicHarmonyModulationTarget.SUBMEDIANT:
-                return "Submediant";
-            case DynamicHarmonyModulationTarget.SUBTONIC:
-                return "Subtonic";
-            case DynamicHarmonyModulationTarget.SUPERTONIC:
-                return "Supertonic";
-            case DynamicHarmonyModulationTarget.NONE:
-                return "None"
-        }
-        return "Unknown modulation target " + a
     }
 };
-addPossibleValuesFunction(DynamicHarmonyModulationTarget, DynamicHarmonyModulationTarget.NONE, DynamicHarmonyModulationTarget.SUBTONIC);
+
 var AppliedChordType = {
     V: 0,
     V6: 1,
@@ -15370,31 +12513,8 @@ var AppliedChordType = {
     VII: 6,
     VII6: 7,
     VII7: 8,
-    toString: function (a) {
-        switch (a) {
-            case AppliedChordType.V:
-                return "V";
-            case AppliedChordType.V42:
-                return "V42";
-            case AppliedChordType.V43:
-                return "V43";
-            case AppliedChordType.V65:
-                return "V65";
-            case AppliedChordType.V6:
-                return "V6";
-            case AppliedChordType.V7:
-                return "V7";
-            case AppliedChordType.VII:
-                return "VII";
-            case AppliedChordType.VII6:
-                return "VII6";
-            case AppliedChordType.VII7:
-                return "VII7"
-        }
-        return "Unknown applied chord type " + a
-    }
 };
-addPossibleValuesFunction(AppliedChordType, AppliedChordType.V, AppliedChordType.VII7);
+
 var DynamicHarmonyMode = {
     ROOT: 0,
     NEIGHBOUR: 1,
@@ -15413,9 +12533,6 @@ function DynamicHarmonyState() {
     this.stepCost = 0;
     this._constructorName = "DynamicHarmonyState"
 }
-DynamicHarmonyState.prototype.toString = function () {
-    return "DHS {harmony: " + this.harmony + "mode: " + this.mode + (this.targetHarmony ? "targetHarmony: " + this.targetHarmony : "") + "}"
-};
 DynamicHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -16402,9 +13519,6 @@ function ChromaticTransitionHarmonyState() {
     this.stepCost = 0;
     this._constructorName = "ChromaticTransitionHarmonyState"
 }
-ChromaticTransitionHarmonyState.prototype.toString = function () {
-    return JSON.stringify(this)
-};
 ChromaticTransitionHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -16580,9 +13694,6 @@ function ChromaticOscillationHarmonyState() {
     this.mode = 0;
     this._constructorName = "ChromaticOscillationHarmonyState"
 }
-ChromaticOscillationHarmonyState.prototype.toString = function () {
-    return JSON.stringify(this)
-};
 ChromaticOscillationHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -16845,9 +13956,6 @@ function VoiceLineSearchNode(b, c, a) {
     this.resultIndex = a;
     this.totalCost = 0
 }
-VoiceLineSearchNode.prototype.toString = function () {
-    return "VLSN {state: " + this.state + "depth: " + this.depth + "}"
-};
 
 function VoiceLineGenerator(a) {
     this.reusables = getValueOrDefault(a, "reusables", {});
@@ -16868,13 +13976,6 @@ function VoiceLineGenerator(a) {
 }
 VoiceLineGenerator.prototype.getlargeLeapToPitchClassPenaltyCount = function (d, b, c, a) {
     if ((b % 12) == a) {
-        return this.getlargeLeapPenaltyCount(d, b, c)
-    } else {
-        return 0
-    }
-};
-VoiceLineGenerator.prototype.getlargeLeapFromPitchClassPenaltyCount = function (d, b, c, a) {
-    if ((d % 12) == a) {
         return this.getlargeLeapPenaltyCount(d, b, c)
     } else {
         return 0
@@ -16990,9 +14091,7 @@ VoiceLineGenerator.prototype.search = function () {
     var n = [];
     this.bestSolutionCost = 99999999;
     this.resultStates = [];
-    voiceLeadingPrepareTimer.start();
     this.prepareBeforeSearch();
-    voiceLeadingPrepareTimer.pause();
     var g = this.harmony.getConstantHarmonyElements();
     var b = 0;
     var m = 0;
@@ -17030,9 +14129,6 @@ ClassicalVoiceLineState.prototype.copy = function () {
     var a = new ClassicalVoiceLineState();
     a.stateIndex = this.stateIndex;
     return a
-};
-ClassicalVoiceLineState.prototype.toString = function () {
-    return "CVLS{stateIndex: " + this.stateIndex + "}"
 };
 
 function ClassicalVoiceLineGenerator(a) {
@@ -17869,15 +14965,6 @@ VoiceLinePlannerConstraint.prototype.oneStepCost = function (b, c, a, d) {
 VoiceLinePlannerConstraint.prototype.twoStepCost = function (b, d, c, a, e) {
     return 0
 };
-VoiceLinePlannerConstraint.prototype.zeroStepValid = function (b, a, c) {
-    return true
-};
-VoiceLinePlannerConstraint.prototype.oneStepValid = function (b, c, a, d) {
-    return true
-};
-VoiceLinePlannerConstraint.prototype.twoStepValid = function (b, d, c, a, e) {
-    return true
-};
 EmptyVoiceLinePlannerConstraint.prototype.getCheckCostSteps = function () {
     return []
 };
@@ -18401,7 +15488,6 @@ ClassicalVoiceLinePlanner.prototype.planVoices = function (L, y, f, w) {
     };
     var z = new ClassicalVoiceLineGenerator(C);
     z.constraints = a;
-    voiceLeadingTimer.start();
     var U = null;
     var c = JSON.stringify(z);
     z.reusables = f.reusables;
@@ -18412,7 +15498,6 @@ ClassicalVoiceLinePlanner.prototype.planVoices = function (L, y, f, w) {
         U = z.search();
         f.reusables[c] = U
     }
-    voiceLeadingTimer.pause();
     if (U) {
         for (var R = 0; R < U.length; R++) {
             U[R].id = L[R].id
@@ -18632,150 +15717,9 @@ var MidiControllerType = {
         }
         console.log("Warning unknown midi controller type " + a);
         return 0
-    },
-    toString: function (a) {
-        switch (a) {
-            case MidiControllerType.ALL_CONTROLLERS_OFF:
-                return "All controllers off";
-            case MidiControllerType.ALL_NOTES_OFF:
-                return "All notes off";
-            case MidiControllerType.ALL_SOUNDS_OFF:
-                return "All sounds off";
-            case MidiControllerType.BALANCE:
-                return "Balance";
-            case MidiControllerType.BALANCE_LSB:
-                return "Balance LSB";
-            case MidiControllerType.BANK_SELECT:
-                return "Bank select";
-            case MidiControllerType.BANK_SELECT_LSB:
-                return "Bank select LSB";
-            case MidiControllerType.BREATH_CONTROLLER:
-                return "Breath controller";
-            case MidiControllerType.BREATH_CONTROLLER_LSB:
-                return "Breath controller LSB";
-            case MidiControllerType.DAMPER_PEDAL:
-                return "Damper pedal";
-            case MidiControllerType.DATA_DECREMENT:
-                return "Data decrement";
-            case MidiControllerType.DATA_ENTRY_LSB:
-                return "Data entry LSB";
-            case MidiControllerType.DATA_ENTRY_MSB:
-                return "Data entry MSB";
-            case MidiControllerType.DATA_INCREMENT:
-                return "Data increment";
-            case MidiControllerType.EFFECTS_DEPTH_1:
-                return "Effects depth 1";
-            case MidiControllerType.EFFECTS_DEPTH_2:
-                return "Effects depth 2";
-            case MidiControllerType.EFFECTS_DEPTH_3:
-                return "Effects depth 3";
-            case MidiControllerType.EFFECTS_DEPTH_4:
-                return "Effects depth 4";
-            case MidiControllerType.EFFECTS_DEPTH_5:
-                return "Effects depth 5";
-            case MidiControllerType.EFFECT_CONTROL_1:
-                return "Effect control 1";
-            case MidiControllerType.EFFECT_CONTROL_1_LSB:
-                return "Effect control 1 LSB";
-            case MidiControllerType.EFFECT_CONTROL_2:
-                return "Effect control 2";
-            case MidiControllerType.EFFECT_CONTROL_2_LSB:
-                return "Effect control 2 LSB";
-            case MidiControllerType.EXPRESSION_CONTROLLER:
-                return "Expression controller";
-            case MidiControllerType.EXPRESSION_CONTROLLER_LSB:
-                return "Expression controller LSB";
-            case MidiControllerType.FOOT_CONTROLLER:
-                return "Foot controller";
-            case MidiControllerType.FOOT_CONTROLLER_LSB:
-                return "Foot controller LSB";
-            case MidiControllerType.GENERAL_PURPOSE_1:
-                return "General purpose 1";
-            case MidiControllerType.GENERAL_PURPOSE_2:
-                return "General purpose 2";
-            case MidiControllerType.GENERAL_PURPOSE_3:
-                return "General purpose 3";
-            case MidiControllerType.GENERAL_PURPOSE_4:
-                return "General purpose 4";
-            case MidiControllerType.GENERAL_PURPOSE_5:
-                return "General purpose 5";
-            case MidiControllerType.GENERAL_PURPOSE_6:
-                return "General purpose 6";
-            case MidiControllerType.GENERAL_PURPOSE_7:
-                return "General purpose 7";
-            case MidiControllerType.GENERAL_PURPOSE_8:
-                return "General purpose 8";
-            case MidiControllerType.HOLD_2:
-                return "Hold 2";
-            case MidiControllerType.LEGATO_FOOTSWITCH:
-                return "Legato footswitch";
-            case MidiControllerType.LOCAL_KEYBOARD:
-                return "Local keyboard";
-            case MidiControllerType.MODULATION:
-                return "Modulation";
-            case MidiControllerType.MODULATION_LSB:
-                return "Modulation LSB";
-            case MidiControllerType.MONO_OPERATION:
-                return "Mono operation";
-            case MidiControllerType.NRPN_LSB:
-                return "NRPN LSB";
-            case MidiControllerType.NRPN_MSB:
-                return "NRPN MSB";
-            case MidiControllerType.OMNI_MODE_OFF:
-                return "Omni mode off";
-            case MidiControllerType.OMNI_MODE_ON:
-                return "Omni mode on";
-            case MidiControllerType.PAN:
-                return "Pan";
-            case MidiControllerType.PAN_LSB:
-                return "Pan LSB";
-            case MidiControllerType.POLY_OPERATION:
-                return "Poly operation";
-            case MidiControllerType.PORTAMENTO:
-                return "Portamento";
-            case MidiControllerType.PORTAMENTO_CONTROL:
-                return "Portamento control";
-            case MidiControllerType.PORTAMENTO_TIME:
-                return "Portamento time";
-            case MidiControllerType.PORTAMENTO_TIME_LSB:
-                return "Portamento time LSB";
-            case MidiControllerType.RPN_LSB:
-                return "RPN LSB";
-            case MidiControllerType.RPN_MSB:
-                return "RPN MSB";
-            case MidiControllerType.SOFT_PEDAL:
-                return "Soft pedal";
-            case MidiControllerType.SOSTENUTO:
-                return "Sostenuto";
-            case MidiControllerType.SOUND_CONTROLLER_1:
-                return "Sound controller 1";
-            case MidiControllerType.SOUND_CONTROLLER_2:
-                return "Sound controller 2";
-            case MidiControllerType.SOUND_CONTROLLER_3:
-                return "Sound controller 3";
-            case MidiControllerType.SOUND_CONTROLLER_4:
-                return "Sound controller 4";
-            case MidiControllerType.SOUND_CONTROLLER_5:
-                return "Sound controller 5";
-            case MidiControllerType.SOUND_CONTROLLER_6:
-                return "Sound controller 6";
-            case MidiControllerType.SOUND_CONTROLLER_7:
-                return "Sound controller 7";
-            case MidiControllerType.SOUND_CONTROLLER_8:
-                return "Sound controller 8";
-            case MidiControllerType.SOUND_CONTROLLER_9:
-                return "Sound controller 9";
-            case MidiControllerType.SOUND_CONTROLLER_10:
-                return "Sound controller 10";
-            case MidiControllerType.VOLUME:
-                return "Volume";
-            case MidiControllerType.VOLUME_LSB:
-                return "Volume LSB"
-        }
-        return "Unknown midi controller type " + a
     }
 };
-addPossibleValuesFunction(MidiControllerType, MidiControllerType.BANK_SELECT, MidiControllerType.POLY_OPERATION);
+
 var MidiDrum = {
     BASS_DRUM_2: 35,
     BASS_DRUM_1: 36,
@@ -18823,109 +15767,9 @@ var MidiDrum = {
     MUTE_CUICA: 78,
     OPEN_CUICA: 79,
     MUTE_TRIANGLE: 80,
-    OPEN_TRIANGLE: 81,
-    toString: function (a) {
-        var b = " (" + a + ", " + toPitchClassString(a) + "" + Math.floor(a / 12) + ")";
-        switch (a) {
-            case MidiDrum.BASS_DRUM_1:
-                return "Bass drum 1" + b;
-            case MidiDrum.BASS_DRUM_2:
-                return "Bass drum 2" + b;
-            case MidiDrum.CABASA:
-                return "Cabasa" + b;
-            case MidiDrum.CHINESE_CYMBAL:
-                return "Chinese cymbal" + b;
-            case MidiDrum.CLAVES:
-                return "Claves" + b;
-            case MidiDrum.CLOSED_HIHAT:
-                return "Closed hi-hat" + b;
-            case MidiDrum.COWBELL:
-                return "Cowbell" + b;
-            case MidiDrum.CRASH_CYMBAL_1:
-                return "Crash cymbal 1" + b;
-            case MidiDrum.CRASH_CYMBAL_2:
-                return "Crash cymbal 2" + b;
-            case MidiDrum.HAND_CLAP:
-                return "Hand clap" + b;
-            case MidiDrum.HIGH_AGOGO:
-                return "High agogo" + b;
-            case MidiDrum.HIGH_BONGO:
-                return "High bongo" + b;
-            case MidiDrum.HIGH_TIMBALE:
-                return "Timbale" + b;
-            case MidiDrum.HIGH_TOM_1:
-                return "High tom 1" + b;
-            case MidiDrum.HIGH_TOM_2:
-                return "High tom 2" + b;
-            case MidiDrum.HIGH_WOOD_BLOCK:
-                return "High wood block" + b;
-            case MidiDrum.LONG_GUIRO:
-                return "Long guiro" + b;
-            case MidiDrum.LONG_WHISTLE:
-                return "Long whistle" + b;
-            case MidiDrum.LOW_AGOGO:
-                return "Low agogo" + b;
-            case MidiDrum.LOW_BONGO:
-                return "Low bongo" + b;
-            case MidiDrum.LOW_CONGA:
-                return "Low conga" + b;
-            case MidiDrum.LOW_TIMBALE:
-                return "Low timbale" + b;
-            case MidiDrum.LOW_TOM_1:
-                return "Low tom 1" + b;
-            case MidiDrum.LOW_TOM_2:
-                return "Low tom 2" + b;
-            case MidiDrum.LOW_WOOD_BLOCK:
-                return "Low wood block" + b;
-            case MidiDrum.MARACAS:
-                return "Maracas" + b;
-            case MidiDrum.MID_TOM_1:
-                return "Mid tom 1" + b;
-            case MidiDrum.MID_TOM_2:
-                return "Mid tom 2" + b;
-            case MidiDrum.MUTE_CUICA:
-                return "Mute cuica" + b;
-            case MidiDrum.MUTE_HIGH_CONGA:
-                return "Mute high conga" + b;
-            case MidiDrum.MUTE_TRIANGLE:
-                return "Mute triangle" + b;
-            case MidiDrum.OPEN_CUICA:
-                return "Open cuica" + b;
-            case MidiDrum.OPEN_HIGH_CONGA:
-                return "Open high conga" + b;
-            case MidiDrum.OPEN_HIHAT:
-                return "Open hi-hat" + b;
-            case MidiDrum.OPEN_TRIANGLE:
-                return "Open triangle" + b;
-            case MidiDrum.PEDAL_HIHAT:
-                return "Pedal hi-hat" + b;
-            case MidiDrum.RIDE_BELL:
-                return "Ride bell" + b;
-            case MidiDrum.RIDE_CYMBAL_1:
-                return "Ride cymbal 1" + b;
-            case MidiDrum.RIDE_CYMBAL_2:
-                return "Ride cymbal 2" + b;
-            case MidiDrum.RIMSHOT:
-                return "Rimshot" + b;
-            case MidiDrum.SHORT_GUIRO:
-                return "Short guiro" + b;
-            case MidiDrum.SHORT_WHISTLE:
-                return "Short whistle" + b;
-            case MidiDrum.SNARE_DRUM_1:
-                return "Snare drum 1" + b;
-            case MidiDrum.SNARE_DRUM_2:
-                return "Snare drum 2" + b;
-            case MidiDrum.SPLASH_CYMBAL:
-                return "Splash cymbal" + b;
-            case MidiDrum.TAMBOURINE:
-                return "Tambourine" + b;
-            case MidiDrum.VIBRA_SLAP:
-                return "Vibraslap" + b
-        }
-        return "unknown midi drum" + b
-    }
+    OPEN_TRIANGLE: 81
 };
-addPossibleValuesFunction(MidiDrum, MidiDrum.BASS_DRUM_2, MidiDrum.VIBRA_SLAP);
+
 var MidiProgram = {
     ACOUSTIC_GRAND_PIANO: 0,
     BRIGHT_ACOUSTIC_PIANO: 1,
@@ -19054,270 +15898,9 @@ var MidiProgram = {
     TELEPHONE_RING: 124,
     HELICOPTER: 125,
     APPLAUSE: 126,
-    GUNSHOT: 127,
-    toString: function (a) {
-        switch (a) {
-            case MidiProgram.ACCORDION:
-                return "Accordion";
-            case MidiProgram.ACOUSTIC_BASS:
-                return "Acoustic bass";
-            case MidiProgram.ACOUSTIC_GRAND_PIANO:
-                return "Acoustic grand piano";
-            case MidiProgram.ACOUSTIC_NYLON_GUITAR:
-                return "Acoustic nylon guitar";
-            case MidiProgram.ACOUSTIC_STEEL_GUITAR:
-                return "Acoustic steel guitar";
-            case MidiProgram.AGOGO:
-                return "Agogo";
-            case MidiProgram.ALTO_SAX:
-                return "Alto sax";
-            case MidiProgram.APPLAUSE:
-                return "Applause";
-            case MidiProgram.ATMOSPHERE_SFX:
-                return "Atmosphere sfx";
-            case MidiProgram.BRIGHT_ACOUSTIC_PIANO:
-                return "Bright acoustic piano";
-            case MidiProgram.BAGPIPE:
-                return "Bagpipe";
-            case MidiProgram.BANJO:
-                return "Banjo";
-            case MidiProgram.BARITONE_SAX:
-                return "Baritone sax";
-            case MidiProgram.BASSOON:
-                return "Bassoon";
-            case MidiProgram.BASS_PLUS_LEAD:
-                return "Bass plus lead";
-            case MidiProgram.BIRD_TWEET:
-                return "Bird tweet";
-            case MidiProgram.BLOWN_BOTTLE:
-                return "Blown bottle";
-            case MidiProgram.BOWED_PAD:
-                return "Bowed pad";
-            case MidiProgram.BRASS_SECTION:
-                return "Brass section";
-            case MidiProgram.BREATH_NOISE:
-                return "Breath noise";
-            case MidiProgram.BRIGHTNESS_SFX:
-                return "Brightness sfx";
-            case MidiProgram.CELESTA:
-                return "Celesta";
-            case MidiProgram.CELLO:
-                return "Cello";
-            case MidiProgram.CHOIR_AAHS:
-                return "Choir aahs";
-            case MidiProgram.CHURCH_ORGAN:
-                return "Church organ";
-            case MidiProgram.CLAVINET:
-                return "Clavinet";
-            case MidiProgram.CONTRABASS:
-                return "Contrabass";
-            case MidiProgram.CALLIOPE_LEAD:
-                return "Calliope lead";
-            case MidiProgram.CHARANG_LEAD:
-                return "Charang lead";
-            case MidiProgram.CHIFF_LEAD:
-                return "Chiff lead";
-            case MidiProgram.CHOIR_PAD:
-                return "Choir pad";
-            case MidiProgram.CLARINET:
-                return "Clarinet";
-            case MidiProgram.CRYSTAL_SFX:
-                return "Crystal sfx";
-            case MidiProgram.DISTORTION_GUITAR:
-                return "Distortion guitar";
-            case MidiProgram.DRAWBAR_ORGAN:
-                return "Drawbar organ";
-            case MidiProgram.DULCIMER:
-                return "Dulcimer";
-            case MidiProgram.ELECTRIC_CLEAN_GUITAR:
-                return "Electric clean guitar";
-            case MidiProgram.ELECTRIC_FINGER_BASS:
-                return "Electric finger bass";
-            case MidiProgram.ELECTRIC_GRAND_PIANO:
-                return "Electric grand piano";
-            case MidiProgram.ELECTRIC_JAZZ_GUITAR:
-                return "Electric jazz guitar";
-            case MidiProgram.ELECTRIC_MUTED_GUITAR:
-                return "Electric muted guitar";
-            case MidiProgram.ELECTRIC_PIANO_1:
-                return "Electric piano 1";
-            case MidiProgram.ELECTRIC_PIANO_2:
-                return "Electric piano 2";
-            case MidiProgram.ELECTRIC_PICK_BASS:
-                return "Electric pick bass";
-            case MidiProgram.ECHOES_SFX:
-                return "Echoes sfx";
-            case MidiProgram.ENGLISH_HORN:
-                return "English hord";
-            case MidiProgram.FRETLESS_BASS:
-                return "Fretless bass";
-            case MidiProgram.FIDDLE:
-                return "Fiddle";
-            case MidiProgram.FIFTHS_LEAD:
-                return "Fifths lead";
-            case MidiProgram.FLUTE:
-                return "Flute";
-            case MidiProgram.FRENCH_HORN:
-                return "French horn";
-            case MidiProgram.GLOCKENSPIEL:
-                return "Glockenspiel";
-            case MidiProgram.GUITAR_HARMONICS:
-                return "Guitar harmonics";
-            case MidiProgram.GOBLINS_SFX:
-                return "Goblins sfx";
-            case MidiProgram.GUITAR_FRET_NOISE:
-                return "Guitar fret noise";
-            case MidiProgram.GUNSHOT:
-                return "Gunshot";
-            case MidiProgram.HARMONICA:
-                return "Harmonica";
-            case MidiProgram.HARPSICHORD:
-                return "Harpsichord";
-            case MidiProgram.HONKY_TONK_PIANO:
-                return "Honky-tonk piano";
-            case MidiProgram.HALO_PAD:
-                return "Halo pad";
-            case MidiProgram.HELICOPTER:
-                return "Helicopter";
-            case MidiProgram.KALIMBA:
-                return "Kalimba";
-            case MidiProgram.KOTO:
-                return "Koto";
-            case MidiProgram.MARIMBA:
-                return "Marimba";
-            case MidiProgram.MUSIC_BOX:
-                return "Music box";
-            case MidiProgram.MELODIC_TOM:
-                return "Melodic tom";
-            case MidiProgram.METALLIC_PAD:
-                return "Metallic pad";
-            case MidiProgram.MUTED_TRUMPET:
-                return "Muted trumpet";
-            case MidiProgram.NEW_AGE_PAD:
-                return "New age pad";
-            case MidiProgram.ORCHESTRAL_HARP:
-                return "Orchestral harp";
-            case MidiProgram.ORCHESTRA_HIT:
-                return "Orchestra hit";
-            case MidiProgram.OVERDRIVEN_GUITAR:
-                return "Overdriven guitar";
-            case MidiProgram.OBOE:
-                return "Oboe";
-            case MidiProgram.OCARINA:
-                return "Ocarina";
-            case MidiProgram.PERCUSSIVE_ORGAN:
-                return "Percussive organ";
-            case MidiProgram.PIZZICATO_STRINGS:
-                return "Pizzicato strings";
-            case MidiProgram.PAN_FLUTE:
-                return "Pan flute";
-            case MidiProgram.PICCOLO:
-                return "Piccolo";
-            case MidiProgram.POLYSYNTH_PAD:
-                return "Polysynth pad";
-            case MidiProgram.REED_ORGAN:
-                return "Reed organ";
-            case MidiProgram.ROCK_ORGAN:
-                return "Rock organ";
-            case MidiProgram.RAIN_SFX:
-                return "Rain sfx";
-            case MidiProgram.RECORDER:
-                return "Recorder";
-            case MidiProgram.REVERSE_CYMBAL:
-                return "Reverse cymbal";
-            case MidiProgram.SLAP_BASS_1:
-                return "Slap bass 1";
-            case MidiProgram.SLAP_BASS_2:
-                return "Slap bass 2";
-            case MidiProgram.STRING_ENSEMBLE_1:
-                return "String ensemble 1";
-            case MidiProgram.STRING_ENSEMBLE_2:
-                return "String ensemble 2";
-            case MidiProgram.SYNTH_BASS_1:
-                return "Synth bass 1";
-            case MidiProgram.SYNTH_BASS_2:
-                return "Synth bass 2";
-            case MidiProgram.SYNTH_CHOIR:
-                return "Synth choir";
-            case MidiProgram.SYNTH_STRINGS_1:
-                return "Synth strings 1";
-            case MidiProgram.SYNTH_STRINGS_2:
-                return "Synth strings 2";
-            case MidiProgram.SAW_LEAD:
-                return "Saw lead";
-            case MidiProgram.SCIFI_SFX:
-                return "Sci-fi sfx";
-            case MidiProgram.SEASHORE:
-                return "Seashore";
-            case MidiProgram.SHAKUHACHI:
-                return "Shakuhachi";
-            case MidiProgram.SHAMISEN:
-                return "Shamisen";
-            case MidiProgram.SHANAI:
-                return "Shanai";
-            case MidiProgram.SITAR:
-                return "Sitar";
-            case MidiProgram.SOPRANO_SAX:
-                return "Soprano sax";
-            case MidiProgram.SOUNDTRACK_SFX:
-                return "Soundtrack sfx";
-            case MidiProgram.SQUARE_LEAD:
-                return "Square lead";
-            case MidiProgram.STEEL_DRUMS:
-                return "Steel drums";
-            case MidiProgram.SWEEP_PAD:
-                return "Sweep pad";
-            case MidiProgram.SYNTH_DRUM:
-                return "Synth drum";
-            case MidiProgram.SYNTH_BRASS_1:
-                return "Synth brass 1";
-            case MidiProgram.SYNTH_BRASS_2:
-                return "Synth brass 2";
-            case MidiProgram.TANGO_ACCORDION:
-                return "Tango accordion";
-            case MidiProgram.TIMPANI:
-                return "Timpani";
-            case MidiProgram.TREMOLO_STRINGS:
-                return "Tremolo strings";
-            case MidiProgram.TUBULAR_BELLS:
-                return "Tubular bells";
-            case MidiProgram.TAIKO_DRUM:
-                return "Taiko drum";
-            case MidiProgram.TELEPHONE_RING:
-                return "Telephone ring";
-            case MidiProgram.TENOR_SAX:
-                return "Tenor sax";
-            case MidiProgram.TINKLE_BELL:
-                return "Tinkle bell";
-            case MidiProgram.TROMBONE:
-                return "Trombone";
-            case MidiProgram.TRUMPET:
-                return "Trumpet";
-            case MidiProgram.TUBA:
-                return "Tuba";
-            case MidiProgram.VIBRAPHONE:
-                return "Vibraphone";
-            case MidiProgram.VIOLA:
-                return "Viola";
-            case MidiProgram.VIOLIN:
-                return "Violin";
-            case MidiProgram.VOICE_OOHS:
-                return "Voice oohs";
-            case MidiProgram.VOICE_LEAD:
-                return "Voice lead";
-            case MidiProgram.WARM_PAD:
-                return "Warm pad";
-            case MidiProgram.WHISTLE:
-                return "Whistle";
-            case MidiProgram.WOODBLOCK:
-                return "Woodblock";
-            case MidiProgram.XYLOPHONE:
-                return "Xylophone"
-        }
-        return "Unknown midi program " + a
-    }
+    GUNSHOT: 127
 };
-addPossibleValuesFunction(MidiProgram, MidiProgram.ACOUSTIC_GRAND_PIANO, MidiProgram.GUNSHOT);
+
 
 function MidiRenderer() {
     this.id = "";
@@ -19601,1778 +16184,6 @@ function HarmonicPlanDataSample(a) {
 }
 HarmonicPlanDataSample.prototype = new DataSample();
 
-function GenInfo() {
-    this.globalSeed = 123456;
-    this.tempoSeed = 123456;
-    this.scaleSeed = 123456;
-    this.tsSeed = 123456;
-    this.introSeed = 123456;
-    this.endSeed = 123456;
-    this.renderAmountSeed = 123456;
-    this.modulationSeed = 123456;
-    this.tonicizationSeed = 123456;
-    this.songStructureSeed = 123456;
-    this.glueSeed = 123456;
-    this.phraseGroupSeed = 123456;
-    this.phraseGroupSimilaritySeed = 123456;
-    this.groupSimilaritySeed = 123456;
-    this.groupDifferenceSeed = 123456;
-    this.melodyShapeIndicesSeed = 123456;
-    this.bassShapeIndicesSeed = 123456;
-    this.harmonyIndicesSeed = 123456;
-    this.harmonyRythmIndicesSeed = 123456;
-    this.suspendIndicesSeed = 123456;
-    this.melodyChannelDistributionIndicesSeed = 123456;
-    this.inner1ChannelDistributionIndicesSeed = 123456;
-    this.inner2ChannelDistributionIndicesSeed = 123456;
-    this.bassChannelDistributionIndicesSeed = 123456;
-    this.melodyMotifDistributionIndicesSeed = 123456;
-    this.inner1MotifDistributionIndicesSeed = 123456;
-    this.inner2MotifDistributionIndicesSeed = 123456;
-    this.bassMotifDistributionIndicesSeed = 123456;
-    this.percussionMotifDistributionIndicesSeed = 123456;
-    this.percussionFillMotifDistributionIndicesSeed = 123456;
-    this.harmonyExtraIndicesSeed = 123456;
-    this.renderAmountIndicesSeed = 123456;
-    this.tempoIndicesSeed = 123456;
-    this.sequentialTempoChangeIndicesSeed = 123456;
-    this.parallelTempoChangeIndicesSeed = 123456;
-    this.sequentialMelodyEffectChangeIndicesSeed = 123456;
-    this.sequentialInner1EffectChangeIndicesSeed = 123456;
-    this.sequentialInner2EffectChangeIndicesSeed = 123456;
-    this.sequentialBassEffectChangeIndicesSeed = 123456;
-    this.sequentialPercussionEffectChangeIndicesSeed = 123456;
-    this.instrumentTypeSeed = 123456;
-    this.melodyInstrumentSeed = 123456;
-    this.inner1InstrumentSeed = 123456;
-    this.inner2InstrumentSeed = 123456;
-    this.bassInstrumentSeed = 123456;
-    this.melodyMotifSeed = 123456;
-    this.melodyMotifRythmSeed = 123456;
-    this.melodyMotifEmbellishConnectSeed = 123456;
-    this.bassMotifSeed = 123456;
-    this.bassMotifRythmSeed = 123456;
-    this.bassMotifEmbellishConnectSeed = 123456;
-    this.harmonyMotifSeed = 123456;
-    this.harmonyMotifRythmSeed = 123456;
-    this.harmonyMotifEmbellishConnectSeed = 123456;
-    this.percussionMotifSeed = 123456;
-    this.percussionFillMotifSeed = 123456;
-    this.percussionInstrumentSeed = 123456;
-    this.percussionFillInstrumentSeed = 123456;
-    this.percussionMotifRythmSeed = 123456;
-    this.percussionFillMotifRythmSeed = 123456;
-    this.melodyShapeSeed = 123456;
-    this.bassShapeSeed = 123456;
-    this.harmonyRythmSeed = 123456;
-    this.melodyMotifDistributionSeed = 123456;
-    this.inner1MotifDistributionSeed = 123456;
-    this.inner2MotifDistributionSeed = 123456;
-    this.bassMotifDistributionSeed = 123456;
-    this.percussionMotifDistributionSeed = 123456;
-    this.percussionFillMotifDistributionSeed = 123456;
-    this.melodyHarmonyPunctationSeed = 123456;
-    this.innerHarmonyPunctationSeed = 123456;
-    this.harmonySeed = 123456;
-    this.channelDistributionSeed = 123456;
-    this.tempoChangeSeed = 123456;
-    this.effectChangeSeed = 123456;
-    this.suspendSeed = 123456;
-    this.allInstrumentsDifferentProbability = 0.35;
-    this.adaptHarmonyRythmToTempo = true;
-    this.adaptHarmonyRythmToTimeSignature = true;
-    this.adaptSuspensionToTempo = true;
-    this.adaptMotifRythmsToTempo = true;
-    this.tonicizeLikelihoodMultipliers = [1];
-    this.modulateLikelihoodMultiplier = 0.25;
-    this.simpleMixtureLikelihoods = [1];
-    this.sus2ChordsLikelihoods = [1];
-    this.sus4ChordsLikelihoods = [1];
-    this.neighbourChordsLikelihoods = [1];
-    this.passingChordsLikelihoods = [1];
-    this.timeSignature2Likelihood = 1;
-    this.timeSignature3Likelihood = 1;
-    this.timeSignature4Likelihood = 3;
-    this.minorScaleLikelihood = 1;
-    this.majorScaleLikelihood = 1;
-    this.setScaleBaseNote = false;
-    this.scaleBaseNote = 60;
-    this.raiseLeadingInMinorProbabilities = [0.5];
-    this.strictBuildSongStructureLikelihoodMultiplier = 1;
-    this.buildSongStructureLikelihoodMultiplier = 1;
-    this.verseChorusSongStructureLikelihoodMultiplier = 1;
-    this.verseChorusBridgeSongStructureLikelihoodMultiplier = 1;
-    this.noMelodyPartSongStructureLikelihoodMultiplier = 1;
-    this.electronicLikelihood = 1;
-    this.electricLikelihood = 1;
-    this.acousticLikelihood = 1;
-    this.filterFEffectsProbMultiplier = 1;
-    this.filterBWEffectsProbMultiplier = 1;
-    this.panEffectsProbMultiplier = 1;
-    this.oddHarmonyRythmProbability = 0.01;
-    this.melodyShareProbabilities = [0.3];
-    this.endSongTempoChangeProbability = 0.5;
-    this.endPhraseGroupTempoChangeProbabilities = [0];
-    this.adaptTempoToRenderAmount = true;
-    this.tempoAdaptBias = 3;
-    this.tempoAdaptRandomMultiplier = 3;
-    this.useNaturalTempoChanges = true;
-    this.voiceLineSuspensionProbabilities = [0.5];
-    this.songIntroProbability = 0.7;
-    this.songEndProbability = 0.5;
-    this.withinPhraseGroupSimilarRandomFraction = 0.35;
-    this.withinPhraseGroupSimilarBias = 0.55;
-    this.samePhraseGroupIndexSimilarRandomFraction = 0.25;
-    this.samePhraseGroupIndexSimilarBias = 0.5;
-    this.differentPhraseGroupIndexDifferentRandomFraction = 0.3;
-    this.differentPhraseGroupIndexDifferentBias = 0.25;
-    this.defaultPrefixGlueProbability = 0.3;
-    this.defaultPostfixGlueProbability = 0.3;
-    this.prefixGlueProbabilityMultiplier = 1;
-    this.postfixGlueProbabilityMultiplier = 1;
-    this.prolongStaticLikelihoods = [2];
-    this.prolongDynamicLikelihoods = [4];
-    this.prolongDominantCadenceLikelihoods = [3];
-    this.prolongTonicCadenceLikelihoods = [1];
-    this.prolongHarmonyPartBiases = [20];
-    this.prolongHarmonyPartRandomFractions = [50];
-    this.overwriteGroupModulationIndices = false;
-    this.groupModulation1Indices = [1];
-    this.groupModulation2Indices = [1, 2];
-    this.groupModulation3Indices = [1, 2, 3];
-    this.groupModulation4Indices = [1, 2, 3, 4];
-    this.groupModulation5Indices = [1, 2, 3, 4, 5];
-    this.harmonyLengthLikelihoodMultipliers = [{}];
-    this.harmonyLengthLikelihoodOverwriters = [{}];
-    this.overwriteHarmonyLengthLikelihoods = [false];
-    this.harmonyLengthLikelihoods = [{
-        "4": 1
-    }];
-    this.tempoRange = [60, 140];
-    this.melodyShapeAmpRanges = [
-        [6, 12]
-    ];
-    this.melodyShapeBiasRanges = [
-        [68, 76]
-    ];
-    this.melodyStartLevels = [
-        [MelodyOffsetLevel.VERY_LOW, MelodyOffsetLevel.LOW, MelodyOffsetLevel.MIDDLE, MelodyOffsetLevel.HIGH, MelodyOffsetLevel.VERY_HIGH]
-    ];
-    this.melodyEndLevels = [
-        [MelodyOffsetLevel.VERY_LOW, MelodyOffsetLevel.LOW, MelodyOffsetLevel.MIDDLE, MelodyOffsetLevel.HIGH, MelodyOffsetLevel.VERY_HIGH]
-    ];
-    this.bassShapeAmpRanges = [
-        [2, 4]
-    ];
-    this.bassShapeBiasRanges = [
-        [35, 45]
-    ];
-    this.bassStartLevels = [
-        [MelodyOffsetLevel.VERY_LOW, MelodyOffsetLevel.LOW, MelodyOffsetLevel.MIDDLE, MelodyOffsetLevel.HIGH, MelodyOffsetLevel.VERY_HIGH]
-    ];
-    this.bassEndLevels = [
-        [MelodyOffsetLevel.VERY_LOW, MelodyOffsetLevel.LOW, MelodyOffsetLevel.MIDDLE, MelodyOffsetLevel.HIGH, MelodyOffsetLevel.VERY_HIGH]
-    ];
-    this.majorDeceptiveRootRndInfos = [{
-        data: 6,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 5,
-        likelihood: 4,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 3,
-        likelihood: 4,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 2,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 1,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }];
-    this.minorDeceptiveRootRndInfos = [{
-        data: 6,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 5,
-        likelihood: 4,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 3,
-        likelihood: 4,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 2,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }, {
-        data: 1,
-        likelihood: 1,
-        _constructorName: "IntDataSample"
-    }];
-    this.electronicMelodyInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SAW_LEAD,
-        likelihood: 1
-    })];
-    this.electronicInnerFastInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_GRAND_PIANO,
-        likelihood: 1
-    })];
-    this.electronicInnerSlowInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.HALO_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.METALLIC_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.NEW_AGE_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.POLYSYNTH_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SWEEP_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_STRINGS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_STRINGS_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.WARM_PAD,
-        likelihood: 1
-    })];
-    this.electronicBassInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_2,
-        likelihood: 1
-    })];
-    this.electricMelodyInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.DISTORTION_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PERCUSSIVE_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ROCK_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OVERDRIVEN_GUITAR,
-        likelihood: 1
-    })];
-    this.electricInnerFastInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.DISTORTION_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_JAZZ_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_MUTED_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PIANO_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OVERDRIVEN_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_CHOIR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_CLEAN_GUITAR,
-        likelihood: 1
-    })];
-    this.electricInnerSlowInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.DISTORTION_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OVERDRIVEN_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_CHOIR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.BOWED_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.HALO_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.METALLIC_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.NEW_AGE_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.POLYSYNTH_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SWEEP_PAD,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_STRINGS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_STRINGS_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.WARM_PAD,
-        likelihood: 1
-    })];
-    this.electricBassInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_FINGER_BASS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ELECTRIC_PICK_BASS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SYNTH_BASS_2,
-        likelihood: 1
-    })];
-    this.acousticMelodyInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.BRIGHT_ACOUSTIC_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_NYLON_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_STEEL_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ORCHESTRAL_HARP,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CELLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.FLUTE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PICCOLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PIZZICATO_STRINGS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.RECORDER,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLIN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OBOE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.REED_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ROCK_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLA,
-        likelihood: 1
-    })];
-    this.acousticInnerFastInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.BRIGHT_ACOUSTIC_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_NYLON_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_STEEL_GUITAR,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ORCHESTRAL_HARP,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CELLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.FLUTE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PICCOLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PIZZICATO_STRINGS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.RECORDER,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLIN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OBOE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.REED_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ROCK_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.TROMBONE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLA,
-        likelihood: 1
-    })];
-    this.acousticInnerSlowInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.STRING_ENSEMBLE_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.STRING_ENSEMBLE_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VOICE_OOHS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CHOIR_AAHS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CHURCH_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CLARINET,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CLAVINET,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ENGLISH_HORN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OBOE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.OCARINA,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PAN_FLUTE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.REED_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ROCK_ORGAN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.CELLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.FLUTE,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.PICCOLO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.RECORDER,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLIN,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.VIOLA,
-        likelihood: 1
-    })];
-    this.acousticBassInstrInfos = [new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_GRAND_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.BRIGHT_ACOUSTIC_PIANO,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.FRETLESS_BASS,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SLAP_BASS_1,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.SLAP_BASS_2,
-        likelihood: 1
-    }), new MidiProgramDataSample({
-        data: MidiProgram.ACOUSTIC_BASS,
-        likelihood: 1
-    })];
-    this.bassDrumRndInfos = [new MidiDrumDataSample({
-        data: MidiDrum.LOW_TOM_1,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.LOW_TOM_2,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.LOW_BONGO,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.LOW_CONGA,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.LOW_TIMBALE,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.BASS_DRUM_1,
-        likelihood: 20
-    }), new MidiDrumDataSample({
-        data: MidiDrum.BASS_DRUM_2,
-        likelihood: 20
-    })];
-    this.snareRndInfos = [new MidiDrumDataSample({
-        data: MidiDrum.SNARE_DRUM_1,
-        likelihood: 30
-    }), new MidiDrumDataSample({
-        data: MidiDrum.HAND_CLAP,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.HIGH_TOM_1,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.HIGH_TOM_2,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.MID_TOM_1,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.MID_TOM_2,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.OPEN_HIGH_CONGA,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.SNARE_DRUM_2,
-        likelihood: 30
-    })];
-    this.crashRndInfos = [new MidiDrumDataSample({
-        data: MidiDrum.CHINESE_CYMBAL,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.SPLASH_CYMBAL,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.CRASH_CYMBAL_1,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.CRASH_CYMBAL_2,
-        likelihood: 1
-    })];
-    this.rideRndInfos = [new MidiDrumDataSample({
-        data: MidiDrum.MARACAS,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.OPEN_TRIANGLE,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.MUTE_TRIANGLE,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.CLAVES,
-        likelihood: 1
-    }), new MidiDrumDataSample({
-        data: MidiDrum.RIDE_BELL,
-        likelihood: 2
-    }), new MidiDrumDataSample({
-        data: MidiDrum.RIMSHOT,
-        likelihood: 5
-    }), new MidiDrumDataSample({
-        data: MidiDrum.RIDE_CYMBAL_1,
-        likelihood: 20
-    }), new MidiDrumDataSample({
-        data: MidiDrum.RIDE_CYMBAL_2,
-        likelihood: 20
-    }), new MidiDrumDataSample({
-        data: MidiDrum.PEDAL_HIHAT,
-        likelihood: 20
-    }), new MidiDrumDataSample({
-        data: MidiDrum.CLOSED_HIHAT,
-        likelihood: 20
-    }), new MidiDrumDataSample({
-        data: MidiDrum.OPEN_HIHAT,
-        likelihood: 20
-    })];
-    this.fillIndexPatternRndInfos = [{
-        data: [0],
-        likelihood: 10,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 0],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 2],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 0, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 0, 0, 1],
-        likelihood: 5,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 0, 1, 0],
-        likelihood: 3,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 0, 0],
-        likelihood: 2,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 0, 1, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 1, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 1, 0],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 0, 1, 2],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 2, 0],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }, {
-        data: [0, 1, 2, 1],
-        likelihood: 1,
-        _constructorName: "IntListDataSample"
-    }];
-    this.phraseGroupTypes = [{
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_INCOMPLETE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_TONIC_PROLONG,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_PLAGIAL,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_IMPERFECT,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_DECEPTIVE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_TONICIZE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_PHRASE_MODULATE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE,
-        likelihood: 0.125,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_MODULATE_BACK,
-        likelihood: 0.125,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_MODULATE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_MODULATE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.ANTECEDENT_CONSEQUENT,
-        likelihood: 0.25,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.ANTECEDENT_CONSEQUENT_SHORTEN,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE_DIFFERENT_SCALE_TYPE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE,
-        likelihood: 0.5,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_DOMINANT_PROLONG_CADENCE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_COMPLETE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG_PLUS_COMPLETE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG_PLUS_TONIC_CADENCE_PROLONG,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLAGIAL_PLUS_COMPLETE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE_PLAGIAL,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_DECEPTIVE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_DECEPTIVE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_DECEPTIVE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_DECEPTIVE,
-        likelihood: 0.1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE,
-        likelihood: 0.5,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.025,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.025,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE_LENGTHEN_DOMINANT,
-        likelihood: 0.025,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC,
-        likelihood: 0.025,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }];
-    this.modulatePhraseGroupTypes = [{
-        data: SimpleModuleGeneratorPhraseGroupType.PHRASE_MODULATE,
-        likelihood: 0.5,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_PHRASE_MODULATE,
-        likelihood: 0.5,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_MODULATE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_MODULATE,
-        likelihood: 0.5,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }];
-    this.introGroupTypes = [{
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_TONIC_PROLONG,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_PLAGIAL,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_IMPERFECT,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_DECEPTIVE,
-        likelihood: 0.05,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_INCOMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }];
-    this.endGroupTypes = [{
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_TONIC_PROLONG,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_PLAGIAL,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_IMPERFECT,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_INCOMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_DECEPTIVE,
-        likelihood: 0.25,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }];
-    this.glueGroupTypes = [{
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_SILENT,
-        likelihood: 0.25,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_TONIC_PROLONG,
-        likelihood: 3,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_PLAGIAL,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_IMPERFECT,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_DECEPTIVE,
-        likelihood: 0.25,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_INCOMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }, {
-        data: SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE,
-        likelihood: 1,
-        _constructorName: "PhraseGroupTypeDataSample"
-    }];
-    this.harmonyRythmDensityCurveFrequencyOverrides = [];
-    this.harmonyRythmDensityCurveAmplitudeOverrides = [];
-    this.harmonyRythmMeasureCountOverrides = [];
-    this.harmonyRythmNoteCountOverrides = [];
-    this.overwriteSongPartStructureRndInfos = false;
-    this.songPartStructureRndInfos = [];
-    this.overwriteSongPartStructure = false;
-    this.songPartStructure = [new SongPartStructureInfo()];
-    this.overwriteMelodyInstruments = false;
-    this.melodyInstruments = [MidiProgram.ACOUSTIC_GRAND_PIANO, MidiProgram.ORCHESTRAL_HARP, MidiProgram.ACOUSTIC_STEEL_GUITAR];
-    this.overwriteInner1Instruments = false;
-    this.inner1Instruments = [MidiProgram.ACOUSTIC_GRAND_PIANO, MidiProgram.ORCHESTRAL_HARP, MidiProgram.ACOUSTIC_STEEL_GUITAR];
-    this.overwriteInner2Instruments = false;
-    this.inner2Instruments = [MidiProgram.ACOUSTIC_GRAND_PIANO, MidiProgram.ORCHESTRAL_HARP, MidiProgram.ACOUSTIC_STEEL_GUITAR];
-    this.overwriteBassInstruments = false;
-    this.bassInstruments = [MidiProgram.ACOUSTIC_GRAND_PIANO, MidiProgram.ACOUSTIC_BASS, MidiProgram.CONTRABASS];
-    this.minorHarmonicPlans = [{
-        data: [DynamicHarmonyModulationTarget.MEDIANT, DynamicHarmonyModulationTarget.MEDIANT, DynamicHarmonyModulationTarget.SUBDOMINANT],
-        likelihood: 1,
-        _constructorName: "HarmonicPlanDataSample"
-    }, {
-        data: [DynamicHarmonyModulationTarget.DOMINANT, DynamicHarmonyModulationTarget.SUBDOMINANT],
-        likelihood: 1,
-        _constructorName: "HarmonicPlanDataSample"
-    }];
-    this.majorHarmonicPlans = [{
-        data: [DynamicHarmonyModulationTarget.DOMINANT, DynamicHarmonyModulationTarget.SUBDOMINANT],
-        likelihood: 1,
-        _constructorName: "HarmonicPlanDataSample"
-    }, {
-        data: [DynamicHarmonyModulationTarget.SUPERTONIC, DynamicHarmonyModulationTarget.MEDIANT, DynamicHarmonyModulationTarget.DOMINANT],
-        likelihood: 1,
-        _constructorName: "HarmonicPlanDataSample"
-    }];
-    this.renderAmountStrengthMap = {
-        veryWeak: [0.02],
-        weak: [0.15],
-        medium: [0.4],
-        strong: [0.7],
-        veryStrong: [1],
-        _constructorName: "RenderAmountStrengthMap"
-    };
-    this.majorModulationTargetInfos = [{
-        data: DynamicHarmonyModulationTarget.MEDIANT,
-        likelihood: 0.1,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.SUBMEDIANT,
-        likelihood: 0.1,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.SUPERTONIC,
-        likelihood: 0.2,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.DOMINANT,
-        likelihood: 1,
-        _constructorName: "ModulationTargetDataSample"
-    }];
-    this.minorModulationTargetInfos = [{
-        data: DynamicHarmonyModulationTarget.MEDIANT,
-        likelihood: 1,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.SUBMEDIANT,
-        likelihood: 0.1,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.SUBTONIC,
-        likelihood: 0.1,
-        _constructorName: "ModulationTargetDataSample"
-    }, {
-        data: DynamicHarmonyModulationTarget.DOMINANT,
-        likelihood: 0.2,
-        _constructorName: "ModulationTargetDataSample"
-    }];
-    this.melodyMotifIndexPatternInfos = [{
-        data: [
-            [1],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [1],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [3],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [3],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [1],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [3],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [3],
-            [0],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [3],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }];
-    this.bassMotifIndexPatternInfos = [{
-        data: [
-            [1],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [1],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [0],
-            [1],
-            [2],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [3]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [3],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [3],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [1],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [3],
-            [0],
-            [2]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [3],
-            [0],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [0],
-            [1]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [3],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [2],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [2],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }, {
-        data: [
-            [1],
-            [0],
-            [1],
-            [0]
-        ],
-        likelihood: 1,
-        _constructorName: "IntList2DDataSample"
-    }];
-    this.harmonyElements = [];
-    this.customMelodyCurveInfos = [];
-    this.customBassCurveInfos = [];
-    this.songPartTypeOverrideInfos = [];
-    this.overrideBassDrumNote = false;
-    this.bassDrumNote = MidiDrum.BASS_DRUM_1;
-    this.overrideSnareDrumNote = false;
-    this.snareDrumNote = MidiDrum.SNARE_DRUM_1;
-    this.overrideCrashDrumNote = false;
-    this.crashDrumNote = MidiDrum.CRASH_CYMBAL_1;
-    this.overrideRideDrumNotes = false;
-    this.rideDrumNotes = [MidiDrum.CLOSED_HIHAT, MidiDrum.OPEN_HIHAT, MidiDrum.RIDE_CYMBAL_1];
-    this.addBassDrumsOverride = [];
-    this.addSnareDrumsOverride = [];
-    this.addRideDrumsOverride = [];
-    this.addCrashDrumsOverride = [];
-    this.percussionFillMotifIndicesOverride = [];
-    this.percussionFillProbabilities = [0.35];
-    this.overrideFillNotes = false;
-    this.fillNotes = [MidiDrum.SNARE_DRUM_1, MidiDrum.OPEN_HIHAT, MidiDrum.RIDE_CYMBAL_1, MidiDrum.BASS_DRUM_1];
-    this.fillActivatedRenderAmountRange = [0.1, 0.4];
-    this.useMaxHarmonyElementLength = true;
-    this.useMaxCustomHarmonyElementLength = false;
-    this.maxCustomHarmonyElementLength = 2;
-    this.maxCustomHarmonyElementLengthUnit = PositionUnit.MEASURES;
-    this.maxCustomHarmonyElementLengthUseExpression = false;
-    this.melodyMotifRythmCountIncreasePerIndex = 0.4;
-    this.melodyMotifRythmCountIncreaseOffsetRange = [0.5, 1];
-    this.bassMotifRythmCountIncreasePerIndex = 0.4;
-    this.bassMotifRythmCountIncreaseOffsetRange = [0.25, 0.75];
-    this.melodyMotifRythmNoteCountOverrides = [];
-    this.bassMotifRythmNoteCountOverrides = [];
-    this.melodyMotifZone1Probabilities = [0.5];
-    this.melodyMotifZone1TripletLikelihoods = [0.5];
-    this.melodyMotifZone1DotSecondLikelihoods = [0.5];
-    this.melodyMotifZone1DotFirstLikelihoods = [2];
-    this.melodyMotifZone1DotNormalDotLikelihoods = [0.5];
-    this.melodyMotifZone1NormalDotDotLikelihoods = [0.5];
-    this.melodyMotifZone1DotDotNormalLikelihoods = [0.5];
-    this.melodyMotifZone1StartPosRanges = [
-        [0, 0]
-    ];
-    this.melodyMotifZone1EndPosRanges = [
-        [0.75, 0.75]
-    ];
-    this.melodyMotifZone1StartEnds = [];
-    this.bassMotifZone1Probabilities = [0.5];
-    this.bassMotifZone1TripletLikelihoods = [0.01];
-    this.bassMotifZone1DotSecondLikelihoods = [0.5];
-    this.bassMotifZone1DotFirstLikelihoods = [2];
-    this.bassMotifZone1DotNormalDotLikelihoods = [0.5];
-    this.bassMotifZone1NormalDotDotLikelihoods = [0.5];
-    this.bassMotifZone1DotDotNormalLikelihoods = [0.5];
-    this.bassMotifZone1StartPosRanges = [
-        [0, 0]
-    ];
-    this.bassMotifZone1EndPosRanges = [
-        [0.75, 0.75]
-    ];
-    this.bassMotifZone1StartEnds = [];
-    this.extraMelodyRenderElements = [];
-    this.extraInner1RenderElements = [];
-    this.extraInner2RenderElements = [];
-    this.extraBassRenderElements = [];
-    this.melodyShapeCount = 6;
-    this.bassShapeCount = 6;
-    this.harmonyRythmCount = 6;
-    this.harmonyCount = 6;
-    this.harmonyExtraCount = 6;
-    this.suspendTypeCount = 6;
-    this.channelDistributionCount = 6;
-    this.motifDistributionCount = 6;
-    this.renderAmountCount = 6;
-    this.tempoCount = 6;
-    this.tempoChangeCount = 6;
-    this.effectChangeCount = 6;
-    this.songName = "song";
-    this.instrumentVolumeHints = {};
-    this.applyInstrumentVolumeHintsToMelody = false;
-    this.applyInstrumentVolumeHintsToInner1 = true;
-    this.applyInstrumentVolumeHintsToInner1 = true;
-    this.applyInstrumentVolumeHintsToBass = false;
-    this.melodyVolumeMultipliers = [1];
-    this.inner1VolumeMultipliers = [1];
-    this.inner2VolumeMultipliers = [1];
-    this.bassVolumeMultipliers = [1];
-    this.percussionVolumeMultiplier = 1;
-    this.melodyPans = [20 / 127];
-    this.bassPans = [110 / 127];
-    this.inner1Pans = [80 / 127];
-    this.inner2Pans = [60 / 127];
-    this.percussionPan = 64 / 127;
-    this.mergeChannels = false;
-    this.exportChordsToNewChannel = false;
-    this.exportVolume = true;
-    this.exportEffects = true;
-    this.melodyReverbSends = [1];
-    this.melodyChorusSends = [0.3];
-    this.bassReverbSends = [0.1];
-    this.bassChorusSends = [0.1];
-    this.inner1ReverbSends = [0.1];
-    this.inner1ChorusSends = [0.1];
-    this.inner2ReverbSends = [0.1];
-    this.inner2ChorusSends = [0.1];
-    this.percussionReverbSend = 0;
-    this.percussionChorusSend = 0;
-    this.soundFontType = SoundFontType.STANDARD_LIGHT;
-    this.normalizeRenderedResult = false;
-    this.compressRenderedResult = false;
-    this._constructorName = "GenInfo"
-}
-GenInfo.prototype.phraseGroupTypes_allowedTypes = {
-    PhraseGroupTypeDataSample: 1
-};
-GenInfo.prototype.modulatePhraseGroupTypes_allowedTypes = {
-    PhraseGroupTypeDataSample: 1
-};
-GenInfo.prototype.introGroupTypes_allowedTypes = {
-    PhraseGroupTypeDataSample: 1
-};
-GenInfo.prototype.endGroupTypes_allowedTypes = {
-    PhraseGroupTypeDataSample: 1
-};
-GenInfo.prototype.glueGroupTypes_allowedTypes = {
-    PhraseGroupTypeDataSample: 1
-};
-GenInfo.prototype.majorDeceptiveRootRndInfos_allowedTypes = {
-    IntDataSample: 1
-};
-GenInfo.prototype.minorDeceptiveRootRndInfos_allowedTypes = {
-    IntDataSample: 1
-};
-GenInfo.prototype.electronicMelodyInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electronicInnerFastInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electronicInnerSlowInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electronicBassInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electricMelodyInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electricInnerFastInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electricInnerSlowInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.electricBassInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.acousticMelodyInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.acousticInnerFastInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.acousticInnerSlowInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.acousticBassInstrInfos_allowedTypes = {
-    MidiProgramDataSample: 1
-};
-GenInfo.prototype.bassDrumRndInfos_allowedTypes = {
-    MidiDrumDataSample: 1
-};
-GenInfo.prototype.snareRndInfos_allowedTypes = {
-    MidiDrumDataSample: 1
-};
-GenInfo.prototype.crashRndInfos_allowedTypes = {
-    MidiDrumDataSample: 1
-};
-GenInfo.prototype.rideRndInfos_allowedTypes = {
-    MidiDrumDataSample: 1
-};
-GenInfo.prototype.fillIndexPatternRndInfos_allowedTypes = {
-    IntListDataSample: 1
-};
-GenInfo.prototype.songPartStructure_allowedTypes = {
-    SongPartStructureInfo: 1
-};
-GenInfo.prototype.songPartStructureRndInfos_allowedTypes = {
-    SongPartStructureInfoDataSample: 1
-};
-GenInfo.prototype.majorHarmonicPlans_allowedTypes = {
-    HarmonicPlanDataSample: 1
-};
-GenInfo.prototype.minorHarmonicPlans_allowedTypes = {
-    HarmonicPlanDataSample: 1
-};
-GenInfo.prototype.majorModulationTargetInfos_allowedTypes = {
-    ModulationTargetDataSample: 1
-};
-GenInfo.prototype.minorModulationTargetInfos_allowedTypes = {
-    ModulationTargetDataSample: 1
-};
-GenInfo.prototype.melodyMotifIndexPatternInfos_allowedTypes = {
-    IntList2DDataSample: 1
-};
-GenInfo.prototype.bassMotifIndexPatternInfos_allowedTypes = {
-    IntList2DDataSample: 1
-};
-GenInfo.prototype.songPartTypeOverrideInfos_allowedTypes = {
-    SongPartTypeOverrideInfo: 1
-};
-GenInfo.prototype.harmonyElements_allowedTypes = {
-    SimpleSequenceHarmonyElement: 1,
-    PhraseHarmonyElement: 1
-};
-GenInfo.prototype.customMelodyCurveInfos_allowedTypes = {
-    LinearInterpolatedCustomVoiceLineCurveInfo: 1
-};
-GenInfo.prototype.customBassCurveInfos_allowedTypes = {
-    LinearInterpolatedCustomVoiceLineCurveInfo: 1
-};
-GenInfo.prototype.randomize = function (a) {
-    this.globalSeed = a.genrand_int31();
-    this.tempoSeed = a.genrand_int31();
-    this.scaleSeed = a.genrand_int31();
-    this.tsSeed = a.genrand_int31();
-    this.introSeed = a.genrand_int31();
-    this.endSeed = a.genrand_int31();
-    this.renderAmountSeed = a.genrand_int31();
-    this.modulationSeed = a.genrand_int31();
-    this.tonicizationSeed = a.genrand_int31();
-    this.songStructureSeed = a.genrand_int31();
-    this.glueSeed = a.genrand_int31();
-    this.phraseGroupSeed = a.genrand_int31();
-    this.phraseGroupSimilaritySeed = a.genrand_int31();
-    this.groupSimilaritySeed = a.genrand_int31();
-    this.groupDifferenceSeed = a.genrand_int31();
-    this.melodyShapeIndicesSeed = a.genrand_int31();
-    this.bassShapeIndicesSeed = a.genrand_int31();
-    this.harmonyIndicesSeed = a.genrand_int31();
-    this.harmonyRythmIndicesSeed = a.genrand_int31();
-    this.suspendIndicesSeed = a.genrand_int31();
-    this.melodyChannelDistributionIndicesSeed = a.genrand_int31();
-    this.inner1ChannelDistributionIndicesSeed = a.genrand_int31();
-    this.inner2ChannelDistributionIndicesSeed = a.genrand_int31();
-    this.bassChannelDistributionIndicesSeed = a.genrand_int31();
-    this.melodyMotifDistributionIndicesSeed = a.genrand_int31();
-    this.inner1MotifDistributionIndicesSeed = a.genrand_int31();
-    this.inner2MotifDistributionIndicesSeed = a.genrand_int31();
-    this.bassMotifDistributionIndicesSeed = a.genrand_int31();
-    this.percussionMotifDistributionIndicesSeed = a.genrand_int31();
-    this.percussionFillMotifDistributionIndicesSeed = a.genrand_int31();
-    this.harmonyExtraIndicesSeed = a.genrand_int31();
-    this.renderAmountIndicesSeed = a.genrand_int31();
-    this.tempoIndicesSeed = a.genrand_int31();
-    this.sequentialTempoChangeIndicesSeed = a.genrand_int31();
-    this.parallelTempoChangeIndicesSeed = a.genrand_int31();
-    this.sequentialMelodyEffectChangeIndicesSeed = a.genrand_int31();
-    this.sequentialInner1EffectChangeIndicesSeed = a.genrand_int31();
-    this.sequentialInner2EffectChangeIndicesSeed = a.genrand_int31();
-    this.sequentialBassEffectChangeIndicesSeed = a.genrand_int31();
-    this.sequentialPercussionEffectChangeIndicesSeed = a.genrand_int31();
-    this.instrumentTypeSeed = a.genrand_int31();
-    this.melodyInstrumentSeed = a.genrand_int31();
-    this.inner1InstrumentSeed = a.genrand_int31();
-    this.inner2InstrumentSeed = a.genrand_int31();
-    this.bassInstrumentSeed = a.genrand_int31();
-    this.melodyMotifSeed = a.genrand_int31();
-    this.melodyMotifRythmSeed = a.genrand_int31();
-    this.melodyMotifEmbellishConnectSeed = a.genrand_int31();
-    this.bassMotifSeed = a.genrand_int31();
-    this.bassMotifRythmSeed = a.genrand_int31();
-    this.bassMotifEmbellishConnectSeed = a.genrand_int31();
-    this.harmonyMotifSeed = a.genrand_int31();
-    this.harmonyMotifRythmSeed = a.genrand_int31();
-    this.harmonyMotifEmbellishConnectSeed = a.genrand_int31();
-    this.percussionMotifSeed = a.genrand_int31();
-    this.percussionFillMotifSeed = a.genrand_int31();
-    this.percussionInstrumentSeed = a.genrand_int31();
-    this.percussionFillInstrumentSeed = a.genrand_int31();
-    this.percussionMotifRythmSeed = a.genrand_int31();
-    this.percussionFillMotifRythmSeed = a.genrand_int31();
-    this.melodyShapeSeed = a.genrand_int31();
-    this.bassShapeSeed = a.genrand_int31();
-    this.harmonyRythmSeed = a.genrand_int31();
-    this.melodyMotifDistributionSeed = a.genrand_int31();
-    this.inner1MotifDistributionSeed = a.genrand_int31();
-    this.inner2MotifDistributionSeed = a.genrand_int31();
-    this.bassMotifDistributionSeed = a.genrand_int31();
-    this.percussionMotifDistributionSeed = a.genrand_int31();
-    this.percussionFillMotifDistributionSeed = a.genrand_int31();
-    this.melodyHarmonyPunctationSeed = a.genrand_int31();
-    this.innerHarmonyPunctationSeed = a.genrand_int31();
-    this.harmonySeed = a.genrand_int31();
-    this.channelDistributionSeed = a.genrand_int31();
-    this.tempoChangeSeed = a.genrand_int31();
-    this.effectChangeSeed = a.genrand_int31();
-    this.suspendSeed = a.genrand_int31()
-};
-GenInfo.prototype.set = function (b) {
-    for (var c in b) {
-        var a = this[c];
-        if (typeof (a) == "undefined") {
-            console.log("Tried to set a value in genInfo that did not exist. Probably a bug to look for ;). Property name: '" + c + "'")
-        } else {
-            this[c] = b[c]
-        }
-    }
-};
-
 var SimpleModuleGeneratorPhraseGroupType = {
     SINGLE_COMPLETE: 0,
     TONIC_PROLONG_PLUS_COMPLETE: 1,
@@ -21427,117 +16238,6 @@ var SimpleModuleGeneratorPhraseGroupType = {
     TONICIZE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC: 50,
     INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_DOMINANT: 51,
     INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC: 52,
-    toString: function (a) {
-        switch (a) {
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Complete imperfect + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Complete imperfect + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Incomplete + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Incomplete + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Deceptive + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Deceptive + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Modulate + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Modulate + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Tonicize + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Tonicize + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_DOMINANT:
-                return "Incomplete initial + complete lengthen dominant";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC:
-                return "Incomplete initial + complete lengthen final tonic";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_DECEPTIVE:
-                return "Incomplete + deceptive";
-            case SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_DECEPTIVE:
-                return "Deceptive + deceptive";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_IMPERFECT_PLUS_DECEPTIVE:
-                return "Complete imperfect + deceptive";
-            case SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_DECEPTIVE:
-                return "Tonicize + deceptive";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLAGIAL_PLUS_COMPLETE:
-                return "Complete plagial + complete";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE_PLAGIAL:
-                return "Complete + complete plagial";
-            case SimpleModuleGeneratorPhraseGroupType.ANTECEDENT_CONSEQUENT:
-                return "Antecedent consequent";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_SILENT:
-                return "Single silent";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_DECEPTIVE:
-                return "Single deceptive";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_PLAGIAL:
-                return "Single complete plagial";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE_IMPERFECT:
-                return "Single complete imperfect";
-            case SimpleModuleGeneratorPhraseGroupType.ANTECEDENT_CONSEQUENT_SHORTEN:
-                return "Antecedent consequent shorten";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE:
-                return "Complete + complete";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE_IMPERFECT:
-                return "Complete + complete imperfect";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_COMPLETE_DIFFERENT_SCALE_TYPE:
-                return "Complete + complete change scale type";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_MODULATE:
-                return "Complete + modulate";
-            case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_PHRASE_MODULATE:
-                return "Complete + phrase modulate";
-            case SimpleModuleGeneratorPhraseGroupType.DECEPTIVE_PLUS_COMPLETE:
-                return "Deceptive + complete";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE:
-                return "Incomplete initial + complete";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_COMPLETE:
-                return "Incomplete + complete";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_MODULATE:
-                return "Incomplete + modulate";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_DOMINANT_PROLONG:
-                return "Incomplete + dominant prolong";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_PLUS_DOMINANT_PROLONG_CADENCE:
-                return "Incomplete + dominant prolong cadence";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_SHORTER_PLUS_COMPLETE:
-                return "Incomplete shorter + complete";
-            case SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_WEAK_PLUS_COMPLETE_WEAK_TONIC:
-                return "Incomplete weak + complete weak tonic";
-            case SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_COMPLETE:
-                return "Modulate + complete";
-            case SimpleModuleGeneratorPhraseGroupType.MODULATE_PLUS_MODULATE_BACK:
-                return "Modulate + modulate back";
-            case SimpleModuleGeneratorPhraseGroupType.PHRASE_MODULATE:
-                return "Phrase modulate";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE:
-                return "Single complete";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_INCOMPLETE:
-                return "Single incomplete";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_TONIC_PROLONG:
-                return "Single tonic prolong";
-            case SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_COMPLETE:
-                return "Tonic prolong + complete";
-            case SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG_CADENCE:
-                return "Tonic prolong + dominant prolong cadence";
-            case SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG:
-                return "Tonic prolong + dominant prolong";
-            case SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG_PLUS_COMPLETE:
-                return "Tonic prolong + dominaint prolong + complete";
-            case SimpleModuleGeneratorPhraseGroupType.TONIC_PROLONG_PLUS_DOMINANT_PROLONG_PLUS_TONIC_CADENCE_PROLONG:
-                return "Tonic prolong + dominant prolong + tonic cadence prolong";
-            case SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_COMPLETE:
-                return "Tonicize + complete";
-            case SimpleModuleGeneratorPhraseGroupType.TONICIZE_PLUS_TONICIZE:
-                return "Tonicize + tonicize";
-            case SimpleModuleGeneratorPhraseGroupType.CUSTOM:
-                return "Custom";
-            case SimpleModuleGeneratorPhraseGroupType.SINGLE_CUSTOM_HARMONY:
-                return "Single custom harmony";
-            case SimpleModuleGeneratorPhraseGroupType.DOUBLE_CUSTOM_HARMONY:
-                return "Double custom harmony"
-        }
-        return "Unknown phrase group type " + a
-    },
     tonicizeOrModulate: function (a) {
         switch (a) {
             case SimpleModuleGeneratorPhraseGroupType.COMPLETE_PLUS_MODULATE:
@@ -21558,7 +16258,7 @@ var SimpleModuleGeneratorPhraseGroupType = {
         return false
     }
 };
-addPossibleValuesFunction(SimpleModuleGeneratorPhraseGroupType, SimpleModuleGeneratorPhraseGroupType.SINGLE_COMPLETE, SimpleModuleGeneratorPhraseGroupType.INCOMPLETE_INITIAL_PLUS_COMPLETE_LENGTHEN_FINAL_TONIC);
+
 var SongPartType = {
     VERSE_1: 0,
     VERSE_2: 1,
@@ -21627,30 +16327,9 @@ var SongPartType = {
                 return "misc2"
         }
         return "verse1"
-    },
-    toString: function (a) {
-        switch (a) {
-            case SongPartType.BRIDGE_1:
-                return "Bridge 1";
-            case SongPartType.BRIDGE_2:
-                return "Bridge 2";
-            case SongPartType.CHORUS_1:
-                return "Chorus 1";
-            case SongPartType.CHORUS_2:
-                return "Chorus 2";
-            case SongPartType.VERSE_1:
-                return "Verse 1";
-            case SongPartType.VERSE_2:
-                return "Verse 2";
-            case SongPartType.MISC_1:
-                return "Misc 1";
-            case SongPartType.MISC_2:
-                return "Misc 2"
-        }
-        return "Unknown song part type " + a
     }
 };
-addPossibleValuesFunction(SongPartType, SongPartType.VERSE_1, SongPartType.MISC_2);
+
 
 function MotifRythmInfo(a) {
     this.noteCountRange = [0.25, 1];
@@ -21670,24 +16349,9 @@ var MelodyOffsetLevel = {
     LOW: -1,
     MIDDLE: 0,
     HIGH: 1,
-    VERY_HIGH: 2,
-    toString: function (a) {
-        switch (a) {
-            case MelodyOffsetLevel.HIGH:
-                return "High";
-            case MelodyOffsetLevel.LOW:
-                return "Low";
-            case MelodyOffsetLevel.MIDDLE:
-                return "Middle";
-            case MelodyOffsetLevel.VERY_HIGH:
-                return "Very high";
-            case MelodyOffsetLevel.VERY_LOW:
-                return "Very low"
-        }
-        return "Unknown melody offset level " + a
-    }
+    VERY_HIGH: 2
 };
-addPossibleValuesFunction(MelodyOffsetLevel, MelodyOffsetLevel.VERY_LOW, MelodyOffsetLevel.VERY_HIGH);
+
 
 function RenderAmountStrengthMap() {
     this.veryWeak = [0.02];
@@ -21738,64 +16402,9 @@ var PhraseGroupIndexProperty = {
     INNER_1_EFFECTS: 21,
     INNER_2_EFFECTS: 22,
     BASS_EFFECTS: 23,
-    PERCUSSION_EFFECTS: 24,
-    toString: function (a) {
-        switch (a) {
-            case PhraseGroupIndexProperty.BASS_EFFECTS:
-                return "Bass Effects";
-            case PhraseGroupIndexProperty.BASS_INSTRUMENT_DISTRIBUTION:
-                return "Bass Instrument Distribution";
-            case PhraseGroupIndexProperty.BASS_MOTIF_DISTRIBUTION:
-                return "Bass Motif Distribution";
-            case PhraseGroupIndexProperty.BASS_SHAPE:
-                return "Bass Shape";
-            case PhraseGroupIndexProperty.HARMONY:
-                return "Harmony";
-            case PhraseGroupIndexProperty.HARMONY_CHARACTERISTIC:
-                return "Harmony Characteristic";
-            case PhraseGroupIndexProperty.HARMONY_RYTHM:
-                return "Harmony Rythm";
-            case PhraseGroupIndexProperty.INNER_1_EFFECTS:
-                return "Inner 1 Effects";
-            case PhraseGroupIndexProperty.INNER_1_INSTRUMENT_DISTRIBUTION:
-                return "Inner 1 Instrument Distribution";
-            case PhraseGroupIndexProperty.INNER_1_MOTIF_DISTRIBUTION:
-                return "Inner 1 Motif Distribution";
-            case PhraseGroupIndexProperty.INNER_2_EFFECTS:
-                return "Inner 2 Effects";
-            case PhraseGroupIndexProperty.INNER_2_INSTRUMENT_DISTRIBUTION:
-                return "Inner 2 Instrument Distribution";
-            case PhraseGroupIndexProperty.INNER_2_MOTIF_DISTRIBUTION:
-                return "Inner 2 Motif Distribution";
-            case PhraseGroupIndexProperty.MELODY_EFFECTS:
-                return "Melody Effects";
-            case PhraseGroupIndexProperty.MELODY_INSTRUMENT_DISTRIBUTION:
-                return "Melody Instrument Distribution";
-            case PhraseGroupIndexProperty.MELODY_MOTIF_DISTRIBUTION:
-                return "Melody Motif Distribution";
-            case PhraseGroupIndexProperty.MELODY_SHAPE:
-                return "Melody Shape";
-            case PhraseGroupIndexProperty.PERCUSSION_EFFECTS:
-                return "Percussion Effects";
-            case PhraseGroupIndexProperty.PERCUSSION_FILL_DISTRIBUTION:
-                return "Percussion Fill Distribution";
-            case PhraseGroupIndexProperty.PERCUSSION_MOTIF_DISTRIBUTION:
-                return "Percussion Motif Distribution";
-            case PhraseGroupIndexProperty.RENDER_AMOUNT:
-                return "Render Amount";
-            case PhraseGroupIndexProperty.SUSPEND:
-                return "Suspend";
-            case PhraseGroupIndexProperty.TEMPO:
-                return "Tempo";
-            case PhraseGroupIndexProperty.TEMPO_CHANGE_1:
-                return "Tempo Change 1";
-            case PhraseGroupIndexProperty.TEMPO_CHANGE_2:
-                return "Tempo Change 2"
-        }
-        return "Unknown phrase group index property"
-    }
+    PERCUSSION_EFFECTS: 24
 };
-addPossibleValuesFunction(PhraseGroupIndexProperty, PhraseGroupIndexProperty.MELODY_SHAPE, PhraseGroupIndexProperty.PERCUSSION_EFFECTS);
+
 var SongPartStrength = {
     DEFAULT: 0,
     VERY_WEAK: 1,
@@ -21803,23 +16412,6 @@ var SongPartStrength = {
     MEDIUM: 3,
     STRONG: 4,
     VERY_STRONG: 5,
-    toString: function (a) {
-        switch (a) {
-            case SongPartStrength.DEFAULT:
-                return "Default";
-            case SongPartStrength.MEDIUM:
-                return "Medium";
-            case SongPartStrength.STRONG:
-                return "Strong";
-            case SongPartStrength.VERY_STRONG:
-                return "Very Strong";
-            case SongPartStrength.VERY_WEAK:
-                return "Very Weak";
-            case SongPartStrength.WEAK:
-                return "Weak"
-        }
-        return "Medium"
-    },
     toIndicatorString: function (a) {
         switch (a) {
             case SongPartStrength.DEFAULT:
@@ -21838,7 +16430,7 @@ var SongPartStrength = {
         return ""
     }
 };
-addPossibleValuesFunction(SongPartStrength, SongPartStrength.DEFAULT, SongPartStrength.VERY_STRONG);
+
 
 function AbstractSongPartStructureInfo() {
     this.partType = SongPartType.VERSE_1;
@@ -21959,10 +16551,7 @@ var InstrumentCapabilityProperty = {
     FILTER_BW_CHANGE: 19,
     VELOCITY_CHANGE: 20,
     PAN_CHANGE: 21,
-    NOTE_RANGE: 22,
-    toString: function (a) {
-        return a
-    }
+    NOTE_RANGE: 22
 };
 var SimpleModuleGeneratorInstrumentSetType = {
     ACOUSTIC: 0,
@@ -24399,149 +18988,9 @@ var PhraseGroupEffectType = {
     RANDOM_SECOND_PHRASE: 15,
     RANDOM_ALL_DIFFERENT: 16,
     RANDOM_ALL_SAME: 17,
-    RANDOM_GROUP: 18,
-    appendEffectInfos: function (g, f, l) {
-        var a = getValueOrDefault(f, "ampFraction", 0.5);
-        var r = getValueOrDefault(f, "xFraction", 0.5);
-        var v = getValueOrDefault(f, "infos", []);
-        var k = getValueOrDefault(f, "indices", []);
-        var s = getValueOrDefault(f, "id", "theId");
-        var q = getValueOrDefault(f, "constraints1", []);
-        var p = getValueOrDefault(f, "constraints2", []);
-        var u = [0, 1];
-        var j = [1, 1];
-        var t = [0, 1];
-        var h = [1, 1];
-        var c = s + "1";
-        var b = s + "2";
-        var o = null;
-        var n = null;
-        switch (g) {
-            // curveRndInfos is not defined. Perhaps it's either 'e' or 'e', but I'm not sure which.
-            //case PhraseGroupEffectType.RANDOM_ALL_SAME:
-            //case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
-            //case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
-            //case PhraseGroupEffectType.RANDOM_GROUP:
-            //case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
-            //    console.log('here');
-            //    var e = getRandomCurveInfos({
-            //        ampRange: [0.3, 0.5],
-            //        biasRange: [1, 1]
-            //    }, l);
-            //    var d = getRandomCurveInfos({
-            //        ampRange: [0.3, 0.5],
-            //        biasRange: [1, 1]
-            //    }, l);
-            //    o = sampleData(curveRndInfos, l);
-            //    switch (g) {
-            //        case PhraseGroupEffectType.RANDOM_ALL_SAME:
-            //            n = o;
-            //            break;
-            //        case PhraseGroupEffectType.RANDOM_ALL_DIFFERENT:
-            //            n = sampleData(curveRndInfos, l);
-            //            break;
-            //        case PhraseGroupEffectType.RANDOM_FIRST_PHRASE:
-            //            break;
-            //        case PhraseGroupEffectType.RANDOM_SECOND_PHRASE:
-            //            n = o;
-            //            o = null;
-            //            break;
-            //        case PhraseGroupEffectType.RANDOM_GROUP:
-            //            break
-            //    }
-            //    break;
-            case PhraseGroupEffectType.DEC_SECOND_PHRASE:
-                h = [1 - a, 1];
-                break;
-            case PhraseGroupEffectType.INC_SECOND_PHRASE:
-                h = [1 + a, 1];
-                break;
-            case PhraseGroupEffectType.DEC_INC_GROUP:
-                j = [1, 1 - a];
-                h = [1 - a, 1];
-                break;
-            case PhraseGroupEffectType.INC_DEC_GROUP:
-                j = [1, 1 + a];
-                h = [1 + a, 1];
-                break;
-            case PhraseGroupEffectType.DEC_FIRST_PHRASE_STAY:
-                j = [1, 1 - a];
-                h = [1 - a, 1 - a];
-                break;
-            case PhraseGroupEffectType.INC_FIRST_PHRASE_STAY:
-                j = [1, 1 + a];
-                h = [1 + a, 1 + a];
-                break;
-            case PhraseGroupEffectType.DEC_FIRST_PHRASE_RETURN:
-                j = [1, 1 - a];
-                break;
-            case PhraseGroupEffectType.INC_FIRST_PHRASE_RETURN:
-                j = [1, 1 + a];
-                break;
-            case PhraseGroupEffectType.INC_GROUP:
-                j = [1, 1 + a * r];
-                h = [1 + a * r, 1 + a];
-                break;
-            case PhraseGroupEffectType.DEC_GROUP:
-                j = [1, 1 - a * r];
-                h = [1 - a * r, 1 - a];
-                break;
-            case PhraseGroupEffectType.INC_DEC_FIRST_PHRASE:
-                u = [0, r, 1];
-                j = [1, 1 + a, 1];
-                break;
-            case PhraseGroupEffectType.INC_DEC_SECOND_PHRASE:
-                t = [0, r, 1];
-                h = [1, 1 + a, 1];
-                break;
-            case PhraseGroupEffectType.DEC_INC_FIRST_PHRASE:
-                u = [0, r, 1];
-                j = [1, 1 - a, 1];
-                break;
-            case PhraseGroupEffectType.DEC_INC_SECOND_PHRASE:
-                t = [0, r, 1];
-                h = [1, 1 - a, 1];
-                break;
-            default:
-                console.log("Unknown effect " + g);
-                break
-        }
-        var m = v.length;
-        if (!o) {
-            o = {
-                ampRange: [1, 1],
-                biasRange: [0, 0],
-                xValues: u,
-                yValues: j
-            }
-        }
-        if (!n) {
-            n = {
-                ampRange: [1, 1],
-                biasRange: [0, 0],
-                xValues: t,
-                yValues: h
-            }
-        }
-        addAll(v, [getEffectInfo({
-            id: c,
-            curveData: o,
-            activeExpression: "indexInfoVar.phraseGroupCount == 2",
-            phraseGroupIndex: 0
-        }, l), getEffectInfo({
-            id: b,
-            curveData: n,
-            activeExpression: "indexInfoVar.phraseGroupCount == 2",
-            phraseGroupIndex: 1
-        }, l)]);
-        k.push(m);
-        k.push(m + 1)
-    },
-    toString: function (a) {
-        return "toString() for PhraseGroupEffectType not implemented"
-    }
+    RANDOM_GROUP: 18
 };
-addPossibleValuesFunction(PhraseGroupEffectType, PhraseGroupEffectType.INC_DEC_FIRST_PHRASE, PhraseGroupEffectType.DEC_INC_GROUP);
+
 
 function createEffectChangeInfos(E, y, n) {
     var m = createOrGetRandom(y, "effectChangeSeed");
@@ -27059,16 +21508,6 @@ function createPhraseGroupInfo(b7, cY, cx) {
     return Y
 }
 
-function intersectDomains(d, b) {
-    var a = {};
-    for (var c in d) {
-        if (b[c]) {
-            a[c] = true
-        }
-    }
-    return a
-}
-
 function checkConstraints(y, d, n, p, z, l, r, b, B) {
     var A = 0;
     var h = d.groupIndices[z];
@@ -27727,7 +22166,6 @@ function createSongStructureInfo(L, a, c) {
 }
 
 function createTestModule(seed, inputGenInfo, resultObj) {
-    moduleConstructTimer.start();
     if (!resultObj) {
         resultObj = {}
     }
@@ -29066,7 +23504,6 @@ function createTestModule(seed, inputGenInfo, resultObj) {
         midiRenderer.channelMaps.push(percussionMidiMap);
         module.addRenderer(midiRenderer)
     }
-    moduleConstructTimer.pause();
     traverseValue(module, function (v, propName, obj) {
         if (stringEndsWith(propName, "Expression")) {
             var valuePropName = propName.substring(0, propName.indexOf("Expression"));
@@ -29100,9 +23537,6 @@ var Midi = (function () {
         INVALID: 0x00,
         isStatus: function (value) {
             return value != MessageStatus.INVALID && MessageStatus.STRING_TABLE[value] != null;
-        },
-        toString: function (value) {
-            return MessageStatus.STRING_TABLE[value];
         }
     };
 
@@ -29123,12 +23557,6 @@ var Midi = (function () {
     }
     Message.prototype.encode = function (data) {
     };
-    Message.prototype.toString = function () {
-        return "[Message(status=" + MessageStatus.toString(this.status) + ")]";
-    };
-
-
-
 
     function DataMessage(status, data1, data2) {
         Message.call(this, status);
@@ -29145,9 +23573,6 @@ var Midi = (function () {
         return combined;
     };
 
-
-
-
     function ChannelMessage(status, channel, data1, data2) {
         DataMessage.call(this, status, data1, data2);
         this.channel = typeof (channel) === 'undefined' ? 0 : channel;
@@ -29160,11 +23585,6 @@ var Midi = (function () {
         data.writeByte(Math.round(this.data1));
         data.writeByte(Math.round(this.data2));
     };
-
-    ChannelMessage.prototype.toString = function () {
-        return "[ChannelMessage(status=" + MessageStatus.toString(this.status) + " channel=" + this.channel + " data1=" + this.data1.toString(16) + " data2=" + this.data2.toString(16) + ")]";
-    };
-
 
     function VoiceMessage(status, channel, data1, data2) {
         ChannelMessage.call(this, status, channel, data1, data2);
@@ -29183,11 +23603,6 @@ var Midi = (function () {
     VoiceMessage.prototype.velocity = function () {
         return this.data2;
     };
-    VoiceMessage.prototype.toString = function () {
-        return "[VoiceMessage(status=" + MessageStatus.toString(this.status) + " channel=" + this.channel + " note=" + MIDINote.toString(this.note()) + " octave=" + this.octave() + " velocity=" + this.velocity() + ")]";
-    };
-
-
     var MIDINote = {
         C: 0,
         C_SHARP: 1,
@@ -29200,28 +23615,8 @@ var Midi = (function () {
         G_SHARP: 8,
         A: 9,
         A_SHARP: 10,
-        B: 11,
-
-        toString: function (value) {
-            switch (value) {
-                case this.C: return "C";
-                case this.C_SHARP: return "C#";
-                case this.D: return "D";
-                case this.D_SHARP: return "D#";
-                case this.E: return "E";
-                case this.F: return "F";
-                case this.F_SHARP: return "F#";
-                case this.G: return "G";
-                case this.G_SHARP: return "G#";
-                case this.A: return "A";
-                case this.A_SHARP: return "A#";
-                case this.B: return "B";
-            }
-
-            return "UNKNOWN";
-        }
+        B: 11
     };
-
 
     var MetaEventMessageType =
     {
@@ -29247,8 +23642,6 @@ var Midi = (function () {
         SEQUENCER_SPECIFIC: 0x7F
     }
 
-
-
     var SystemMessageType = {
         SYS_EX_START: 0x0,
         MIDI_TIME_CODE: 0x1,
@@ -29261,29 +23654,8 @@ var Midi = (function () {
         CONTINUE: 0xB,
         STOP: 0xC,
         ACTIVE_SENSING: 0xE,
-        SYSTEM_RESET: 0xF,
-
-        toString: function (value) {
-            switch (value) {
-                case this.SYS_EX_START: return "SYS_EX_START";
-                case this.MIDI_TIME_CODE: return "MIDI_TIME_CODE";
-                case this.SONG_POSITION: return "SONG_POSITION";
-                case this.SONG_SELECT: return "SONG_SELECT";
-                case this.TUNE_REQUEST: return "TUNE_REQUEST";
-                case this.SYS_EX_END: return "SYS_EX_END";
-                case this.TIMING_CLOCK: return "TIMING_CLOCK";
-                case this.START: return "START";
-                case this.CONTINUE: return "CONTINUE";
-                case this.STOP: return "STOP";
-                case this.ACTIVE_SENSING: return "ACTIVE_SENSING";
-                case this.SYSTEM_RESET: return "SYSTEM_RESET";
-            }
-
-            return "UNKNOWN";
-        }
+        SYSTEM_RESET: 0xF
     };
-
-
 
     function MetaEventMessage(type) {
         Message.call(this, SystemMessageType.SYSTEM_RESET);
@@ -29291,15 +23663,12 @@ var Midi = (function () {
     }
     MetaEventMessage.prototype = new Message();
 
-
     function EndTrackMessage(type) {
         MetaEventMessage.call(this, type);
     }
 
     EndTrackMessage.prototype = new MetaEventMessage();
-
     EndTrackMessage.prototype.END_OF_TRACK = new EndTrackMessage(MetaEventMessageType.END_OF_TRACK);
-
     EndTrackMessage.prototype.encode = function (data) {
         data.writeByte(0xff);
         data.writeByte(0x2f);
@@ -29315,12 +23684,6 @@ var Midi = (function () {
         data.writeByte(this.status | this.channel);
         data.writeByte(this.data1);
     };
-
-
-    ProgramChangeMessage.prototype.toString = function () {
-        return "[ProgramChangeMessage(channel=" + this.channel + " program=" + this.data1 + ")]";
-    };
-
 
     function SetTempoMessage(microsPerQuarter) {
         MetaEventMessage.call(this, MetaEventMessageType.SET_TEMPO);
@@ -29338,12 +23701,6 @@ var Midi = (function () {
         data.writeByte((this.microsPerQuarter) & 0xff);
     };
 
-    SetTempoMessage.prototype.toString = function () {
-        return "[SetTempoMessage(microsPerQuarter=" + this.microsPerQuarter + ")]";
-    };
-
-
-
     function MIDITrackEvent(time, message) {
         this.eventTime = time;
         this.eventMessage = message;
@@ -29355,19 +23712,9 @@ var Midi = (function () {
         this.eventMessage.encode(data);
     };
 
-    MIDITrackEvent.prototype.toString = function () {
-        return "[MIDITrackEvent(time=" + this.eventTime + " message=" + this.eventMessage + ")]";
-    };
-
-
-
     function MIDITrack(events) {
         this.trackEvents = events;
     }
-    MIDITrack.prototype.toString = function () {
-        return "[MIDITrack(events=\n\t" + this.trackEvents.join("\n\t") + ")]";
-    };
-
 
     function MIDIFile(format, division, tracks) {
         this.fileFormat = format;
@@ -29378,10 +23725,6 @@ var Midi = (function () {
     MIDIFile.prototype.numTracks = function () {
         return this.midiTracks.length;
     };
-    MIDIFile.prototype.toString = function () {
-        return "[MIDIFile(format=" + this.fileFormat + " division=" + this.midiDivision + " numTracks=" + this.midiTracks.length + " tracks=\n\t" + this.midiTracks.join("\n\t") + ")]";
-    };
-
 
     function MIDIEncoder() {
     }
@@ -29395,7 +23738,6 @@ var Midi = (function () {
             event.encode(data);
         }
     };
-
 
     MIDIEncoder.prototype.encodeFile = function (data, file) {
 
@@ -29455,8 +23797,6 @@ var Midi = (function () {
         //    console.log("Data length: " + data.lengths.length);
     }
 
-
-
     function writeVariableLengthUInt(data, theUInt) {
         var mask = 0xffffff7f;
 
@@ -29465,7 +23805,6 @@ var Midi = (function () {
         for (var i = 0; i < 4; i++) {
             var masked = theUInt & mask;
             var byt = masked & 0x7f;
-            //trace("current: " + theUInt.toString(2) + " masked: " + masked.toString(2) + " the byte: " + byte.toString(2));
             if (masked) {
                 bytes.push(byt);
             }
@@ -29475,21 +23814,14 @@ var Midi = (function () {
             bytes.push(0);
         }
 
-        //var str = "";
-        //var hexStr = "";
         for (i = bytes.length - 1; i >= 0; i--) {
             byt = bytes[i];
             if (i != 0) {
                 byt = byt | 0x80;
             }
             data.writeByte(byt);
-            //str += byte.toString(2);
-            //hexStr += byte.toString(16);
         }
-        //trace("Result: " + str + " or " + hexStr);
     }
-
-
 
     function encodeMidi(midiDataObject, resultBuffer) {
 
@@ -29597,8 +23929,6 @@ var Midi = (function () {
 
         var midiFile = new MIDIFile(midiDataObject.fileFormat, midiDataObject.midiDivisions, resultMidiTracks);
 
-        //trace("file before: " + midiFile.toString());
-
         var encoder = new MIDIEncoder();
         encoder.encodeFile(resultBuffer, midiFile);
 
@@ -29691,13 +24021,73 @@ function generateMidiData(jsonRenderRequestData) {
     }
 }
 
-function exportMidi(seed) {
-    //console.log("starting midi export...");
-    //var renderRequestData = {seed: seed, strSeed: songSettings.seed, name: songSettings.name, sectionIndex: -1, genInfo: genInfo};
+function parseSeed(seedString) {
+    // Try parsing the seed as an integer
+    var seed = parseInt(seedString);
 
-    renderRequestData["seed"] = hashCode(seed);
-    renderRequestData["strSeed"] = seed; // strSeed is not used anywhere.
-    console.log(renderRequestData["strSeed"]);
+    // If it couldn't be parsed, use hashCode
+    if (isNaN(seed)) {
+        seed = hashCode(seedString);
+    }
+
+    return seed;
+}
+
+// Properly parses seeds and sets them on the object Sets the seed values
+// function setSeeds(result, settings) {
+//     for (var prop in settings) {
+//         // using indexOf prevents the _constructorName property (potentially among other defaults) from being copied
+//         if (prop.indexOf("Seed") >= 0) {
+//             var seedStr = settings[prop];
+//             if (seedStr) {
+//                 var seed = parseSeed(seedStr);
+
+//                 if (!isNaN(seed)) {
+//                     result[prop] = seed;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function setProperties(result, settings) {
+//     for (var prop in settings) {
+//         let value = settings[prop];
+//         if (!isFunction(value)) {
+//             result[prop] = value;
+//         }
+//     }
+// }
+
+// Create a new object to use as genInfo
+// function createGenInfo() {
+//     var result = new GenInfo(); // Start with the plain gen info object
+
+//     setSeeds(result, new SongStructureSeedSettings());
+//     setSeeds(result, new SongContentSeedSettings());
+//     setSeeds(result, new SongIndicesSeedSettings());
+
+//     setProperties(result, new SongParameters());
+//     setProperties(result, new SongDomains());
+//     setProperties(result, new SongDetails());
+
+//     setProperties(result, new MidiExportSettings())
+
+//     return result;
+// }
+
+function exportMidi(seedString) {
+    //console.log("starting midi export...");
+    let seed = parseSeed(seedString); // Parse the user provided seed
+
+    var renderRequestData = {
+        seed: seed, 
+        strSeed: seedString, // strSeed is not used anywhere.
+        name: 'Song',
+        sectionIndex: -1, 
+        genInfo: genInfo_overrides_default // located in geninfo.overrides.js
+    };
+
     var midiResult = generateMidiData(renderRequestData);
 
     // that.resultRenderData = result.renderData;

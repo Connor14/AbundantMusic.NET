@@ -20,10 +20,15 @@ namespace AbundantMusic.NET
         static MidiComposer()
         {
             // Load the scripts from embedded resource
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.abundant-music-consolidated.js"))
+            using (var genInfoStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.geninfo.js"))
+            using (var genInfoOverridesStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.geninfo.overrides.js"))
+            using (var abundantMusicStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.abundant-music-consolidated.js"))
             using (var memoryStream = new MemoryStream())
             {
-                stream.CopyTo(memoryStream);
+                genInfoStream.CopyTo(memoryStream);
+                genInfoOverridesStream.CopyTo(memoryStream);
+                abundantMusicStream.CopyTo(memoryStream);
+
                 javascript = Encoding.UTF8.GetString(memoryStream.ToArray());
             }
         }

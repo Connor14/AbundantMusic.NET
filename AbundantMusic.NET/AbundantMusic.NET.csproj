@@ -15,6 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="abundant-music-composer\js\geninfo.js" />
+    <EmbeddedResource Include="abundant-music-composer\js\geninfo.overrides.js" />
     <EmbeddedResource Include="abundant-music-composer\LICENSE" />
     <EmbeddedResource Include="abundant-music-composer\js\abundant-music-consolidated.js" />
   </ItemGroup>

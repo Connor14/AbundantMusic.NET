@@ -21,11 +21,12 @@ namespace AbundantMusic.NET
         {
             string[] resources = new string[]
             {
-                "abundant_music_composer.js.geninfo.js",
-                "abundant_music_composer.js.geninfo.overrides.js",
                 "abundant_music_composer.js.enums.js",
-                "abundant_music_composer.js.midi.js",
+                "abundant_music_composer.js.utilities.js",
+                "abundant_music_composer.js.geninfo.js",
                 "abundant_music_composer.js.prototypes.js",
+                "abundant_music_composer.js.midi.js",
+                "abundant_music_composer.js.geninfo.overrides.js",
                 "abundant_music_composer.js.abundant-music-consolidated.js"
             };
 

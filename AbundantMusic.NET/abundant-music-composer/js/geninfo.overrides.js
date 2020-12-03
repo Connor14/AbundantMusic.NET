@@ -1,3 +1,5 @@
+'use strict';
+
 // When you first navigate to Abundant Music (https://pernyblom.github.io/abundant-music/index.html) and type in a seed,
 // the song that generates is NOT using the default GenInfo properties on the GenInfo object.
 // Rather, it is using some of the default GenInfo properties (after they've been randomized by your seed) with overrides applied from songpresets/song_20121105_120934_788.json

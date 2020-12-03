@@ -15,9 +15,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="abundant-music-composer\LICENSE" />
+    <None Remove="abundant-music-composer\js\enums.js" />
+    <None Remove="abundant-music-composer\js\geninfo.js" />
+    <None Remove="abundant-music-composer\js\geninfo.overrides.js" />
+    <None Remove="abundant-music-composer\js\midi.js" />
+    <None Remove="abundant-music-composer\js\prototypes.js" />
+    <None Remove="abundant-music-composer\js\abundant-music-consolidated.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="abundant-music-composer\LICENSE" />
+    <EmbeddedResource Include="abundant-music-composer\js\enums.js" />
     <EmbeddedResource Include="abundant-music-composer\js\geninfo.js" />
     <EmbeddedResource Include="abundant-music-composer\js\geninfo.overrides.js" />
-    <EmbeddedResource Include="abundant-music-composer\LICENSE" />
+    <EmbeddedResource Include="abundant-music-composer\js\midi.js" />
+    <EmbeddedResource Include="abundant-music-composer\js\prototypes.js" />
     <EmbeddedResource Include="abundant-music-composer\js\abundant-music-consolidated.js" />
   </ItemGroup>
 

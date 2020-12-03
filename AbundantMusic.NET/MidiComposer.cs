@@ -19,15 +19,27 @@ namespace AbundantMusic.NET
         // https://github.com/dotnet/docs/issues/10243
         static MidiComposer()
         {
-            // Load the scripts from embedded resource
-            using (var genInfoStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.geninfo.js"))
-            using (var genInfoOverridesStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.geninfo.overrides.js"))
-            using (var abundantMusicStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), "abundant_music_composer.js.abundant-music-consolidated.js"))
+            string[] resources = new string[]
+            {
+                "abundant_music_composer.js.geninfo.js",
+                "abundant_music_composer.js.geninfo.overrides.js",
+                "abundant_music_composer.js.enums.js",
+                "abundant_music_composer.js.midi.js",
+                "abundant_music_composer.js.prototypes.js",
+                "abundant_music_composer.js.abundant-music-consolidated.js"
+            };
+
+            // Load all required scripts from embedded resource
             using (var memoryStream = new MemoryStream())
             {
-                genInfoStream.CopyTo(memoryStream);
-                genInfoOverridesStream.CopyTo(memoryStream);
-                abundantMusicStream.CopyTo(memoryStream);
+                // Copy each resource to the MemoryStream
+                foreach(string resource in resources)
+                {
+                    using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), resource))
+                    {
+                        resourceStream.CopyTo(memoryStream);
+                    }
+                }
 
                 javascript = Encoding.UTF8.GetString(memoryStream.ToArray());
             }

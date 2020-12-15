@@ -1,7 +1,9 @@
-﻿using Microsoft.ClearScript.JavaScript;
-using Microsoft.ClearScript.V8;
+﻿using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -12,37 +14,31 @@ namespace AbundantMusic.NET
     /// </summary>
     public static class MidiComposer
     {
-        private static readonly string javascript;
+        private static readonly string[] resources = new string[]
+        {
+            "abundant_music_composer.js.enums.js",
+            "abundant_music_composer.js.utilities.js",
+            "abundant_music_composer.js.geninfo.js",
+            "abundant_music_composer.js.prototypes.js",
+            "abundant_music_composer.js.midi.js",
+            "abundant_music_composer.js.geninfo.overrides.js",
+            "abundant_music_composer.js.abundant-music-consolidated.js"
+        };
+
+        private static readonly List<IPrecompiledScript> scripts;
 
         // Note: I believe this is thread-safe based on the documentation and comments here: 
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors
         // https://github.com/dotnet/docs/issues/10243
         static MidiComposer()
         {
-            string[] resources = new string[]
-            {
-                "abundant_music_composer.js.enums.js",
-                "abundant_music_composer.js.utilities.js",
-                "abundant_music_composer.js.geninfo.js",
-                "abundant_music_composer.js.prototypes.js",
-                "abundant_music_composer.js.midi.js",
-                "abundant_music_composer.js.geninfo.overrides.js",
-                "abundant_music_composer.js.abundant-music-consolidated.js"
-            };
+            scripts = new List<IPrecompiledScript>();
 
-            // Load all required scripts from embedded resource
-            using (var memoryStream = new MemoryStream())
+            // Load all required scripts from embedded resource and precompile them
+            using (var compilationEngine = new ChakraCoreJsEngine())
             {
-                // Copy each resource to the MemoryStream
-                foreach(string resource in resources)
-                {
-                    using (var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(MidiComposer), resource))
-                    {
-                        resourceStream.CopyTo(memoryStream);
-                    }
-                }
-
-                javascript = Encoding.UTF8.GetString(memoryStream.ToArray());
+                foreach (var resource in resources)
+                    scripts.Add(compilationEngine.PrecompileResource(resource, typeof(MidiComposer)));
             }
         }
 
@@ -53,12 +49,13 @@ namespace AbundantMusic.NET
         /// <returns></returns>
         public static Composition Compose(string seed)
         {
-            using (var engine = new V8ScriptEngine())
+            using (var engine = new ChakraCoreJsEngine())
             {
-                engine.Execute(javascript);
+                foreach (var script in scripts)
+                    engine.Execute(script);
 
-                var result = (ITypedArray<byte>)engine.Script.exportMidi(seed);
-                var midiBytes = result.ToArray();
+                var result = engine.CallFunction<string>("exportMidi", seed);
+                var midiBytes = result.Split(',').Select(str => Convert.ToByte(str)).ToArray();
 
                 return new Composition(seed, new MemoryStream(midiBytes));
             }

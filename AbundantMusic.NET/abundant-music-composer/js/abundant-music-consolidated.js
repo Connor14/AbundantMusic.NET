@@ -7174,5 +7174,5 @@ function exportMidi(seedString) {
     Midi.encodeMidi(midiResult.midiData, fakeByteArray);
     var buffer = fakeByteArray.toBuffer();
 
-    return new Uint8Array(buffer);
+    return new Uint8Array(buffer).join();
 }

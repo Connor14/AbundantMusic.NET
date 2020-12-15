@@ -13,37 +13,34 @@ namespace DemoPlayer
         {
             Stopwatch stopwatch = new Stopwatch();
 
-            while (true)
+            Console.Write("Enter seed: ");
+            string seed = Console.ReadLine();
+
+            Console.WriteLine("Generating Midi...");
+
+            stopwatch.Restart();
+
+            // Generate a MIDI using Abundant Music
+            using (Composition composition = MidiComposer.Compose(seed))
             {
-                Console.Write("Enter seed: ");
-                string seed = Console.ReadLine();
+                stopwatch.Stop();
+                Console.WriteLine("Seed: " + composition.Seed);
+                Console.WriteLine("Generated in: " + stopwatch.Elapsed);
 
-                Console.WriteLine("Generating Midi...");
-
-                stopwatch.Restart();
-
-                // Generate a MIDI using Abundant Music
-                using (Composition composition = MidiComposer.Compose(seed))
+                // Play the MIDI using managed-midi
+                // https://github.com/atsushieno/managed-midi
+                var access = MidiAccessManager.Default;
+                var music = MidiMusic.Read(composition.Midi);
+                using (var player = new MidiPlayer(music, access))
                 {
-                    stopwatch.Stop();
-                    Console.WriteLine("Seed: " + composition.Seed);
-                    Console.WriteLine("Generated in: " + stopwatch.Elapsed);
+                    long totalPlayTime = player.GetTotalPlayTimeMilliseconds();
+                    Console.WriteLine("Play time: " + TimeSpan.FromMilliseconds(totalPlayTime).ToString("g"));
 
-                    // Play the MIDI using managed-midi
-                    // https://github.com/atsushieno/managed-midi
-                    var access = MidiAccessManager.Default;
-                    var music = MidiMusic.Read(composition.Midi);
-                    using (var player = new MidiPlayer(music, access))
+                    player.Play();
+
+                    while (player.State == PlayerState.Playing)
                     {
-                        long totalPlayTime = player.GetTotalPlayTimeMilliseconds();
-                        Console.WriteLine("Play time: " + TimeSpan.FromMilliseconds(totalPlayTime).ToString("g"));
 
-                        player.Play();
-
-                        while (player.State == PlayerState.Playing)
-                        {
-
-                        }
                     }
                 }
             }

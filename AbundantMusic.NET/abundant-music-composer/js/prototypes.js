@@ -1,145 +1,3 @@
-'use strict';
-
-function FakeByteArray() {
-    this.position = 0;
-    this.length = 0;
-    this.data = [];
-    this.lengths = [];
-}
-
-FakeByteArray.prototype.toBuffer = function () {
-
-    var result = new ArrayBuffer(this.length);
-    var dv = new DataView(result);
-
-    var bytePos = 0;
-    for (var i = 0; i < this.data.length; i++) {
-        var d = this.data[i];
-        var dataLength = this.lengths[i];
-
-        //        console.log("bytepos " + bytePos + " dataLength: " + dataLength + " length: " + this.length);
-        switch (dataLength) {
-            case 1:
-                dv.setUint8(bytePos, d);
-                break;
-            case 2:
-                dv.setUint16(bytePos, d);
-                break;
-            case 4:
-                dv.setUint32(bytePos, d);
-                break;
-        }
-        bytePos += dataLength;
-    }
-
-    return result;
-};
-
-FakeByteArray.prototype.appendByteArray = function (arr) {
-    for (var i = 0; i < arr.data.length; i++) {
-        var d = arr.data[i];
-        var dataLength = arr.lengths[i];
-        switch (dataLength) {
-            case 1:
-                //                console.log("Appending byte " + d);
-                this.writeByte(d);
-                break;
-            case 2:
-                //                console.log("Appending short " + d);
-                this.writeShort(d);
-                break;
-            case 4:
-                //                console.log("Appending int " + d);
-                this.writeInt(d);
-                break;
-        }
-    }
-};
-
-FakeByteArray.prototype.writeByte = function (byt) {
-    if (typeof (byt) === 'undefined') {
-        console.log("bad byte...");
-    }
-    this.length += 1;
-    this.data[this.position] = byt;
-    this.lengths[this.position] = 1;
-    this.position += 1;
-};
-
-FakeByteArray.prototype.writeInt = function (i) {
-    if (typeof (i) === 'undefined') {
-        console.log("bad int...");
-    }
-    this.length += 4;
-    this.data[this.position] = i;
-    this.lengths[this.position] = 4;
-    this.position += 1;
-};
-
-FakeByteArray.prototype.writeShort = function (s) {
-    if (typeof (s) === 'undefined') {
-        console.log("bad short...");
-    }
-    this.length += 2;
-    this.data[this.position] = s;
-    this.lengths[this.position] = 2;
-    this.position += 1;
-};
-
-var MersenneTwister = function (a) {
-    if (a == undefined) {
-        a = new Date().getTime()
-    }
-    this.N = 624;
-    this.M = 397;
-    this.MATRIX_A = 2567483615;
-    this.UPPER_MASK = 2147483648;
-    this.LOWER_MASK = 2147483647;
-    this.mt = new Array(this.N);
-    this.mti = this.N + 1;
-    this.init_genrand(a)
-};
-MersenneTwister.prototype.init_genrand = function (a) {
-    this.mt[0] = a >>> 0;
-    for (this.mti = 1; this.mti < this.N; this.mti++) {
-        var a = this.mt[this.mti - 1] ^ (this.mt[this.mti - 1] >>> 30);
-        this.mt[this.mti] = (((((a & 4294901760) >>> 16) * 1812433253) << 16) + (a & 65535) * 1812433253) + this.mti;
-        this.mt[this.mti] >>>= 0
-    }
-};
-MersenneTwister.prototype.genrand_int32 = function () {
-    var c;
-    var b = new Array(0, this.MATRIX_A);
-    if (this.mti >= this.N) {
-        var a;
-        if (this.mti == this.N + 1) {
-            this.init_genrand(5489)
-        }
-        for (a = 0; a < this.N - this.M; a++) {
-            c = (this.mt[a] & this.UPPER_MASK) | (this.mt[a + 1] & this.LOWER_MASK);
-            this.mt[a] = this.mt[a + this.M] ^ (c >>> 1) ^ b[c & 1]
-        }
-        for (; a < this.N - 1; a++) {
-            c = (this.mt[a] & this.UPPER_MASK) | (this.mt[a + 1] & this.LOWER_MASK);
-            this.mt[a] = this.mt[a + (this.M - this.N)] ^ (c >>> 1) ^ b[c & 1]
-        }
-        c = (this.mt[this.N - 1] & this.UPPER_MASK) | (this.mt[0] & this.LOWER_MASK);
-        this.mt[this.N - 1] = this.mt[this.M - 1] ^ (c >>> 1) ^ b[c & 1];
-        this.mti = 0
-    }
-    c = this.mt[this.mti++];
-    c ^= (c >>> 11);
-    c ^= (c << 7) & 2636928640;
-    c ^= (c << 15) & 4022730752;
-    c ^= (c >>> 18);
-    return c >>> 0
-};
-MersenneTwister.prototype.genrand_int31 = function () {
-    return (this.genrand_int32() >>> 1)
-};
-MersenneTwister.prototype.random = function () {
-    return this.genrand_int32() * (1 / 4294967296)
-};
 
 function BaseInterpolator(b, a) {
     this.n = b.length;
@@ -254,8 +112,7 @@ LinearInterpolator.prototype.rawInterpolate = function (b, a) {
     }
 };
 
-// Map was renamed to CustomMap to avoid conflicting with ES6 Map
-function CustomMap(a) {
+function Map(a) {
     this.current = undefined;
     this.size = 0;
     this.isLinked = true;
@@ -263,8 +120,8 @@ function CustomMap(a) {
         this.disableLinking()
     }
 }
-CustomMap.from = function (d, a, c) {
-    var b = new CustomMap(c);
+Map.from = function (d, a, c) {
+    var b = new Map(c);
     for (var e in d) {
         if (a || d.hasOwnProperty(e)) {
             b.put(e, d[e])
@@ -272,13 +129,13 @@ CustomMap.from = function (d, a, c) {
     }
     return b
 };
-CustomMap.noop = function () {
+Map.noop = function () {
     return this
 };
-CustomMap.illegal = function () {
+Map.illegal = function () {
     throw new Error("can't do this with unlinked maps")
 };
-CustomMap.prototype.disableLinking = function () {
+Map.prototype.disableLinking = function () {
     this.isLinked = false;
     this.link = Map.noop;
     this.unlink = Map.noop;
@@ -294,12 +151,11 @@ CustomMap.prototype.disableLinking = function () {
     this.listValues = Map.illegal;
     return this
 };
-CustomMap.prototype.hash = function (a) {
-    // replaced ++arguments.callee.current with ++this.hash.current
-    return a instanceof Object ? (a.__hash || (a.__hash = "object " + ++this.hash.current)) : (typeof a) + " " + String(a)
+Map.prototype.hash = function (a) {
+    return a instanceof Object ? (a.__hash || (a.__hash = "object " + ++arguments.callee.current)) : (typeof a) + " " + String(a)
 };
-CustomMap.prototype.hash.current = 0;
-CustomMap.prototype.link = function (a) {
+Map.prototype.hash.current = 0;
+Map.prototype.link = function (a) {
     if (this.size === 0) {
         a.prev = a;
         a.next = a;
@@ -311,7 +167,7 @@ CustomMap.prototype.link = function (a) {
         this.current.prev = a
     }
 };
-CustomMap.prototype.unlink = function (a) {
+Map.prototype.unlink = function (a) {
     if (this.size === 0) {
         this.current = undefined
     } else {
@@ -322,11 +178,11 @@ CustomMap.prototype.unlink = function (a) {
         }
     }
 };
-CustomMap.prototype.get = function (a) {
+Map.prototype.get = function (a) {
     var b = this[this.hash(a)];
     return typeof b === "undefined" ? undefined : b.value
 };
-CustomMap.prototype.put = function (a, c) {
+Map.prototype.put = function (a, c) {
     var d = this.hash(a);
     if (this.hasOwnProperty(d)) {
         this[d].value = c
@@ -341,7 +197,7 @@ CustomMap.prototype.put = function (a, c) {
     }
     return this
 };
-CustomMap.prototype.remove = function (a) {
+Map.prototype.remove = function (a) {
     var b = this.hash(a);
     if (this.hasOwnProperty(b)) {
         --this.size;
@@ -350,29 +206,29 @@ CustomMap.prototype.remove = function (a) {
     }
     return this
 };
-CustomMap.prototype.removeAll = function () {
+Map.prototype.removeAll = function () {
     while (this.size) {
         this.remove(this.key())
     }
     return this
 };
-CustomMap.prototype.contains = function (a) {
+Map.prototype.contains = function (a) {
     return this.hasOwnProperty(this.hash(a))
 };
-CustomMap.prototype.isUndefined = function (a) {
+Map.prototype.isUndefined = function (a) {
     var b = this.hash(a);
     return this.hasOwnProperty(b) ? typeof this[b] === "undefined" : false
 };
-CustomMap.prototype.next = function () {
+Map.prototype.next = function () {
     this.current = this.current.next
 };
-CustomMap.prototype.key = function () {
+Map.prototype.key = function () {
     return this.current.key
 };
-CustomMap.prototype.value = function () {
+Map.prototype.value = function () {
     return this.current.value
 };
-CustomMap.prototype.each = function (c, a) {
+Map.prototype.each = function (c, a) {
     if (typeof a === "undefined") {
         a = this
     }
@@ -384,8 +240,8 @@ CustomMap.prototype.each = function (c, a) {
     }
     return this
 };
-CustomMap.prototype.flip = function (e) {
-    var d = new CustomMap(e);
+Map.prototype.flip = function (e) {
+    var d = new Map(e);
     for (var a = this.size; a--; this.next()) {
         var c = this.value(),
             b = d.get(c);
@@ -397,7 +253,7 @@ CustomMap.prototype.flip = function (e) {
     }
     return d
 };
-CustomMap.prototype.drop = function (c, a) {
+Map.prototype.drop = function (c, a) {
     if (typeof a === "undefined") {
         a = this
     }
@@ -411,22 +267,35 @@ CustomMap.prototype.drop = function (c, a) {
     }
     return this
 };
-CustomMap.prototype.listValues = function () {
+Map.prototype.listValues = function () {
     var b = [];
     for (var a = this.size; a--; this.next()) {
         b.push(this.value())
     }
     return b
 };
-CustomMap.prototype.listKeys = function () {
+Map.prototype.listKeys = function () {
     var b = [];
     for (var a = this.size; a--; this.next()) {
         b.push(this.key())
     }
     return b
 };
-CustomMap.reverseIndexTableFrom = function (g, f) {
-    var e = new CustomMap(f);
+Map.prototype.toString = function () {
+    var a = "[object Map";
+
+    function b(d, e, c) {
+        a += " { " + this.hash(d) + " : " + e + " }" + (c ? "," : "") + "\n"
+    }
+    if (this.isLinked && this.size) {
+        a += "\n";
+        this.each(b)
+    }
+    a += "]";
+    return a
+};
+Map.reverseIndexTableFrom = function (g, f) {
+    var e = new Map(f);
     for (var b = 0, a = g.length; b < a; ++b) {
         var c = g[b],
             d = e.get(c);
@@ -438,7 +307,7 @@ CustomMap.reverseIndexTableFrom = function (g, f) {
     }
     return e
 };
-CustomMap.cross = function (h, g, e, b) {
+Map.cross = function (h, g, e, b) {
     var f, a;
     if (h.isLinked) {
         f = h;
@@ -459,7 +328,7 @@ CustomMap.cross = function (h, g, e, b) {
     }
     return b
 };
-CustomMap.uniqueArray = function (d) {
+Map.uniqueArray = function (d) {
     var c = new Map;
     for (var b = 0, a = d.length; b < a; ++b) {
         c.put(d[b])
@@ -483,6 +352,11 @@ LatticeNoise.prototype.fillValueTab = function () {
 LatticeNoise.prototype.whiteNoise1 = function (a) {
     var b = Math.floor(a);
     return this.latticeValue1(b)
+};
+LatticeNoise.prototype.whiteNoise2 = function (b, d) {
+    var c = Math.floor(b);
+    var a = Math.floor(d);
+    return this.latticeValue2(c, a)
 };
 LatticeNoise.prototype.lerpNoise1 = function (a) {
     var b = Math.floor(a);
@@ -510,8 +384,14 @@ LatticeNoise.prototype.quadraticNoise1 = function (a) {
 LatticeNoise.prototype.latticeValue1 = function (a) {
     return this.valueTab[this.index1(a)]
 };
+LatticeNoise.prototype.latticeValue2 = function (b, a) {
+    return this.valueTab[this.index2(b, a)]
+};
 LatticeNoise.prototype.index1 = function (a) {
     return hash(a) & this.TAB_MASK
+};
+LatticeNoise.prototype.index2 = function (b, a) {
+    return hash(a + hash(b)) & this.TAB_MASK
 };
 var ClassicalNoise = function (b) {
     if (b == undefined) {
@@ -546,6 +426,48 @@ ClassicalNoise.prototype.dot = function (b, a, d, c) {
 ClassicalNoise.prototype.mix = function (d, c, e) {
     return (1 - e) * d + e * c
 };
+ClassicalNoise.prototype.fade = function (a) {
+    return a * a * a * (a * (a * 6 - 15) + 10)
+};
+ClassicalNoise.prototype.noise = function (t, s, q) {
+    var h = Math.floor(t);
+    var f = Math.floor(s);
+    var e = Math.floor(q);
+    t = t - h;
+    s = s - f;
+    q = q - e;
+    h = h & 255;
+    f = f & 255;
+    e = e & 255;
+    var c = this.perm[h + this.perm[f + this.perm[e]]] % 12;
+    var a = this.perm[h + this.perm[f + this.perm[e + 1]]] % 12;
+    var p = this.perm[h + this.perm[f + 1 + this.perm[e]]] % 12;
+    var n = this.perm[h + this.perm[f + 1 + this.perm[e + 1]]] % 12;
+    var G = this.perm[h + 1 + this.perm[f + this.perm[e]]] % 12;
+    var F = this.perm[h + 1 + this.perm[f + this.perm[e + 1]]] % 12;
+    var M = this.perm[h + 1 + this.perm[f + 1 + this.perm[e]]] % 12;
+    var L = this.perm[h + 1 + this.perm[f + 1 + this.perm[e + 1]]] % 12;
+    var l = this.dot(this.grad3[c], t, s, q);
+    var I = this.dot(this.grad3[G], t - 1, s, q);
+    var E = this.dot(this.grad3[p], t, s - 1, q);
+    var j = this.dot(this.grad3[M], t - 1, s - 1, q);
+    var k = this.dot(this.grad3[a], t, s, q - 1);
+    var H = this.dot(this.grad3[F], t - 1, s, q - 1);
+    var D = this.dot(this.grad3[n], t, s - 1, q - 1);
+    var g = this.dot(this.grad3[L], t - 1, s - 1, q - 1);
+    var C = this.fade(t);
+    var B = this.fade(s);
+    var A = this.fade(q);
+    var d = this.mix(l, I, C);
+    var b = this.mix(k, H, C);
+    var r = this.mix(E, j, C);
+    var o = this.mix(D, g, C);
+    var K = this.mix(d, r, B);
+    var J = this.mix(b, o, B);
+    var m = this.mix(K, J, A);
+    return m
+};
+
 function EditorFunctionOrVariable() {
     this.id = "";
     this._constructorName = "EditorFunctionOrVariable"
@@ -646,7 +568,6 @@ SimpleStringEditorVariable.prototype = new StringEditorVariable();
 SimpleStringEditorVariable.prototype.getValue = function (a) {
     return this.value
 };
-
 
 function IdReferenceEditorVariable() {
     StringEditorVariable.call(this);
@@ -918,6 +839,52 @@ PatternDoubleArrayEditorVariable.prototype.getValue = function (c) {
     return a
 };
 
+function PerfTimer(a) {
+    this.name = a;
+    this.lastStartTime = 0;
+    this.totalTime = 0;
+    this.intervals = 0
+}
+PerfTimer.prototype.report = function () {
+    console.log("PerfTimer " + this.name + " total time: " + this.totalTime + " time per interval: " + (this.totalTime / this.intervals) + " intervals: " + this.intervals)
+};
+PerfTimer.prototype.start = function () {
+    this.lastStartTime = Date.now()
+};
+PerfTimer.prototype.pause = function () {
+    var a = Date.now();
+    var b = a - this.lastStartTime;
+    this.intervals++;
+    this.totalTime += b;
+    this.lastStartTime = a
+};
+var moduleConstructTimer = new PerfTimer("module construct");
+var composeTimer = new PerfTimer("compose");
+var harmonyTimer = new PerfTimer("harmony");
+var voiceLeadingTimer = new PerfTimer("voice leading");
+var voiceLeadingPrepareTimer = new PerfTimer("voice leading prepare");
+var figurationTimer = new PerfTimer("figuration");
+var perfTimer2 = new PerfTimer("timer 2");
+
+function EditorProcedure() {
+    this.id = "";
+    this._constructorName = "EditorProcedure"
+}
+EditorProcedure.prototype.getProcedure = function (a) {
+    return function () { }
+};
+
+function CustomEditorProcedure() {
+    EditorProcedure.call(this);
+    this.procedureText = "";
+    this._constructorName = "CustomEditorProcedure"
+}
+CustomEditorProcedure.prototype = new EditorProcedure();
+CustomEditorProcedure.prototype.getProcedure = function (module) {
+    return function () {
+        eval(this.procedureText)
+    }
+};
 
 function DfsSearchNode(b, a, c) {
     this.state = b;
@@ -926,6 +893,9 @@ function DfsSearchNode(b, a, c) {
     this.depth = c;
     this.totalCost = 0
 }
+DfsSearchNode.prototype.toString = function () {
+    return "DFSSN {state: " + this.state + "depth: " + this.depth + "totalCost: " + this.totalCost + "}"
+};
 
 function RandomDfsStateIterator(d, c, a, b) {
     this.elements = d;
@@ -1028,6 +998,9 @@ function DfsSolver(a) {
     this.mlSolutions = 0;
     this._constructorName = "DfsSolver"
 }
+DfsSolver.prototype.getGoalLikelihood = function (a) {
+    return 1
+};
 DfsSolver.prototype.extractStateResultData = function (a) {
     console.log("DfsSolver need to implement extractStateResultData()")
 };
@@ -1179,6 +1152,31 @@ DfsSolver.prototype.searchML = function () {
     console.log("Failed to find a solution in DfsSolver " + this.failReason + "<br />");
     return null
 };
+DfsSolver.prototype.extractPartialSolutionFromNode = function (c) {
+    var b = c;
+    var a = [];
+    do {
+        a.unshift(b.state.harmony);
+        b = b.previous
+    } while (b);
+    return a
+};
+DfsSolver.prototype.extractPartialSolutionStatesFromNode = function (c) {
+    var b = c;
+    var a = [];
+    do {
+        a.unshift(b.state);
+        b = b.previous
+    } while (b);
+    return a
+};
+DfsSolver.prototype.extractSolutionFromStates = function (b) {
+    var a = [];
+    for (var c = 0; c < b.length; c++) {
+        a.push(this.extractStateResultData(b[c]))
+    }
+    return a
+};
 DfsSolver.prototype.extractSolutionFromMLGoalNode = function (b) {
     var a = [];
     var c = b;
@@ -1203,8 +1201,6 @@ DfsSolver.prototype.extractStatesFromMLGoalNode = function (b) {
     }
     return a
 };
-
-
 function SlotData(c, a, b) {
     this.values = [];
     this.values.length = c;
@@ -1230,7 +1226,6 @@ SlotData.prototype.read = function (a) {
         return this.defaultValue
     }
 };
-
 
 function ControlChannel() {
     this.id = "";
@@ -1284,7 +1279,6 @@ ControlChannel.prototype.readDouble = function (b, a) {
 ControlChannel.prototype.readBoolean = function (b, a) {
     console.log("-- All control channels must implement readBoolean()")
 };
-
 
 function DoubleControlChannel() {
     ControlChannel.call(this);
@@ -1347,35 +1341,6 @@ IntegerControlChannel.prototype.writeInt = function (g, e, d) {
         }
     }
 };
-var BooleanControlChannelMixMode = {
-    OR: 0,
-    AND: 1,
-    NOR: 2,
-    NAND: 3,
-    XOR: 4,
-    OVERWRITE_FIRST: 5,
-    OVERWRITE_LAST: 6,
-    mix: function (b, a, c) {
-        switch (b) {
-            case BooleanControlChannelMixMode.OR:
-                return a || c;
-            case BooleanControlChannelMixMode.AND:
-                return a && c;
-            case BooleanControlChannelMixMode.NOR:
-                return !(a || c);
-            case BooleanControlChannelMixMode.NAND:
-                return !(a && c);
-            case BooleanControlChannelMixMode.XOR:
-                return (a || c) && !(a && c);
-            case BooleanControlChannelMixMode.OVERWRITE_FIRST:
-                return a;
-            case BooleanControlChannelMixMode.OVERWRITE_LAST:
-                return c
-        }
-        return a || c
-    }
-};
-
 
 function BooleanControlChannel() {
     ControlChannel.call(this);
@@ -1461,24 +1426,6 @@ Curve.prototype.setId = function (a) {
 Curve.prototype.getValue = function (b, a) {
     return 0
 };
-var PredefinedCurveType = {
-    LINEAR: 0,
-    EXP: 1,
-    QUADRATIC: 2,
-    CONSTANT: 3,
-    SINE: 4,
-    COSINE: 5,
-    TRIANGLE: 6,
-    SAW: 7,
-    SQUARE: 8,
-    WHITE_NOISE: 9,
-    CONSTANT_NOISE: 10,
-    LINEAR_NOISE: 11,
-    QUADRATIC_NOISE: 12,
-    CUBIC_NOISE: 13,
-    PERLIN_NOISE: 14
-};
-
 
 function PredefinedCurve() {
     Curve.call(this);
@@ -1508,6 +1455,10 @@ PredefinedCurve.prototype.setBias = function (b) {
 };
 PredefinedCurve.prototype.setFrequency = function (b) {
     this.frequency = b;
+    return this
+};
+PredefinedCurve.prototype.setPhase = function (b) {
+    this.phase = b;
     return this
 };
 PredefinedCurve.prototype.setType = function (b) {
@@ -1679,6 +1630,10 @@ function ComputationCurve() {
     this._constructorName = "ComputationCurve"
 }
 ComputationCurve.prototype = new Curve();
+ComputationCurve.prototype.setComputation = function (a) {
+    this.computation = a;
+    return this
+};
 ComputationCurve.prototype.getValue = function (b, a) {
     return this.computation.getValue(b, a)
 };
@@ -1869,6 +1824,10 @@ function MultiInputCurveComputation() {
     this._constructorName = "MultiInputCurveComputation"
 }
 MultiInputCurveComputation.prototype = new CurveComputation();
+MultiInputCurveComputation.prototype.setInputCurves = function (a) {
+    this.inputCurves = a;
+    return this
+};
 MultiInputCurveComputation.prototype.updateReferences = function (c, f, a) {
     for (var b = 0; b < a.length; b++) {
         var e = f[b];
@@ -2026,10 +1985,37 @@ MaxCurveComputation.prototype.getValueReferencesOk = function (f, b) {
     return a === null ? 0 : a
 };
 
+function CurveGroup() {
+    this.curves = []
+}
+
+function CurveModifier() { }
+
+function FigurationGrid(a) {
+    this.beatCellSize = getValueOrDefault(a, "beatCellSize", 1);
+    this.noteCellSize = getValueOrDefault(a, "noteCellSize", 5);
+    this.infos = [];
+    this.nextIndices = [];
+    this.previousIndices = []
+}
+FigurationGrid.prototype.storeInfo = function (a) {
+    this.infos.push(a)
+};
+FigurationGrid.prototype.getBeatCellIndex = function (a) {
+    return Math.floor(a / this.beatCellSize)
+};
+FigurationGrid.prototype.getNoteCellIndex = function (a) {
+    return Math.floor(a / this.noteCellSize)
+};
+FigurationGrid.prototype.getOverlapIndices = function (b, a) { };
+
 function FiguratorState() {
     this.absoluteNote = 60;
     this.stepCost = 0
 }
+FiguratorState.prototype.toString = function () {
+    return "FS{absNote:" + this.absoluteNote + ", stepCost:" + this.stepCost + "}"
+};
 
 function Figurator(a) {
     DfsSolver.call(this, a);
@@ -2130,6 +2116,19 @@ Figurator.prototype.getVerticalOffsets = function (k, f) {
             break
     }
     return c
+};
+Figurator.prototype.intersectDomainAndLikelihoodArrs = function (f, d) {
+    var h = f[0];
+    var c = d[0];
+    var b = null;
+    for (var e = 1; e < f.length; e++) {
+        var g = f[e];
+        var a = d[e];
+        b = this.intersectDomainAndLikelihoods(h, c, g, a);
+        h = b[0];
+        c = b[1]
+    }
+    return b
 };
 Figurator.prototype.intersectDomainAndLikelihoods = function (g, f, e, c) {
     var a = {};
@@ -2443,6 +2442,15 @@ Figurator.prototype.getSuccessorDomain = function (b, e, d) {
     var a = c.absoluteNote;
     return this.getDomain(b + 1, a, null, d, e)
 };
+Figurator.prototype.intersectDomains = function (c, b) {
+    var a = {};
+    for (var e in c) {
+        if (b[e]) {
+            a[e] = true
+        }
+    }
+    return a
+};
 Figurator.prototype.createStatesFromDomain = function (e, g, f, a) {
     for (var h in e) {
         var c = new FiguratorState();
@@ -2481,13 +2489,11 @@ Figurator.prototype.getStartStateIterator = function () {
 Figurator.prototype.getSuccessorIterator = function (a) {
     return this.getSuccessorDomainIteratorForElement(a.depth, a)
 };
-// TODO REMOVE
 Figurator.prototype.prepareBeforeSearch = function () {
-
+    figurationTimer.start()
 };
-// TODO REMOVE
 Figurator.prototype.searchDone = function () {
-
+    figurationTimer.pause()
 };
 
 function RenderLine() {
@@ -2552,7 +2558,6 @@ PrimitiveRenderLine.prototype.addRenderElement = function (a) {
     this.renderElements.push(a);
     return this
 };
-
 
 function RenderElement() {
     this.id = "";
@@ -3535,13 +3540,13 @@ MotifRenderElement.prototype.renderBatch = function (b) {
         return
     }
     var m = b.constantHarmony;
-    var d = new CustomMap(true);
+    var d = new Map(true);
     var g = [];
-    var c = new CustomMap(true);
-    var p = new CustomMap(true);
-    var q = new CustomMap(true);
-    var o = new CustomMap(true);
-    var k = new CustomMap(true);
+    var c = new Map(true);
+    var p = new Map(true);
+    var q = new Map(true);
+    var o = new Map(true);
+    var k = new Map(true);
     var f = this.getOrCreateVoiceLine(b, m);
     var h = b.voiceLineHarmonies[f.id];
     if (h) {
@@ -3938,6 +3943,7 @@ function GenMusicModule() {
     this.rythms = [];
     this.rythmGroups = [];
     this.curves = [];
+    this.curveGroups = [];
     this.parameters = [];
     this.renderChannels = [];
     this.namedNotes = [];
@@ -3946,11 +3952,58 @@ function GenMusicModule() {
     this.figurationPlanners = [];
     this._variables = [];
     this._variablesHash = {};
+    this.procedures = [];
     this.voiceLines = [];
     this.idCounters = {};
     this.reusables = {};
     this._constructorName = "GenMusicModule"
 }
+GenMusicModule.prototype.getUniqueId = function (f, d) {
+    var a = this.idCounters[f];
+    for (var b = 0; b < 100; b++) {
+        if (a) {
+            a++
+        } else {
+            a = 1;
+            this.idCounters[f] = a
+        }
+        var g = f + "" + a;
+        var e = false;
+        for (var c = 0; c < d.length; c++) {
+            if (g == d[c].id) {
+                e = true;
+                break
+            }
+        }
+        if (!e) {
+            return g
+        }
+    }
+    console.log("failed to find unique id with prefix " + f + " and arr " + d + "<br />")
+};
+GenMusicModule.prototype.deleteRythm = function (a) {
+    arrayDelete(this.rythms, a);
+    return this
+};
+GenMusicModule.prototype.setRythms = function (a) {
+    this.rythms = a;
+    return this
+};
+GenMusicModule.prototype.getRythms = function () {
+    return this.rythms
+};
+GenMusicModule.prototype.getMotifs = function () {
+    return this.motifs
+};
+GenMusicModule.prototype.getCurves = function () {
+    return this.curves
+};
+GenMusicModule.prototype.getHarmonies = function () {
+    return this.harmony
+};
+GenMusicModule.prototype.getSections = function () {
+    return this.sections
+};
 GenMusicModule.prototype.getStructures = function () {
     return this.structures
 };
@@ -3974,12 +4027,28 @@ GenMusicModule.prototype.addMotif = function (a) {
     this.motifs.push(a);
     return this
 };
+GenMusicModule.prototype.addMotifGroup = function (a) {
+    this.motifGroups.push(a);
+    return this
+};
 GenMusicModule.prototype.addRythm = function (a) {
     this.rythms.push(a);
     return this
 };
+GenMusicModule.prototype.addRythmGroup = function (a) {
+    this.rythmGroups.push(a);
+    return this
+};
 GenMusicModule.prototype.addCurve = function (a) {
     this.curves.push(a);
+    return this
+};
+GenMusicModule.prototype.addCurveGroup = function (a) {
+    this.curveGroups.push(a);
+    return this
+};
+GenMusicModule.prototype.addParameter = function (a) {
+    this.parameters.push(a);
     return this
 };
 GenMusicModule.prototype.addRenderChannel = function (a) {
@@ -3999,16 +4068,31 @@ GenMusicModule.prototype.addVariable = function (a) {
     this._variablesHash[a.id] = a;
     return this
 };
+GenMusicModule.prototype.getVariables = function () {
+    return this._variables
+};
 GenMusicModule.prototype.getRythm = function (a) {
     return getObjectWithId(a, this.rythms)
 };
 GenMusicModule.prototype.getVariable = function (a) {
     return this._variablesHash[a]
 };
+GenMusicModule.prototype.getRythmGroup = function (a) {
+    return getObjectWithId(a, this.rythmGroups)
+};
 GenMusicModule.prototype.getCurve = function (a) {
     return getObjectWithId(a, this.curves)
 };
+GenMusicModule.prototype.getCurveGroup = function (a) {
+    return getObjectWithId(a, this.curveGroups)
+};
+GenMusicModule.prototype.getParameter = function (a) {
+    return getObjectWithId(a, this.parameters)
+};
 GenMusicModule.prototype.getSynthRenderer = function (a) {
+    return getObjectWithId(a, this.renderers)
+};
+GenMusicModule.prototype.getRenderer = function (a) {
     return getObjectWithId(a, this.renderers)
 };
 GenMusicModule.prototype.getStructure = function (a) {
@@ -4028,6 +4112,9 @@ GenMusicModule.prototype.getNamedNote = function (a) {
 };
 GenMusicModule.prototype.getPercussionMotif = function (a) {
     return getObjectWithId(a, this.percussionMotifs)
+};
+GenMusicModule.prototype.getMotifGroup = function (a) {
+    return getObjectWithId(a, this.motifGroups)
 };
 GenMusicModule.prototype.getControlChannel = function (a) {
     return getObjectWithId(a, this.controlChannels)
@@ -4052,6 +4139,7 @@ GenMusicModule.prototype.renderBatch = function (c) {
     }
     return a
 };
+GenMusicModule.prototype.toJSON = function () { };
 
 function SplitZone() {
     this.id = "";
@@ -4090,8 +4178,24 @@ SplitZone.prototype.applicable = function (e, f, d, a, c, g) {
     }
     return j
 };
+SplitZone.prototype.setNoteLengthInterval = function (a) {
+    this.noteLengthInterval = a;
+    return this
+};
+SplitZone.prototype.setNoteLengthIntervalUnit = function (a) {
+    this.noteLengthIntervalUnit = a;
+    return this
+};
 SplitZone.prototype.setSplitStrategy = function (a) {
     this.splitStrategy = a;
+    return this
+};
+SplitZone.prototype.setDottedSplitStrategy = function (a) {
+    this.dottedSplitStrategy = a;
+    return this
+};
+SplitZone.prototype.setTripletSplitStrategy = function (a) {
+    this.tripletSplitStrategy = a;
     return this
 };
 SplitZone.prototype.setPositionInterval = function (a) {
@@ -4235,7 +4339,7 @@ SplitZoneCollection.prototype.getSplitBeat = function (c, b, j, k, a, e) {
         return h
     }
     var d = 0;
-    var l = new CustomMap();
+    var l = new Map();
     while (true) {
         var f = this.singleSplit(c, k, h, j, a, e, d, l);
         d++;
@@ -4346,6 +4450,9 @@ Rythm.prototype.addRythmElement = function (a) {
     this.rythmElements.push(a);
     return this
 };
+Rythm.prototype.getRythmElements = function () {
+    return this.rythmElements
+};
 Rythm.prototype.getNoteRythmElements = function (e, c, b) {
     var a = [];
     for (var d = 0; d < this.rythmElements.length; d++) {
@@ -4386,11 +4493,6 @@ RythmElement.prototype.getLength = function () {
 RythmElement.prototype.getLengthUnit = function () {
     return this.lengthUnit
 };
-var NoteRythmElementLengthType = {
-    NORMAL: 0,
-    DOT: 1,
-    TRIPLET: 2
-};
 
 function NoteRythmElement() {
     RythmElement.call(this);
@@ -4402,6 +4504,9 @@ NoteRythmElement.prototype = new RythmElement();
 NoteRythmElement.prototype.setLengthType = function (a) {
     this.lengthType = a;
     return this
+};
+NoteRythmElement.prototype.toString = function () {
+    return "NRE{length: " + this.length + " lengthUnit: " + this.lengthUnit + " strength: " + this.strength + " rest: " + this.rest + " lengthType: " + this.lengthType + "}"
 };
 
 function SequenceRythmElement() {
@@ -4683,6 +4788,10 @@ Section.prototype.addControlLine = function (a) {
     this.controlLines.push(a);
     return this
 };
+Section.prototype.addModifier = function (a) {
+    this.modifiers.push(a);
+    return this
+};
 Section.prototype.getVoiceLine = function (a) {
     return getObjectWithId(a, this.voiceLines)
 };
@@ -4792,10 +4901,12 @@ Section.prototype.renderBatch = function (e) {
             var y = b.sectionModifiers[u];
             y.beforeControlRender(e)
         }
+        perfTimer2.start();
         for (var w = 0; w < e.controlLines.length; w++) {
             var l = e.controlLines[w];
             l.renderBatch(e)
         }
+        perfTimer2.pause();
         for (var u = 0; u < b.sectionModifiers.length; u++) {
             var y = b.sectionModifiers[u];
             y.afterControlRender(e)
@@ -4983,6 +5094,10 @@ function SetVariableValueSectionModifier() {
 SetVariableValueSectionModifier.prototype = new SectionModifier();
 SetVariableValueSectionModifier.prototype.setVariable = function (a) {
     this.variable = a;
+    return this
+};
+SetVariableValueSectionModifier.prototype.setValueExpression = function (a) {
+    this.valueExpression = a;
     return this
 };
 SetVariableValueSectionModifier.prototype.modifySection = function (d, c) {
@@ -5574,9 +5689,17 @@ function Motif() {
     this.useExternalSeed = false;
     this._constructorName = "Motif"
 }
+Motif.prototype.toString = function (b) {
+    var a = "{";
+    a += "" + $.map(this.motifElements, function (d, c) {
+        return d.toString(b)
+    });
+    a += "}";
+    return a
+};
 Motif.prototype.getConstantMotifElements = function (c, n, b, v) {
     if (!v) {
-        v = new CustomMap(true)
+        v = new Map(true)
     }
     var l = [];
     if (this.inheritedMotif) {
@@ -5684,6 +5807,10 @@ Motif.prototype.getConstantMotifElements = function (c, n, b, v) {
     }
     return l
 };
+Motif.prototype.addMotifElement = function (a) {
+    this.motifElements.push(a);
+    return this
+};
 
 function MotifElement() {
     this.id = "";
@@ -5694,6 +5821,18 @@ function MotifElement() {
 }
 MotifElement.prototype.getConstantMotifElements = function (d, c, b, a) {
     return [this]
+};
+MotifElement.prototype.toString = function (d) {
+    var c = getValueOrDefault(d, "showLength", false);
+    var b = getValueOrDefault(d, "showLength", false);
+    var a = "";
+    if (c) {
+        a += "len:" + this.length + " "
+    }
+    if (b) {
+        a += "lu:" + this.lengthUnit + " "
+    }
+    return a
 };
 MotifElement.prototype.setLength = function (a) {
     this.length = a;
@@ -5833,6 +5972,19 @@ ConstantMotifElement.prototype.addFiller = function (a) {
     this.fillers.push(a);
     return this
 };
+ConstantMotifElement.prototype.toString = function (c) {
+    var a = MotifElement.prototype.toString.call(this, c);
+    var d = [];
+    var b = getValueOrDefault(c, "showVelocity", false);
+    var e = getValueOrDefault(c, "showRest", true);
+    if (this.rest && e) {
+        d.push("R")
+    }
+    if (b) {
+        d.push("vel:" + this.strength)
+    }
+    return a + " " + d
+};
 ConstantMotifElement.prototype.set = function (b) {
     MotifElement.prototype.set.call(this, b);
     b.rest = this.rest;
@@ -5840,6 +5992,10 @@ ConstantMotifElement.prototype.set = function (b) {
     for (var a = 0; a < this.fillers.length; a++) {
         b.fillers.push(this.fillers[a].copy())
     }
+};
+ConstantMotifElement.prototype.setRest = function (a) {
+    this.rest = a;
+    return this
 };
 ConstantMotifElement.prototype.getBeatLength = function (a, b) {
     return positionUnitToBeats(this.length, this.lengthUnit, a, b)
@@ -5855,6 +6011,29 @@ function VerticalRelativeMotifElement() {
     this._constructorName = "VerticalRelativeMotifElement"
 }
 VerticalRelativeMotifElement.prototype = new ConstantMotifElement();
+VerticalRelativeMotifElement.prototype.toString = function (h) {
+    var j = ConstantMotifElement.prototype.toString.call(this, h);
+    var e = [];
+    var b = getValueOrDefault(h, "showIndex", true);
+    var g = getValueOrDefault(h, "showRelativeType", false);
+    var f = getValueOrDefault(h, "showOffsetType", false);
+    var d = getValueOrDefault(h, "showBeforeOffsetSnapType", false);
+    var c = getValueOrDefault(h, "showAfterOffsetSnapType", false);
+    var a = getValueOrDefault(h, "showAfterOffsetSnapType", true);
+    if (b) {
+        e.push("ind:" + this.index)
+    }
+    if (g) {
+        e.push("rt:" + VerticalRelativeType.toString(this.relativeType))
+    }
+    if (f) {
+        e.push("ot:" + OffsetType.toString(this.offsetType))
+    }
+    if (a) {
+        e.push("len:" + this.length)
+    }
+    return j + " " + e
+};
 VerticalRelativeMotifElement.prototype.setIndex = function (a) {
     this.index = a;
     return this
@@ -5970,12 +6149,54 @@ function AdaptiveMotifElement() {
     this._constructorName = "AdaptiveMotifElement"
 }
 AdaptiveMotifElement.prototype = new ClusterableMotifElement();
-var PercussionMotifMode = {
-    RYTHM_AND_ZONES: 0,
-    RYTHM_AND_RENDER_PATTERN: 1,
-    ELEMENTS: 2
+AdaptiveMotifElement.prototype.setVerticalDomainType = function (b) {
+    this.verticalDomainType = b;
+    return this
 };
-
+AdaptiveMotifElement.prototype.setVerticalRelativeType = function (b) {
+    this.verticalRelativeType = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setVerticalDomainOffsetType = function (b) {
+    this.verticalDomainOffsetType = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setVerticalDomainOffsetRange = function (b) {
+    this.verticalDomainOffsetRange = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setVerticalDomainOffsetElements = function (b) {
+    this.verticalDomainOffsetElements = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setVerticalDomainOffsetCurve = function (b) {
+    this.verticalDomainOffsetCurve = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalDomainTypes = function (b) {
+    this.horizontalDomainTypes = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalRelativeTypes = function (b) {
+    this.horizontalRelativeTypes = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalDomainOffsetTypes = function (b) {
+    this.horizontalDomainOffsetTypes = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalDomainOffsetRanges = function (b) {
+    this.horizontalDomainOffsetRanges = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalDomainOffsetElements = function (b) {
+    this.horizontalDomainOffsetElements = b;
+    return this
+};
+AdaptiveMotifElement.prototype.setHorizontalDomainOffsetLikelihoods = function (b) {
+    this.horizontalDomainOffsetLikelihoods = b;
+    return this
+};
 
 function AbstractPercussionMotif() {
     this.id = "";
@@ -6907,6 +7128,17 @@ HarmonyElement.prototype.setLength = function (a) {
 HarmonyElement.prototype.getConstantHarmonyElements = function (b, a) {
     return [this]
 };
+HarmonyElement.prototype.applyModifers = function (b, a) { };
+HarmonyReferenceHarmonyElement.prototype.getConstantHarmonyElements = function (d, b) {
+    var c = getValueOrExpressionValue(this, "harmony", d);
+    var a = d.getHarmony(c);
+    if (a) {
+        return applyHarmonyModifiers(a.getConstantHarmonyElements(d), this.modifiers, d)
+    } else {
+        console.log("Could not find harmony " + c + "<br />")
+    }
+    return []
+};
 SwitchHarmonyElement.prototype.getConstantHarmonyElements = function (f, c) {
     var a = [];
     var d = getValueOrExpressionValue(this, "index", f);
@@ -6928,6 +7160,15 @@ ConstantHarmonyElement.prototype.getConstantHarmonyElements = function (b, a) {
 };
 ConstantHarmonyElement.prototype.getBeatLength = function () {
     return positionUnitToBeats(this.length, this.lengthUnit, this.tsNumerator, this.tsDenominator)
+};
+ConstantHarmonyElement.prototype.toString = function () {
+    var b = this.getScale();
+    var a = "HarmonyElement {";
+    a += " scale: " + b;
+    a += " chordRoot: " + this.chordRoot;
+    a += " inversions: " + this.chordInversions;
+    a += "}";
+    return a
 };
 ConstantHarmonyElement.prototype.sameScale = function (d) {
     if (d.baseNote == this.baseNote) {
@@ -7059,6 +7300,14 @@ ConstantHarmonyElement.prototype.toRomanString = function () {
 ConstantHarmonyElement.prototype.copy = function () {
     return copyObjectDeep(this)
 };
+ConstantHarmonyElement.prototype.getDerivedChord = function (d, b, c) {
+    var a = this.copy();
+    var e = this.getAbsoluteNoteFromScaleIndex(d);
+    a.baseNote = e;
+    a.chordRoot = c;
+    a.scaleType = b;
+    return a
+};
 ConstantHarmonyElement.prototype.setTimeSignature = function (b, a) {
     this.tsNumerator = b;
     this.tsDenominator = a;
@@ -7115,6 +7364,15 @@ ConstantHarmonyElement.prototype.alterScaleCopy = function (c) {
     }
     return p
 };
+ConstantHarmonyElement.prototype.addAlteration = function (a, b) {
+    this.alterations.push(a);
+    this.alterations.push(b);
+    return this
+};
+ConstantHarmonyElement.prototype.clearAlterations = function () {
+    this.alterations = [];
+    return this
+};
 ConstantHarmonyElement.prototype.getScale = function () {
     var a = ScaleType.MAJOR_SCALE_STEPS;
     switch (this.scaleType) {
@@ -7126,6 +7384,11 @@ ConstantHarmonyElement.prototype.getScale = function () {
             break
     }
     return this.alterScaleCopy(a)
+};
+ConstantHarmonyElement.prototype.getHarmonyElements = function () {
+    var a = [];
+    a.push(this);
+    return a
 };
 ConstantHarmonyElement.prototype.hasSeventh = function () {
     return this.isSeventh() || this.isNinth()
@@ -7209,6 +7472,12 @@ ConstantHarmonyElement.prototype.isTriad = function () {
 ConstantHarmonyElement.prototype.is64Triad = function () {
     return this.chordType == ChordType.TRIAD && this.chordInversions == 2
 };
+ConstantHarmonyElement.prototype.is63Triad = function () {
+    return this.chordType == ChordType.TRIAD && this.chordInversions == 1
+};
+ConstantHarmonyElement.prototype.is53Triad = function () {
+    return this.chordType == ChordType.TRIAD && this.chordInversions == 0
+};
 ConstantHarmonyElement.prototype.setChordRoot = function (a) {
     this.chordRoot = a;
     return this
@@ -7227,6 +7496,9 @@ ConstantHarmonyElement.prototype.getScaleType = function () {
 ConstantHarmonyElement.prototype.setChordInversions = function (a) {
     this.chordInversions = a;
     return this
+};
+ConstantHarmonyElement.prototype.getChordInversions = function () {
+    return this.chordInversions
 };
 ConstantHarmonyElement.prototype.getChordScaleIndices = function () {
     var a = this.chordRoot;
@@ -7249,6 +7521,44 @@ ConstantHarmonyElement.prototype.getChordScaleIndices = function () {
             return [a, a + 3, a + 4, a + 6]
     }
     return this.chord
+};
+ConstantHarmonyElement.prototype.getThirdScaleIndex = function () {
+    switch (this.chordType) {
+        case ChordType.SEVENTH:
+        case ChordType.TRIAD:
+        case ChordType.NINTH:
+            return this.chordRoot + 2;
+        case ChordType.SUS2:
+        case ChordType.SUS2_SEVENTH:
+            return this.chordRoot + 1;
+        case ChordType.SUS4:
+        case ChordType.SUS4_SEVENTH:
+            return this.chordRoot + 3
+    }
+    return this.chordRoot + 2
+};
+ConstantHarmonyElement.prototype.getFifthScaleIndex = function () {
+    switch (this.chordType) {
+        case ChordType.SEVENTH:
+        case ChordType.TRIAD:
+        case ChordType.SUS2:
+        case ChordType.SUS2_SEVENTH:
+        case ChordType.SUS4:
+        case ChordType.SUS4_SEVENTH:
+        case ChordType.NINTH:
+            return this.chordRoot + 4
+    }
+    return this.chordRoot + 4
+};
+ConstantHarmonyElement.prototype.getSeventhScaleIndex = function () {
+    switch (this.chordType) {
+        case ChordType.SUS2_SEVENTH:
+        case ChordType.SUS4_SEVENTH:
+        case ChordType.SEVENTH:
+        case ChordType.NINTH:
+            return this.chordRoot + 6
+    }
+    return this.chordRoot + 7
 };
 ConstantHarmonyElement.prototype.getBassScaleIndex = function () {
     switch (this.chordType) {
@@ -7391,6 +7701,14 @@ ConstantHarmonyElement.prototype.getPitchClassesFromAbsoluteNotes = function (b)
     var a = [];
     for (var c = 0; c < b.length; c++) {
         a[c] = b[c] % 12
+    }
+    return a
+};
+ConstantHarmonyElement.prototype.getPitchClassesSetFromAbsoluteNotes = function (b) {
+    var a = {};
+    for (var d = 0; d < b.length; d++) {
+        var c = b[d] % 12;
+        a[c] = true
     }
     return a
 };
@@ -8143,6 +8461,7 @@ SequenceHarmonyElement.prototype.getBeatLengths = function (c) {
             var s = u[N];
             addAll(P, A(s))
         }
+        if (u.length != P.length) { }
         u = P
     }
     return u
@@ -8568,7 +8887,17 @@ PhraseHarmonyElement.prototype.getLengthInfos = function (d, b) {
     }
     return p
 };
+PhraseHarmonyElement.prototype.countSevenths = function (b) {
+    var a = 0;
+    for (var c = 0; c < b.length; c++) {
+        if (b[c].chordType == ChordType.SEVENTH) {
+            a++
+        }
+    }
+    return a
+};
 PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
+    harmonyTimer.start();
     var aD = getValueOrExpressionValue(this, "seed", bv);
     var N = getValueOrExpressionValue(this, "scaleBaseNote", bv);
     var aX = this.getBeatLengths(bv);
@@ -9404,7 +9733,9 @@ PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
         var bi = false;
         for (var ak = 0; ak < ba.length; ak++) {
             var ao = ba[ak].toRomanString().indexOf("X") >= 0;
+            if (ao) { }
             var a4 = ba[ak].toRomanString().indexOf("sus") >= 0;
+            if (a4) { }
             var M = ba[ak].toRomanString().indexOf("NX") >= 0 || ba[ak].toRomanString().indexOf("NMX") >= 0;
             var a4 = ba[ak].toRomanString().indexOf("sus") >= 0;
             var bk = ba[ak].note.indexOf("D, E") >= 0
@@ -9463,6 +9794,7 @@ PhraseHarmonyElement.prototype.getConstantHarmonyElements = function (bv, bq) {
             ba[ba.length - 1].voiceLineConstraints.push(h[ak])
         }
     }
+    harmonyTimer.pause();
     return ba
 };
 
@@ -9491,6 +9823,9 @@ VoiceLine.prototype.getCount = function () {
 VoiceLine.prototype.addVoiceLineElement = function (a) {
     this.lineElements.push(a);
     return this
+};
+VoiceLine.prototype.toString = function () {
+    return this.lineElements.toString()
 };
 VoiceLine.prototype.getSingleStepVoiceLineElements = function (b, e) {
     var a = [];
@@ -9737,6 +10072,27 @@ function ConstantVoiceLine() {
     this._constructorName = "ConstantVoiceLine"
 }
 ConstantVoiceLine.prototype = new VoiceLine();
+ConstantVoiceLine.prototype.toString = function (c) {
+    var a = "[";
+    for (var d = 0; d < this.lineElements.length; d++) {
+        var h = this.lineElements[d];
+        a += h.index;
+        var f = [];
+        if (c && c.showAbsoluteNote && c.harmony) {
+            var g = c.harmony.get(d);
+            var b = g.getAbsoluteNoteConstantVoiceLineElement(h);
+            f.push("abs: " + b)
+        }
+        if (f.length > 0) {
+            a += " (" + f + ")"
+        }
+        if (d < this.lineElements.length - 1) {
+            a += ", "
+        }
+    }
+    a += "]";
+    return a
+};
 
 function VoiceLineElement() {
     this.id = "";
@@ -9798,6 +10154,10 @@ ConstantVoiceLineElement.prototype.setIndex = function (a) {
     this.index = a;
     return this
 };
+ConstantVoiceLineElement.prototype.setOctaves = function (a) {
+    this.octaves = a;
+    return this
+};
 ConstantVoiceLineElement.prototype.setIndexType = function (a) {
     this.indexType = a;
     return this
@@ -9841,6 +10201,7 @@ function Structure() {
     this._constructorName = "Structure"
 }
 Structure.prototype.renderBatch = function (e, a) {
+    composeTimer.start();
     for (var b = 0; b < this.references.length; b++) {
         var d = this.references[b];
         if (d.active) {
@@ -9854,7 +10215,17 @@ Structure.prototype.renderBatch = function (e, a) {
             a(c)
         }
     }
+    composeTimer.pause()
 };
+Structure.prototype.renderSection = function (c, a) {
+    var b = this.references[a];
+    if (b) {
+        b.renderBatch(c)
+    } else {
+        console.log(this._constructorName + ": Could not find section with index " + a)
+    }
+};
+
 function RenderState(a, b) {
     this.module = a;
     this.data = b;
@@ -9932,6 +10303,36 @@ RenderData.prototype.addEvents = function (a) {
 RenderData.prototype.getEvents = function () {
     return this.events
 };
+RenderData.prototype.getNonOverlappingDatas = function () {
+    var a = [];
+    return a
+};
+RenderData.prototype.getTimeLimits = function () {
+    var a = this.events.length == 0 ? 0 : 99999999;
+    var b = this.events.length == 0 ? 0 : -99999999;
+    for (var d = 0; d < this.events.length; d++) {
+        var f = this.events[d];
+        var c = f.getTime();
+        a = Math.min(a, c);
+        b = Math.max(b, c)
+    }
+    return [a, b]
+};
+RenderData.prototype.splitOnTime = function (f) {
+    var c = new RenderData();
+    var g = new RenderData();
+    for (var b = 0; b < this.events.length; b++) {
+        var d = this.events[b];
+        if (d.getTime() >= f) {
+            g.events.push(d)
+        } else {
+            c.events.push(d)
+        }
+    }
+    var a = [c, g];
+    return a
+};
+
 function RenderEvent(a) {
     this.time = a
 }
@@ -9982,6 +10383,9 @@ NoteOnEvent.prototype.netJSONTransformProperty = function (a, b, c, d) {
         return RenderEvent.prototype.netJSONTransformProperty.call(this, a, b, c, d)
     }
 };
+NoteOnEvent.prototype.toString = function () {
+    return "noteOn(" + this.note + ", " + this.time + ", " + this.onVelocity + ", " + this.renderChannel.id + ")"
+};
 
 function NoteOffEvent(c, d, b, a) {
     RenderEvent.call(this, d);
@@ -10005,6 +10409,9 @@ NoteOffEvent.prototype.netJSONTransformProperty = function (a, b, c, d) {
     } else {
         return RenderEvent.prototype.netJSONTransformProperty.call(this, a, b, c, d)
     }
+};
+NoteOffEvent.prototype.toString = function () {
+    return "noteOff(" + this.note + ", " + this.time + ", " + this.offVelocity + ", " + this.renderChannel.id + ")"
 };
 
 function SetControlEvent(b, c, a) {
@@ -10041,6 +10448,9 @@ SetTempoEvent.prototype.netJSONPropertiesMap = {
     bpm: "b"
 };
 SetTempoEvent.prototype.netJSONType = "t";
+SetTempoEvent.prototype.toString = function () {
+    return "setTempo(" + this.bpm + ", " + this.time + ")"
+};
 
 function HarmonyGenerator(a) {
     DfsSolver.call(this, a);
@@ -10093,6 +10503,9 @@ HarmonyGenerator.prototype.calculateSeventhToTriadCosts = function (d, k, h, g) 
             }
         }
     }
+};
+HarmonyGenerator.prototype.getCostFromLikelihood = function (a) {
+    return a > 0 ? -Math.log(a) : 99999999999
 };
 HarmonyGenerator.prototype.calculateSusCosts = function (c, m, k, g, j, e) {
     var a = c.state;
@@ -10379,6 +10792,11 @@ HarmonyGenerator.prototype.getBassPassingChords = function (f, b, c, m, a) {
     var l = this.filterChords(f, g, m, a);
     return l
 };
+HarmonyGenerator.prototype.getThirdFromBassPassingChords = function (b, c, a) { };
+HarmonyGenerator.prototype.getFifthFromBassPassingChords = function (b, c, a) { };
+HarmonyGenerator.prototype.getSeventhFromBassPassingChords = function (b, c, a) { };
+HarmonyGenerator.prototype.prepareBeforeSearch = function () { };
+HarmonyGenerator.prototype.searchDone = function () { };
 
 function StaticHarmonyState() {
     this.harmony = null;
@@ -10387,6 +10805,9 @@ function StaticHarmonyState() {
     this.auxiliaryRoot = 0;
     this.stepCost = 0
 }
+StaticHarmonyState.prototype.toString = function () {
+    return "SHS {harmony: " + this.harmony + "mode: " + this.mode + "stepCost: " + this.stepCost + (this.targetHarmony ? "targetHarmony: " + this.targetHarmony : "") + "}"
+};
 
 function StaticHarmonyGenerator(a) {
     HarmonyGenerator.call(this, a);
@@ -10944,6 +11365,9 @@ function DynamicHarmonyState() {
     this.stepCost = 0;
     this._constructorName = "DynamicHarmonyState"
 }
+DynamicHarmonyState.prototype.toString = function () {
+    return "DHS {harmony: " + this.harmony + "mode: " + this.mode + (this.targetHarmony ? "targetHarmony: " + this.targetHarmony : "") + "}"
+};
 DynamicHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -11503,6 +11927,7 @@ DynamicHarmonyGenerator.prototype.isGoalState = function (f) {
         default:
             return false
     }
+    return false
 };
 DynamicHarmonyGenerator.prototype.isInvalidState = function (a) {
     return false
@@ -11895,6 +12320,8 @@ DynamicHarmonyGenerator.prototype.getRootStatesAndLikelihoods = function (ai, av
             this.getChordsStuff(aB, aL, this.simpleMixtureLikelihood * at[T], J[T], this.mixtureSeventhLikelihoods, this.mixtureTriadLikelihoods, this.mixtureSeventhCosts, this.mixtureTriadCosts, av, ah, ag)
         }
     }
+    if (this.passingLikelihood > 0) { }
+    if (this.expansionLikelihood > 0) { }
 };
 DynamicHarmonyGenerator.prototype.getSuccessorIterator = function (d) {
     var e = d.state;
@@ -11930,6 +12357,9 @@ function ChromaticTransitionHarmonyState() {
     this.stepCost = 0;
     this._constructorName = "ChromaticTransitionHarmonyState"
 }
+ChromaticTransitionHarmonyState.prototype.toString = function () {
+    return JSON.stringify(this)
+};
 ChromaticTransitionHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -12105,6 +12535,9 @@ function ChromaticOscillationHarmonyState() {
     this.mode = 0;
     this._constructorName = "ChromaticOscillationHarmonyState"
 }
+ChromaticOscillationHarmonyState.prototype.toString = function () {
+    return JSON.stringify(this)
+};
 ChromaticOscillationHarmonyState.prototype.copy = function () {
     return copyObjectDeep(this)
 };
@@ -12367,6 +12800,9 @@ function VoiceLineSearchNode(b, c, a) {
     this.resultIndex = a;
     this.totalCost = 0
 }
+VoiceLineSearchNode.prototype.toString = function () {
+    return "VLSN {state: " + this.state + "depth: " + this.depth + "}"
+};
 
 function VoiceLineGenerator(a) {
     this.reusables = getValueOrDefault(a, "reusables", {});
@@ -12387,6 +12823,13 @@ function VoiceLineGenerator(a) {
 }
 VoiceLineGenerator.prototype.getlargeLeapToPitchClassPenaltyCount = function (d, b, c, a) {
     if ((b % 12) == a) {
+        return this.getlargeLeapPenaltyCount(d, b, c)
+    } else {
+        return 0
+    }
+};
+VoiceLineGenerator.prototype.getlargeLeapFromPitchClassPenaltyCount = function (d, b, c, a) {
+    if ((d % 12) == a) {
         return this.getlargeLeapPenaltyCount(d, b, c)
     } else {
         return 0
@@ -12502,7 +12945,9 @@ VoiceLineGenerator.prototype.search = function () {
     var n = [];
     this.bestSolutionCost = 99999999;
     this.resultStates = [];
+    voiceLeadingPrepareTimer.start();
     this.prepareBeforeSearch();
+    voiceLeadingPrepareTimer.pause();
     var g = this.harmony.getConstantHarmonyElements();
     var b = 0;
     var m = 0;
@@ -12540,6 +12985,9 @@ ClassicalVoiceLineState.prototype.copy = function () {
     var a = new ClassicalVoiceLineState();
     a.stateIndex = this.stateIndex;
     return a
+};
+ClassicalVoiceLineState.prototype.toString = function () {
+    return "CVLS{stateIndex: " + this.stateIndex + "}"
 };
 
 function ClassicalVoiceLineGenerator(a) {
@@ -13376,6 +13824,15 @@ VoiceLinePlannerConstraint.prototype.oneStepCost = function (b, c, a, d) {
 VoiceLinePlannerConstraint.prototype.twoStepCost = function (b, d, c, a, e) {
     return 0
 };
+VoiceLinePlannerConstraint.prototype.zeroStepValid = function (b, a, c) {
+    return true
+};
+VoiceLinePlannerConstraint.prototype.oneStepValid = function (b, c, a, d) {
+    return true
+};
+VoiceLinePlannerConstraint.prototype.twoStepValid = function (b, d, c, a, e) {
+    return true
+};
 EmptyVoiceLinePlannerConstraint.prototype.getCheckCostSteps = function () {
     return []
 };
@@ -13896,6 +14353,7 @@ ClassicalVoiceLinePlanner.prototype.planVoices = function (L, y, f, w) {
     };
     var z = new ClassicalVoiceLineGenerator(C);
     z.constraints = a;
+    voiceLeadingTimer.start();
     var U = null;
     var c = JSON.stringify(z);
     z.reusables = f.reusables;
@@ -13906,6 +14364,7 @@ ClassicalVoiceLinePlanner.prototype.planVoices = function (L, y, f, w) {
         U = z.search();
         f.reusables[c] = U
     }
+    voiceLeadingTimer.pause();
     if (U) {
         for (var R = 0; R < U.length; R++) {
             U[R].id = L[R].id
@@ -14068,6 +14527,7 @@ MidiRenderer.prototype.getMidiData = function (y, c, h) {
                 var l = clamp(Math.round(C.value * e.amplitude + e.bias), 0, 127);
                 var a = MidiControllerType.getValue(e.controllerType);
                 if (e && (h.exportEffects && e.controllerType != MidiControllerType.VOLUME || h.exportVolume && e.controllerType == MidiControllerType.VOLUME)) {
+                    if (a == MidiControllerType.VOLUME) { }
                     if (!k[e.channel]) {
                         q = {
                             eventTime: x,

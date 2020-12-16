@@ -16,13 +16,18 @@ namespace AbundantMusic.NET
     {
         private static readonly string[] resources = new string[]
         {
-            "abundant_music_composer.js.enums.js",
             "abundant_music_composer.js.utilities.js",
-            "abundant_music_composer.js.geninfo.js",
-            "abundant_music_composer.js.prototypes.js",
+            "abundant_music_composer.js.other-functions.js",
+
             "abundant_music_composer.js.midi.js",
+            "abundant_music_composer.js.fakebytearray.js",
+            "abundant_music_composer.js.mersennetwister.js",
+            
+            "abundant_music_composer.js.enums.js",
+            "abundant_music_composer.js.geninfo.js",
             "abundant_music_composer.js.geninfo.overrides.js",
-            "abundant_music_composer.js.abundant-music-consolidated.js"
+            "abundant_music_composer.js.prototypes.js",
+            "abundant_music_composer.js.main.js"
         };
 
         private static readonly List<IPrecompiledScript> scripts;

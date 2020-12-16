@@ -1,4 +1,3 @@
-'use strict';
 
 // When you first navigate to Abundant Music (https://pernyblom.github.io/abundant-music/index.html) and type in a seed,
 // the song that generates is NOT using the default GenInfo properties on the GenInfo object.

@@ -1,4 +1,3 @@
-'use strict';
 
 function GenInfo() {
     this.globalSeed = 123456;

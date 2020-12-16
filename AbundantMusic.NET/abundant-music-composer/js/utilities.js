@@ -1,3 +1,4 @@
+
 function intervalIntersect(b, a) {
     return !(b[1] < a[0] || b[0] > a[1])
 }
@@ -26,7 +27,7 @@ function hashCode(c) {
     if (c.length == 0) {
         return b
     }
-    for (let i = 0; i < c.length; i++) {
+    for (i = 0; i < c.length; i++) {
         var a = c.charCodeAt(i);
         b = ((b << 5) - b) + a;
         b = b & b
@@ -332,11 +333,28 @@ function toPitchClassString(b) {
     return "?"
 }
 
+function getValue2LevelsOrDefault(e, b, a, d) {
+    if (e && e[b]) {
+        var c = e[b][a];
+        if (!(typeof (c) === "undefined")) {
+            return c
+        }
+    }
+    return d
+}
+
 function copyValueDeep(g, f, d) {
     if (isArray(g)) {
         var a = [];
-        for (var e = 0; e < g.length; e++) {
-            a[e] = copyValueDeep(g[e], f, d)
+        if (d && d.propertyInfo && d.propertyInfo.dataType == GuiPropertyDataType.ID_REFERENCE_LIST) {
+            var c = d.propertyInfo.uniqueIdInfo;
+            for (var e = 0; e < g.length; e++) {
+                a[e] = getValue2LevelsOrDefault(d.oldToNewIdMap, c.namespace, g[e], g[e])
+            }
+        } else {
+            for (var e = 0; e < g.length; e++) {
+                a[e] = copyValueDeep(g[e], f, d)
+            }
         }
         return a
     } else {
@@ -346,6 +364,13 @@ function copyValueDeep(g, f, d) {
             if (typeof (g) === "object") {
                 return copyObjectDeep(g, d)
             } else {
+                if (d && d.propertyInfo) {
+                    if (d.propertyInfo.dataType == GuiPropertyDataType.UNIQUE_ID || d.propertyInfo.dataType == GuiPropertyDataType.ID_REFERENCE) {
+                        var c = d.propertyInfo.uniqueIdInfo;
+                        var b = getValue2LevelsOrDefault(d.oldToNewIdMap, c.namespace, g, g);
+                        return b
+                    }
+                }
                 return g
             }
         }
@@ -367,7 +392,6 @@ function copyObjectPropertiesDeep(e, d, a) {
         }
     }
 }
-
 var isValidFunctionName = function () {
     var b = /^[$A-Z_][0-9A-Z_$]*$/i;
     var a = {
@@ -389,8 +413,7 @@ function copyObjectDeep(obj, options) {
         copy = {}
     } else {
         if (isValidFunctionName(obj._constructorName)) {
-            //copy = eval("new " + obj._constructorName + "()")
-            copy = Object.create(obj);
+            copy = eval("new " + obj._constructorName + "()")
         } else {
             copy = {}
         }
@@ -403,6 +426,10 @@ function copyObjectDeep(obj, options) {
             options.propertyInfos = propertyInfos
         } else {
             options.propertyInfos = null
+        }
+        if (!options.oldToNewIdMap) {
+            options.oldToNewIdMap = {};
+            traverseObject(obj, propertyInfoProvider, createOldToNewIdMap, null, options.oldToNewIdMap)
         }
     }
     copyObjectPropertiesDeep(copy, obj, options);
@@ -417,7 +444,7 @@ function objectToJson(g, a, b) {
         a = []
     }
     if (!b) {
-        b = new CustomMap(true)
+        b = new Map(true)
     }
     var f = b.get(g);
     if (f) {
@@ -490,7 +517,7 @@ function traverseValue(g, f, a) {
         return
     }
     if (!a) {
-        a = new CustomMap(true)
+        a = new Map(true)
     }
     if (isArray(g)) {
         for (var c = 0; c < g.length; c++) {
@@ -513,9 +540,118 @@ function traverseValue(g, f, a) {
                         }
                     }
                 }
+            } else {
+                if (typeof (g) === "string") { } else { }
             }
         }
     }
+}
+
+function getExpressionValue(expression, module, extraVars, verbose, object, propName) {
+    var result = null;
+    var exprIsString = typeof (expression) === "string";
+    if (exprIsString && !expression.match(/[a-z]/i)) {
+        result = eval(expression);
+        return result
+    }
+    if (exprIsString && !expression.match(/[^a-z]/i)) {
+        var variable = module.getVariable(expression);
+        if (variable) {
+            result = variable.getValue(module);
+            return result
+        }
+    }
+    var foundVars = {};
+    var myArray = null;
+    var replacedExpression = expression;
+    var replaceSuccess = true;
+    do {
+        myArray = /([a-z][a-z0-9]*Var)/gi.exec(replacedExpression);
+        if (myArray) {
+            for (var i = 0; i < myArray.length; i++) {
+                var varName = myArray[i];
+                var variable = module.getVariable(varName);
+                if (variable) {
+                    foundVars[variable.id] = variable;
+                    var varValue = variable.getValue(module);
+                    var valueType = typeof (varValue);
+                    if (valueType === "string" || valueType === "number" || isArray(varValue)) {
+                        var re = new RegExp(myArray[i], "g");
+                        replacedExpression = replacedExpression.replace(re, JSON.stringify(variable.getValue(module)))
+                    } else {
+                        replaceSuccess = false;
+                        break
+                    }
+                } else {
+                    replaceSuccess = false;
+                    break
+                }
+            }
+        }
+    } while (myArray != null && replaceSuccess);
+    if (replaceSuccess) {
+        try {
+            var result = eval(replacedExpression);
+            return result
+        } catch (exc) {
+            console.log("Error when evaluating " + replacedExpression + " original: " + expression + " exc: " + exc)
+        }
+    }
+    var prv = {};
+
+    function prop(name, def) {
+        prv[name] = def;
+        return function (value) {
+            if (typeof value === "undefined") {
+                return Object.prototype.hasOwnProperty.call(prv, name) ? prv[name] : undefined
+            }
+            prv[name] = value;
+            return this
+        }
+    }
+    var pub = {};
+    pub.module = prop("module", module);
+    for (var varId in foundVars) {
+        var v = foundVars[varId];
+        pub[v.id] = prop(v.id, v.getValue(module))
+    }
+    for (var i = 0; i < module.procedures.length; i++) {
+        var v = module.procedures[i];
+        pub[v.id] = prop(v.id, v.getProcedure(module))
+    }
+    if (extraVars) {
+        for (var varName in extraVars) {
+            pub[varName] = prop(varName, extraVars[varName])
+        }
+    }
+    pub.getTheValue = function () {
+        with (prv) {
+            return eval(expression)
+        }
+    };
+    result = pub.getTheValue();
+    return result
+}
+
+function getValueOrExpressionValue(b, d, a, e, c) {
+    var j = b[d];
+    try {
+        if (b[d + "UseExpression"]) {
+            var g = b[d + "Expression"];
+            if (g) {
+                if (c) {
+                    console.log("Found expression " + g)
+                }
+                var h = getExpressionValue(g, a, e, c, b, d);
+                if (h != null) {
+                    j = h
+                }
+            }
+        }
+    } catch (f) {
+        console.log("Expression eval error. useExpression: " + b[d + "UseExpression"] + " expression: " + b[d + "Expression"])
+    }
+    return j
 }
 
 function createFilledArray(d, c) {
@@ -559,6 +695,19 @@ function snapMidiTicks(d, a) {
     return d - b / a
 }
 
+function addPossibleValuesFunction(a, c, b) {
+    a.possibleValues = null;
+    a.getPossibleValues = function () {
+        if (!a.possibleValues) {
+            a.possibleValues = [];
+            for (var d = c; d <= b; d++) {
+                a.possibleValues.push(d)
+            }
+        }
+        return a.possibleValues
+    }
+}
+
 function stringEndsWith(b, a) {
     return b.length == a.length ? b == a : b.indexOf(a, b.length - a.length) !== -1
 }
@@ -571,4 +720,94 @@ function getArrayValueOrDefault(a, c, e, d) {
         }
     }
     return e
+}
+
+function validateArrayValue(arrayValue, allowedTypes, defaultAllowedArrayTypes, correct) {
+    if (!allowedTypes) {
+        allowedTypes = defaultAllowedArrayTypes
+    }
+    if (!allowedTypes) {
+        return false
+    }
+    var result = true;
+    var type = typeof (arrayValue);
+    if (isArray(arrayValue)) {
+        result = allowedTypes.array
+    } else {
+        if (type === "object") {
+            result = allowedTypes[arrayValue._constructorName];
+            if (result) {
+                var safeValue = eval("new " + arrayValue._constructorName + "()");
+                result = validateValueWithSafeValue(arrayValue, safeValue, null, defaultAllowedArrayTypes, correct)
+            }
+        } else {
+            result = allowedTypes[type]
+        }
+    }
+    return result
+}
+
+function validateValueWithSafeValue(q, g, j, h, p) {
+    if (!q) {
+        return true
+    }
+    var f = typeof (q);
+    var m = typeof (g);
+    if (f != m) {
+        return false
+    }
+    var l = true;
+    if (isArray(q)) {
+        if (!isArray(g)) {
+            return false
+        }
+        var n = true;
+        for (var k = 0; k < q.length; k++) {
+            var e = q[k];
+            var c = validateArrayValue(e, j, h, p);
+            if (!c) {
+                console.log("Type not valid in array " + e + " " + typeof (e) + " " + j);
+                n = false;
+                break
+            }
+        }
+        if (!n) {
+            if (p) {
+                q.length = 0;
+                return true
+            } else {
+                return false
+            }
+        }
+    } else {
+        if (f == "object") {
+            for (var b in q) {
+                var a = g[b];
+                if (typeof (a) == "undefined") {
+                    console.log("Property " + b + " in " + g._constructorName + " did not exist");
+                    if (p) {
+                        console.log("Removed it!");
+                        delete q[b];
+                        return true
+                    }
+                    return false
+                } else {
+                    var d = q[b];
+                    var o = g[b + "_allowedTypes"];
+                    var r = validateValueWithSafeValue(d, a, o, h, p);
+                    if (!r) {
+                        console.log("Property " + b + " in " + g._constructorName + " was not valid");
+                        if (p) {
+                            console.log("Used default value for it instead!");
+                            q[b] = a;
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return l
 }

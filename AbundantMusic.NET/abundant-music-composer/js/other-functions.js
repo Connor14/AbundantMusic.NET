@@ -1,340 +1,3 @@
-'use strict';
-
-function getExpressionValue(expression, module, extraVars, verbose, object, propName) {
-    var result = null;
-    var exprIsString = typeof (expression) === "string";
-    // expression does not contain a letter (i option is ignore case)
-    // I suppose these could be symbols and numbers, but in a couple of test cases, the value was always 1
-    if (exprIsString && !expression.match(/[a-z]/i)) { 
-        // always seems to return 1
-        //result = eval(expression);
-        result = +expression;
-        return result 
-    }
-    if (exprIsString && !expression.match(/[^a-z]/i)) {
-        var variable = module.getVariable(expression);
-        if (variable) {
-            result = variable.getValue(module);
-            return result
-        }
-    }
-    var foundVars = {};
-    var myArray = null;
-    var replacedExpression = expression;
-    var replaceSuccess = true;
-    do {
-        myArray = /([a-z][a-z0-9]*Var)/gi.exec(replacedExpression);
-        if (myArray) {
-            for (var i = 0; i < myArray.length; i++) {
-                var varName = myArray[i];
-                var variable = module.getVariable(varName);
-                if (variable) {
-                    foundVars[variable.id] = variable;
-                    var varValue = variable.getValue(module);
-                    var valueType = typeof (varValue);
-                    if (valueType === "string" || valueType === "number" || isArray(varValue)) {
-                        var re = new RegExp(myArray[i], "g");
-                        replacedExpression = replacedExpression.replace(re, JSON.stringify(variable.getValue(module)))
-                    } else {
-                        replaceSuccess = false;
-                        break
-                    }
-                } else {
-                    replaceSuccess = false;
-                    break
-                }
-            }
-        }
-    } while (myArray != null && replaceSuccess);
-    if (replaceSuccess) {
-        try {
-            var result = eval(replacedExpression);
-            return result
-        } catch (exc) {
-            console.log("Error when evaluating " + replacedExpression + " original: " + expression + " exc: " + exc)
-        }
-    }
-    var prv = {};
-
-    function prop(name, def) {
-        prv[name] = def;
-        return function (value) {
-            if (typeof value === "undefined") {
-                return Object.prototype.hasOwnProperty.call(prv, name) ? prv[name] : undefined
-            }
-            prv[name] = value;
-            return this
-        }
-    }
-    var pub = {};
-    pub.module = prop("module", module);
-    for (var varId in foundVars) {
-        var v = foundVars[varId];
-        pub[v.id] = prop(v.id, v.getValue(module))
-    }
-    if (extraVars) {
-        for (var varName in extraVars) {
-            pub[varName] = prop(varName, extraVars[varName])
-        }
-    }
-    pub.getTheValue = function () {
-        return prv[expression];
-        // with / eval are dangerous. 'expression' is just a path to an property on the 'prv' object, so using prv[expression] works fine.
-        //with (prv) {
-        //    return eval(expression)
-        //}
-    };
-    result = pub.getTheValue();
-    return result
-}
-
-function getValueOrExpressionValue(b, d, a, e, c) {
-    var j = b[d];
-    try {
-        if (b[d + "UseExpression"]) {
-            var g = b[d + "Expression"];
-            if (g) {
-                if (c) {
-                    console.log("Found expression " + g)
-                }
-                var h = getExpressionValue(g, a, e, c, b, d);
-                if (h != null) {
-                    j = h
-                }
-            }
-        }
-    } catch (f) {
-        console.log("Expression eval error. useExpression: " + b[d + "UseExpression"] + " expression: " + b[d + "Expression"])
-    }
-    return j
-}
-
-function validateArrayValue(arrayValue, allowedTypes, defaultAllowedArrayTypes, correct) {
-    if (!allowedTypes) {
-        allowedTypes = defaultAllowedArrayTypes
-    }
-    if (!allowedTypes) {
-        return false
-    }
-    var result = true;
-    var type = typeof (arrayValue);
-    if (isArray(arrayValue)) {
-        result = allowedTypes.array
-    } else {
-        if (type === "object") {
-            result = allowedTypes[arrayValue._constructorName];
-            if (result) {
-                //var safeValue = eval("new " + arrayValue._constructorName + "()");
-                var safeValue = Object.create(arrayValue);
-                result = validateValueWithSafeValue(arrayValue, safeValue, null, defaultAllowedArrayTypes, correct)
-            }
-        } else {
-            result = allowedTypes[type]
-        }
-    }
-    return result
-}
-
-function validateValueWithSafeValue(q, g, j, h, p) {
-    if (!q) {
-        return true
-    }
-    var f = typeof (q);
-    var m = typeof (g);
-    if (f != m) {
-        return false
-    }
-    var l = true;
-    if (isArray(q)) {
-        if (!isArray(g)) {
-            return false
-        }
-        var n = true;
-        for (var k = 0; k < q.length; k++) {
-            var e = q[k];
-            var c = validateArrayValue(e, j, h, p);
-            if (!c) {
-                console.log("Type not valid in array " + e + " " + typeof (e) + " " + j);
-                n = false;
-                break
-            }
-        }
-        if (!n) {
-            if (p) {
-                q.length = 0;
-                return true
-            } else {
-                return false
-            }
-        }
-    } else {
-        if (f == "object") {
-            for (var b in q) {
-                var a = g[b];
-                if (typeof (a) == "undefined") {
-                    console.log("Property " + b + " in " + g._constructorName + " did not exist");
-                    if (p) {
-                        console.log("Removed it!");
-                        delete q[b];
-                        return true
-                    }
-                    return false
-                } else {
-                    var d = q[b];
-                    var o = g[b + "_allowedTypes"];
-                    var r = validateValueWithSafeValue(d, a, o, h, p);
-                    if (!r) {
-                        console.log("Property " + b + " in " + g._constructorName + " was not valid");
-                        if (p) {
-                            console.log("Used default value for it instead!");
-                            q[b] = a;
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return l
-}
-
-function positionUnitToBeats2(a, h, b, e) {
-    var k = e.getHarmonyIndexAt(b);
-    var g = e.get(k);
-    var j = 0;
-    for (var d = k; d >= 0; d--) {
-        var c = e.get(d);
-        if (c.startsPhrase) {
-            j = d;
-            break
-        }
-    }
-    var f = e.getCount();
-    for (var d = k; d < e.getCount(); d++) {
-        var c = e.get(d);
-        if (c.startsPhrase) {
-            f = Math.max(d - 1, k);
-            break
-        }
-    }
-    return positionUnitToBeats(a, h, g.tsNumerator, g.tsDenominator, e, g, [j, f])
-}
-
-function positionUnitToBeats(c, n, a, d, j, m, k) {
-    var p = 1;
-    switch (d) {
-        case 2:
-            p = 0.5;
-            break;
-        case 4:
-            p = 1;
-            break;
-        case 8:
-            p = 2;
-            break
-    }
-    switch (n) {
-        case PositionUnit.BEATS:
-            return c;
-        case PositionUnit.BEAT_THIRDS:
-            return c / 3;
-        case PositionUnit.BEAT_FOURTHS:
-            return c / 4;
-        case PositionUnit.BEAT_FIFTHS:
-            return c / 5;
-        case PositionUnit.BEAT_SIXTHS:
-            return c / 6;
-        case PositionUnit.BEAT_SEVENTHS:
-            return c / 7;
-        case PositionUnit.BEAT_EIGHTHS:
-            return c / 8;
-        case PositionUnit.BEAT_NINTHS:
-            return c / 9;
-        case PositionUnit.QUARTER_NOTES:
-            return p * c;
-        case PositionUnit.EIGHTH_NOTES:
-            return p * 0.5 * c;
-        case PositionUnit.HALF_NOTES:
-            return p * 2 * c;
-        case PositionUnit.MEASURES:
-            return a * c;
-        case PositionUnit.SIXTEENTH_NOTES:
-            return p * 0.25 * c;
-        case PositionUnit.WHOLE_NOTES:
-            return p * 4 * c;
-        case PositionUnit.BEATS_PLUS_MEASURE:
-            return a + c;
-        case PositionUnit.HARMONY:
-            if (j) {
-                return c * j.getBeatLength()
-            } else {
-                return c * a
-            }
-        case PositionUnit.HARMONY_ELEMENTS:
-            if (m) {
-                return c * positionUnitToBeats(m.length, m.lengthUnit, a, d)
-            } else {
-                return c * a
-            }
-        case PositionUnit.BEATS_PLUS_HARMONY_ELEMENT:
-            if (m) {
-                return c + positionUnitToBeats(m.length, m.lengthUnit, a, d)
-            } else {
-                return a + c
-            }
-        case PositionUnit.BEATS_PLUS_HARMONY:
-            if (j) {
-                return c + j.getBeatLength()
-            } else {
-                return a + c
-            }
-        case PositionUnit.HARMONY_INDEX:
-            if (j) {
-                var l = Math.floor(c);
-                var b = c - l;
-                var h = 0;
-                var g = null;
-                for (var f = 0; f < l; f++) {
-                    var e = j.get(f);
-                    if (e) {
-                        h += positionUnitToBeats(e.length, e.lengthUnit, e.tsNumerator, e.tsDenominator, null);
-                        g = e
-                    }
-                }
-                var o = j.get(l);
-                if (!o) {
-                    o = g
-                }
-                if (o) {
-                    h += positionUnitToBeats(o.length * b, o.lengthUnit, o.tsNumerator, o.tsDenominator, null)
-                }
-                return h
-            } else {
-                return positionUnitToBeats(c, PositionUnit.MEASURES, a, d, j)
-            }
-            break;
-        case PositionUnit.PHRASE:
-            if (j) {
-                if (k) {
-                    var q = 0;
-                    for (var f = k[0]; f <= k[1]; f++) {
-                        if (f >= 0 && f < j.getCount()) {
-                            q += j.get(f).getBeatLength()
-                        }
-                    }
-                    return c * q
-                } else {
-                    return c * j.getBeatLength()
-                }
-            } else {
-                return c * a
-            }
-            break
-    }
-    return c
-}
 
 function applyHarmonyModifiers(e, b, d) {
     for (var c = 0; c < b.length; c++) {
@@ -1318,13 +981,6 @@ function createPercussionMotifInfos(P, r, C, e, b, s) {
         }
         return ac
     }
-
-    // moved from inside the next for loop
-    function J(ae, j, ad) {
-        var ac = j[0] + ad.random() * (j[1] - j[0]);
-        return ae + "RenderAmountVar > " + ac
-    }
-
     for (var Y = 0; Y < P; Y++) {
         var Z = {};
         var y = copyValueDeep(q);
@@ -1377,6 +1033,10 @@ function createPercussionMotifInfos(P, r, C, e, b, s) {
         var W = 0.8;
         var w = 16;
 
+        function J(ae, j, ad) {
+            var ac = j[0] + ad.random() * (j[1] - j[0]);
+            return ae + "RenderAmountVar > " + ac
+        }
         if (D) {
             var T = {};
             var L = ab;
@@ -2859,6 +2519,7 @@ function createEffectChangeInfos(E, y, n) {
         var ao = getValueOrDefault(ad, "prefix", "melody");
         var at = getValueOrDefault(ad, "effect", "FilterF");
         var T = getValueOrDefault(ad, "infos", []);
+        if (X.length == 0 && ao == "percussion") { }
         var L = 0;
         var W = 1;
         var aj = 1;
@@ -4492,6 +4153,7 @@ function createPhraseGroupInfo(b7, cY, cx) {
                 aw = 0.5;
                 aQ = [0.3, 0.5]
             }
+            if (a2) { }
             a2[bO] = bO == 0 && bR && aO.random() < aw ? 1 : 0;
             ct[bO] = bO == aX.length - 1 && a0 && aO.random() < c ? 1 : 0;
             a2[bO] *= cY.prefixGlueProbabilityMultiplier;
@@ -5020,6 +4682,16 @@ function createPhraseGroupInfo(b7, cY, cx) {
     return Y
 }
 
+function intersectDomains(d, b) {
+    var a = {};
+    for (var c in d) {
+        if (b[c]) {
+            a[c] = true
+        }
+    }
+    return a
+}
+
 function checkConstraints(y, d, n, p, z, l, r, b, B) {
     var A = 0;
     var h = d.groupIndices[z];
@@ -5089,6 +4761,7 @@ function checkConstraints(y, d, n, p, z, l, r, b, B) {
                     break
                 }
             }
+            if (s) { }
         }
     }
     return A
@@ -5678,6 +5351,7 @@ function createSongStructureInfo(L, a, c) {
 }
 
 function createTestModule(seed, inputGenInfo, resultObj) {
+    moduleConstructTimer.start();
     if (!resultObj) {
         resultObj = {}
     }
@@ -6845,6 +6519,98 @@ function createTestModule(seed, inputGenInfo, resultObj) {
         structure.references.push(sectionRef)
     }
     module.addStructure(structure);
+    if (!(typeof (WebAudioRenderer) === "undefined")) {
+        var waRenderer = new WebAudioRenderer();
+        waRenderer.id = "webAudioRenderer";
+        waRenderer.structure = module.getStructures()[0].id;
+        var waEnv1 = new WebAudioADSREnvelope();
+        waEnv1.id = "env1";
+        var waEnv2 = new WebAudioADSREnvelope();
+        waEnv2.id = "env2";
+        waEnv2.attack = 0.01;
+        waEnv2.release = 0.2;
+        waEnv2.sustain = 0;
+        waRenderer.envelopes = [waEnv1, waEnv2];
+        var bufferCurve1 = new PredefinedCurve();
+        bufferCurve1.id = "bufferCurve1";
+        bufferCurve1.type = PredefinedCurveType.SQUARE;
+        module.curves.push(bufferCurve1);
+        var quadNoiseCurve1 = new PredefinedCurve();
+        quadNoiseCurve1.id = "bufferCurve2";
+        quadNoiseCurve1.type = PredefinedCurveType.QUADRATIC_NOISE;
+        quadNoiseCurve1.frequency = 40;
+        module.curves.push(quadNoiseCurve1);
+        var quadNoiseCurve2 = new PredefinedCurve();
+        quadNoiseCurve2.id = "bufferCurve3";
+        quadNoiseCurve2.type = PredefinedCurveType.QUADRATIC_NOISE;
+        quadNoiseCurve2.frequency = 220;
+        module.curves.push(quadNoiseCurve2);
+        var waBuffer1 = new WebAudioCurveBufferSource();
+        waBuffer1.id = "buffer1";
+        waBuffer1.curve = bufferCurve1.id;
+        var waBuffer2 = new WebAudioCurveBufferSource();
+        waBuffer2.id = "buffer2";
+        waBuffer2.curve = quadNoiseCurve1.id;
+        waBuffer2.adaptToFrequency = false;
+        var waBuffer3 = new WebAudioCurveBufferSource();
+        waBuffer3.id = "buffer3";
+        waBuffer3.curve = quadNoiseCurve2.id;
+        waBuffer3.adaptToFrequency = false;
+        waRenderer.sources = [waBuffer1, waBuffer2, waBuffer3];
+        var zoneCounter = 1;
+
+        function createWebAudioZone(bufferId, noteInterval, ampEnvId) {
+            var result = new WebAudioSourceZone();
+            result.noteInterval = noteInterval ? noteInterval : [0, 127];
+            result.id = "waSourceZone" + zoneCounter;
+            result.amplitudeEnvelope = ampEnvId ? ampEnvId : "";
+            zoneCounter++;
+            result.source = bufferId;
+            return result
+        }
+        var waSourceZone1 = createWebAudioZone(waBuffer1.id);
+        var waSourceZone2 = createWebAudioZone(waBuffer1.id);
+        var waSourceZone3 = createWebAudioZone(waBuffer1.id);
+        var waSourceZone4 = createWebAudioZone(waBuffer2.id, [36, 36], waEnv2.id);
+        var waSourceZone5 = createWebAudioZone(waBuffer3.id, [38, 38], waEnv2.id);
+        var waSourceZone6 = createWebAudioZone(waBuffer3.id, [42, 42], waEnv2.id);
+        var waInstr1 = new WebAudioInstrument();
+        waInstr1.id = "waInstrument1";
+        waInstr1.zones = [waSourceZone1];
+        var waInstr2 = new WebAudioInstrument();
+        waInstr2.id = "waInstrument2";
+        waInstr2.zones = [waSourceZone2];
+        var waInstr3 = new WebAudioInstrument();
+        waInstr3.id = "waInstrument3";
+        waInstr3.zones = [waSourceZone3];
+        var waInstr4 = new WebAudioInstrument();
+        waInstr4.id = "percussionInstrument";
+        waInstr4.zones = [waSourceZone4, waSourceZone5, waSourceZone6];
+        waRenderer.instruments = [waInstr1, waInstr2, waInstr3, waInstr4];
+        var waChannelInfo1 = new WebAudioRenderChannelInfo();
+        waChannelInfo1.instrument = waInstr1.id;
+        waChannelInfo1.renderChannel = "melodyRenderChannel1";
+        var waChannelInfo2 = new WebAudioRenderChannelInfo();
+        waChannelInfo2.instrument = waInstr2.id;
+        waChannelInfo2.renderChannel = "inner1RenderChannel1";
+        var waChannelInfo5 = new WebAudioRenderChannelInfo();
+        waChannelInfo5.instrument = waInstr2.id;
+        waChannelInfo5.renderChannel = "inner2RenderChannel1";
+        var waChannelInfo3 = new WebAudioRenderChannelInfo();
+        waChannelInfo3.instrument = waInstr3.id;
+        waChannelInfo3.renderChannel = "bassRenderChannel1";
+        var waChannelInfo4 = new WebAudioRenderChannelInfo();
+        waChannelInfo4.instrument = waInstr4.id;
+        waChannelInfo4.renderChannel = percussionRenderChannel1.id;
+        waRenderer.channelInfos = [waChannelInfo1, waChannelInfo2, waChannelInfo3, waChannelInfo4, waChannelInfo5];
+        module.addRenderer(waRenderer)
+    }
+    if (!(typeof (JsonAudioRenderer) === "undefined")) {
+        var jsonRenderer = new JsonRenderer();
+        jsonRenderer.id = "jsonRenderer";
+        jsonRenderer.structure = module.getStructures()[0].id;
+        module.addRenderer(jsonRenderer)
+    }
     if (!(typeof (MidiRenderer) === "undefined")) {
         var midiRenderer = new MidiRenderer();
         midiRenderer.id = "midiRenderer";
@@ -7016,6 +6782,7 @@ function createTestModule(seed, inputGenInfo, resultObj) {
         midiRenderer.channelMaps.push(percussionMidiMap);
         module.addRenderer(midiRenderer)
     }
+    moduleConstructTimer.pause();
     traverseValue(module, function (v, propName, obj) {
         if (stringEndsWith(propName, "Expression")) {
             var valuePropName = propName.substring(0, propName.indexOf("Expression"));
@@ -7032,147 +6799,3 @@ function createTestModule(seed, inputGenInfo, resultObj) {
     });
     return module
 };
-
-function inputOk(genInfo, correct) {
-    var valid = true;
-    try {
-        valid = validateValueWithSafeValue(genInfo, new GenInfo(), null, {
-            "array": 1,
-            "number": 1
-        }, correct);
-        if (!valid) {
-            console.log("Input validation failed");
-        }
-    } catch (exc) {
-        console.log("Input validation threw exception:");
-        console.log(exc.toString());
-        valid = false;
-    }
-    return valid;
-}
-
-function render(jsonRenderRequestData) {
-    var content = jsonRenderRequestData;
-
-    var seed = content.seed;
-
-    var rnd = new MersenneTwister(seed);
-    var genInfo = content.genInfo;
-
-    if (inputOk(genInfo, true)) {
-        var resultObj = {};
-        var maxSections = 40;
-        var module = createTestModule(rnd.genrand_int31(), genInfo, resultObj);
-
-        var midiRenderer = module.getSynthRenderer("midiRenderer");
-
-        var result = {
-            songStructureInfo: resultObj.songStructureInfo,
-            seed: seed,
-            channelMaps: midiRenderer.channelMaps,
-            module: module
-        };
-
-        var renderData = new RenderData();
-        var state = new RenderState(module, renderData);
-        var structure = module.structures[0];
-        if (structure.references.length > maxSections) {
-            structure.references.length = maxSections;
-        }
-        var sectionTimes = [];
-        structure.renderBatch(state, function (progress) {
-            sectionTimes.push(state.sectionTime);
-        });
-        renderData.sort();
-
-        result.origRenderData = renderData;
-
-        var netJson = renderData.toNetJSON();
-
-        result.renderData = JSON.parse(netJson);
-        result.renderDataLength = state.sectionTime;
-        result.sectionTimes = sectionTimes;
-
-        return result;
-    }
-
-    return null;
-}
-
-function generateMidiData(jsonRenderRequestData) {
-    var result = render(jsonRenderRequestData);
-
-    if (result) {
-        var midiRenderer = result.module.getSynthRenderer("midiRenderer");
-        var midiData = midiRenderer.getMidiData(result.origRenderData, result.module, jsonRenderRequestData.genInfo);
-        result.midiData = midiData;
-
-        delete result.origRenderData; // No use to us now after midi has been rendered
-        delete result.module; // No use to us now after midi has been rendered
-
-        return result;
-    }
-}
-
-function parseSeed(seedString) {
-    // Try parsing the seed as an integer
-    var seed = parseInt(seedString);
-
-    // If it couldn't be parsed, use hashCode
-    if (isNaN(seed)) {
-        seed = hashCode(seedString);
-    }
-
-    return seed;
-}
-
-// Properly parses seeds and sets them back on the object
-function adjustSeedValues(inputGenInfo) {
-    for (var prop in inputGenInfo) {
-        // using indexOf ensures that only "seed" properties are ajusted
-        if (prop.indexOf("Seed") >= 0) {
-            var seedStr = inputGenInfo[prop];
-            if (seedStr) {
-                var seed = parseSeed(seedStr); // Parse the seed
-
-                if (!isNaN(seed)) {
-                    inputGenInfo[prop] = seed; // Replace the value
-                }
-            }
-        }
-    }
-}
-
-function exportMidi(seedString) {    
-    //console.log("starting midi export...");
-    let seed = parseSeed(seedString); // Parse the user provided seed
-
-    // Copy the overrides object
-    // genInfo_overrides_default is located in geninfo.overrides.js
-    let inputGenInfo = copyObjectDeep(genInfo_overrides_default); 
-
-    // Make sure any seed values are properly parsed the same way they are in Abundant Music web
-    adjustSeedValues(inputGenInfo);
-
-    var renderRequestData = {
-        seed: seed, 
-        strSeed: seedString, // strSeed is not used anywhere.
-        name: 'Song',
-        sectionIndex: -1, 
-        genInfo: inputGenInfo
-    };
-
-    var midiResult = generateMidiData(renderRequestData);
-
-    // that.resultRenderData = result.renderData;
-    // that.resultRenderDataLength = result.renderDataLength;
-    // that.resultChannelMaps = result.channelMaps;
-    // that.resultSongStructureInfo = result.songStructureInfo;
-    // that.resultSectionTimes = result.sectionTimes;
-
-    var fakeByteArray = new FakeByteArray();
-    Midi.encodeMidi(midiResult.midiData, fakeByteArray);
-    var buffer = fakeByteArray.toBuffer();
-
-    return new Uint8Array(buffer).join();
-}
